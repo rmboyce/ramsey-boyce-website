@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Orbit Simulator</title>
+	<meta name="description" content="Ramsey Boyce's Website">
+	<link rel="canonical" href="https://ramseyboyce.com/javascript_demos/orbit_sim/orbit_sim.html">
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+	<header>
+		<ul class="navBar">
+			<li><a id="t" href="../../bigger_projects.html" title="Large, useful projects">Bigger Projects</a></li>
+			<li><a id="s" href="../../smaller_projects.html" title="Small, one-off projects for fun">Smaller Projects</a></li>
+			<li><a id="e" href="../../javascript_demos.html" title="See my Javascript programs on this website">Javascript Demos</a></li>
+			<li><a id="r" href="../../index.html" title="About me">About</a></li>
+		</ul>
+	</header>
+	
+	<h1>Orbit Simulator</h1>
+	
+	<div class="splitscreen">
+		<div>
+			<script src="orbit_sim.js" type="text/javascript"></script>
+			<script src="Button.js" type="text/javascript"></script>
+			<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+		</div>
+		<div style="flex:250%">
+			<div></div>
+			<ul>
+				<li>See the code: <a href="https://github.com/rmboyce/orbit-sim" title="Orbit simulator code" rel="nofollow">https://github.com/rmboyce/orbit-sim</a></li>
+				<li>Simple orbit simulator that ignores interactions between planets. It finds where the planets should be and what speeds they should be moving at by solving the two-body problem with the Kepler Equation (<a href="https://en.wikipedia.org/wiki/Kepler%27s_equation" title="Kepler equation Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Kepler%27s_equation</a>). Uses Newton’s Method to calculate a numerical approximation.</li>
+				<li>Control by using four clicks: The first two clicks set the orbit, and the last two set the planet radius.</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

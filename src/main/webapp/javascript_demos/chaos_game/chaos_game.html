@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Chaos Game</title>
+	<meta name="description" content="Ramsey Boyce's Website">
+	<link rel="canonical" href="https://ramseyboyce.com/javascript_demos/chaos_game/chaos_game.html">
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+	<header>
+		<ul class="navBar">
+			<li><a id="t" href="../../bigger_projects.html" title="Large, useful projects">Bigger Projects</a></li>
+			<li><a id="s" href="../../smaller_projects.html" title="Small, one-off projects for fun">Smaller Projects</a></li>
+			<li><a id="e" href="../../javascript_demos.html" title="See my Javascript programs on this website">Javascript Demos</a></li>
+			<li><a id="r" href="../../index.html" title="About me">About</a></li>
+		</ul>
+	</header>
+	
+	<h1>Chaos Game</h1>
+	
+	<div class="splitscreen">
+		<div>
+			<script src="chaos_game.js" type="text/javascript"></script>
+			<script src="Button.js" type="text/javascript"></script>
+			<script src="Checkbox.js" type="text/javascript"></script>
+			<script src="HScrollbar.js" type="text/javascript"></script>
+			<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+		</div>
+		<div style="flex:70%">
+			<div></div>
+			<ul>
+				<li>See the code: <a href="https://github.com/rmboyce/chaos-game" title="Chaos game code" rel="nofollow">https://github.com/rmboyce/chaos-game</a></li>
+				<li>This program starts with a polygon and a point in a random location inside it. Then, the program chooses a random vertex from the polygon and makes a copy of the point some fraction of the way between the old point and the vertex. The process is repeated using the new point. Eventually, the points will make a pattern.</li>
+				<li>The Sierpinski Carpet Fraction is the ratio between the size of a polygon and the size of smaller polygons that can be put inside the original against its vertices without colliding the other small polygons. The Sierpinski Fraction causes the points to make nice patterns usually, and is calculated in the method CalculateCarpetFraction() if you want to look more into it.</li>
+				<li>More information:</li>
+				<li><a href="https://en.wikipedia.org/wiki/Sierpinski_carpet" title="Sierpinski carpet Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Sierpinski_carpet</a></li>
+				<li><a href="http://shiftingmind.com/chaosgame/" title="Shifting mind chaos game" rel="nofollow">http://shiftingmind.com/chaosgame/</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
