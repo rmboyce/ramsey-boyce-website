@@ -6,7 +6,7 @@
 
   <groupId>com.mycompany.app</groupId>
   <artifactId>ramsey-boyce-website</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>ramsey-boyce-website</name>
   <!-- FIXME change it to the project's website -->
@@ -16,6 +16,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+	<app.deploy.projectId>ramsey-boyce-website</app.deploy.projectId>
+    <app.deploy.version>1</app.deploy.version>
   </properties>
 
   <dependencies>
