@@ -18,7 +18,8 @@ var elements = [ "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
 var displayCase = 2;
 
 function setup() {
-  createCanvas(600, 400);
+  let cnv = createCanvas(600, 400);
+  cnv.parent("p5Container");
 	
   hs1 = new HScrollbar(480, 50, 100, 20, 3);
   hs1.setNormalPos(0.9);

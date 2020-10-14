@@ -31,7 +31,8 @@ var sumDoubledGrid = 0;
 var dimensionEstimate = 2;
 
 function setup() {
-  createCanvas(750, 450);
+  let cnv = createCanvas(750, 450);
+  cnv.parent("p5Container");
   
   //Start the first point at a random location in the window
   current = createVector(random(width), random(height));

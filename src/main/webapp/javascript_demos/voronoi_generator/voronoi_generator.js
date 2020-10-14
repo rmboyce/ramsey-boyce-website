@@ -80,7 +80,8 @@ var b1;
 var numberOfPointsAdded = 0;
 
 function setup() {
-  createCanvas(750, 450);
+  let cnv = createCanvas(750, 450);
+  cnv.parent("p5Container");
   background(0,0,0);
   points.push(createVector(100, 100));
   points.push(createVector(500, 200));

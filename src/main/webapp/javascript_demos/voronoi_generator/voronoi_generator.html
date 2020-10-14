@@ -1,42 +1,50 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Voronoi Generator</title>
-	<meta name="description" content="Ramsey Boyce's Website">
-	<link rel="canonical" href="https://ramseyboyce.com/javascript_demos/voronoi_generator/voronoi_generator.html">
-	<link rel="stylesheet" href="../../css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Voronoi Generator</title>
+    <meta name="description" content="Ramsey Boyce's Website">
+    <link rel="canonical" href="https://ramseyboyce.com/javascript_demos/voronoi_generator/voronoi_generator.html">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-	<header>
-		<ul class="navBar">
-			<li><a id="t" href="../../bigger_projects.html" title="Large, useful projects">Bigger Projects</a></li>
-			<li><a id="s" href="../../smaller_projects.html" title="Small, one-off projects for fun">Smaller Projects</a></li>
-			<li><a id="e" href="../../javascript_demos.html" title="See my Javascript programs on this website">Javascript Demos</a></li>
-			<li><a id="r" href="../../index.html" title="About me">About</a></li>
-		</ul>
-	</header>
-	
-	<h1>Voronoi Generator</h1>
-	
-	<div class="splitscreen">
-		<div>
-			<script src="voronoi_generator.js" type="text/javascript"></script>
-			<script src="Checkbox.js" type="text/javascript"></script>
-			<script src="Button.js" type="text/javascript"></script>
-			<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
-		</div>
-		<div style="flex:70%">
-			<div></div>
-			<ul>
-				<li>See the code: <a href="https://github.com/rmboyce/voronoi-generator" title="Voronoi generator code" rel="nofollow">https://github.com/rmboyce/voronoi-generator</a></li>
-				<li>Generates Voronoi diagrams (diagrams where each point in a colored region is closer to the region's "seed point" than any other seed point) and the Delaunay triangulation (a triangulation where the circumcircle of each triangle contains no other points in the triangulation). Click to place “seed points”.</li>
-				<li>More information:</li>
-				<li><a href="https://en.wikipedia.org/wiki/Voronoi_diagram" title="Voronoi diagrams Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Voronoi_diagram</a></li>
-				<li><a href="https://en.wikipedia.org/wiki/Delaunay_triangulation" title="Delaunay triangulation Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Delaunay_triangulation</a></li>
-			</ul>
-		</div>
-	</div>
+    <header>
+        <ul class="navBar">
+            <li><a id="t" href="../../bigger_projects.html" title="Large, useful projects">Bigger Projects</a></li>
+            <li><a id="s" href="../../smaller_projects.html" title="Small, one-off projects for fun">Smaller Projects</a></li>
+            <li><a id="e" href="../../javascript_demos.html" title="See my Javascript programs on this website">Javascript Demos</a></li>
+            <li><a id="r" href="../../index.html" title="About me">About</a></li>
+        </ul>
+    </header>
+    
+    <article>
+        <h1>Voronoi Generator</h1>
+        
+        <table>
+            <tr>
+                <td id="p5Container">
+                    <script src="voronoi_generator.js" type="text/javascript"></script>
+                    <script src="Checkbox.js" type="text/javascript"></script>
+                    <script src="Button.js" type="text/javascript"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+                </td>
+                <td class="javascriptDesc">
+                    <ul>
+                        <li>See the code: <a href="https://github.com/rmboyce/voronoi-generator" title="Voronoi generator code" rel="nofollow">https://github.com/rmboyce/voronoi-generator</a></li>
+                        <li>Generates Voronoi diagrams (diagrams where each point in a colored region is closer to the region's "seed point" than any other seed point) and the Delaunay triangulation (a triangulation where the circumcircle of each triangle contains no other points in the triangulation). Click to place “seed points”.</li>
+                        <li>More information:</li>
+                        <li><a href="https://en.wikipedia.org/wiki/Voronoi_diagram" title="Voronoi diagrams Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Voronoi_diagram</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Delaunay_triangulation" title="Delaunay triangulation Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Delaunay_triangulation</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </article>
+    
+    <footer>
+        <ul><li class="smallDesc">By Ramsey Boyce; Copyright &#169; 2020</li></ul>
+    </footer>
 </body>
 </html>
 

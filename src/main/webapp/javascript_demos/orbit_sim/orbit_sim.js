@@ -59,7 +59,8 @@ var sol = new SolarSystem(225, 225, 25, p);
 var b1;
 
 function setup() {
-  createCanvas(450, 450);
+  let cnv = createCanvas(450, 450);
+  cnv.parent("p5Container");
   stroke(255, 255, 255);
   strokeWeight(2);
 	
