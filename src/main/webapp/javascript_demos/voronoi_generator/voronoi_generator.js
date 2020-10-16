@@ -64,13 +64,15 @@ function det(m00, m01, m10, m11)
   return m00 * m11 - m01 * m10; 
 }
 
-var points = new Array(0);      // User-selected points
-var triangles = new Array(0);   // Triangles
-var circles = false;            // Turn circumcircles off/on
-var voronoi = false;            // Switch between voronoi/delaunay
-var fast = true;                // Much faster if this is turned on
-var noiseVal = false;           // Turn noise off/on
-var addPointOnCursor = true;    // Add point on the cursor
+var points = new Array(0);         // User-selected points
+var triangles = new Array(0);      // Triangles
+var circles = false;               // Turn circumcircles off/on
+var voronoi = false;               // Switch between voronoi/delaunay
+var fast = true;                   // Much faster if this is turned on
+var noiseVal = false;              // Turn noise off/on
+var addPointOnCursor = true;       // Draw point on the cursor
+var cursorTooCloseToPoint = false; // Is the cursor too close to a point?
+const TOO_CLOSE = 2;
 
 var c1;
 var c2;
@@ -82,6 +84,7 @@ var numberOfPointsAdded = 0;
 function setup() {
   let cnv = createCanvas(750, 450);
   cnv.parent("p5Container");
+  
   background(0,0,0);
   points.push(createVector(100, 100));
   points.push(createVector(500, 200));
@@ -107,17 +110,12 @@ function draw() {
   stroke(255, 255, 255);
   strokeWeight(3);
   
+  cursorTooCloseToPoint = CheckTooClose();
   if (addPointOnCursor) {
     if (points.length > numberOfPointsAdded) {
       points.pop();
     }
-    let cursorTooCloseToPoint = false;
-    for (let i = 0; i < points.length; i++) {
-      if (dist(points[i].x, points[i].y, mouseX, mouseY) < 2) {
-        cursorTooCloseToPoint = true;
-        break;
-      }
-    }
+    cursorTooCloseToPoint = CheckTooClose();
     if (!cursorTooCloseToPoint) {
       points.push(createVector(mouseX, mouseY));
     }
@@ -127,19 +125,19 @@ function draw() {
       points.pop();
     }
   }
+  
+  //Draw points
   for (let i = 0; i < points.length; i++) {
     let v = points[i];
-    let nX = pow(noise(i), 0.5)*2;
-	let nY = pow(noise(2*i), 0.5)*2;
-    //Turn noise off
-    if (!noiseVal) {
-      nX = 0;
-	  nY = 0;
+    let nX = 0;
+	let nY = 0;
+    //Turn noise on
+    if (noiseVal) {
+      nX = pow(noise(i), 0.5)*2;
+	  nY = pow(noise(2*i), 0.5)*2;
+      nX *= random(0, 1) < 0.5 ? 1 : -1;
+	  nY *= random(0, 1) < 0.5 ? 1 : -1;
     }
-    let signX = random(0, 1) < 0.5 ? 1 : -1;
-	let signY = random(0, 1) < 0.5 ? 1 : -1;
-    nX *= signX;
-	nY *= signY;
     points[i] = createVector(v.x + nX, v.y + nY);
     point(v.x, v.y);
   }
@@ -421,25 +419,22 @@ function ThirdPoint(a, b, no) {
   return null;
 }
 
+//Check if the cursor is too close to a point
+function CheckTooClose() {
+  let tooClose = false;
+  for (let i = 0; i < points.length; i++) {
+    if (dist(points[i].x, points[i].y, mouseX, mouseY) < TOO_CLOSE) {
+      tooClose = true;
+      break;
+    }
+  }
+  return tooClose;
+}
+
 //Callback when the user clicks at (x, y)
 function mousePressed() {
   if (mouseX < 550 && mouseY < height) {
-    //Slow method blows up without this
-    if (!fast) {
-      let canAdd = true;
-      for(let i = 0; i < points.length - 1; i++) {
-        let v = points[i];
-        if (dist(mouseX, mouseY, v.x, v.y) < 1) {
-          canAdd = false;
-          break;
-        }
-      }
-      if (canAdd) {
-        points.push(createVector(mouseX, mouseY));
-        numberOfPointsAdded++;
-      }
-    }
-    else {
+    if (!cursorTooCloseToPoint) {
       points.push(createVector(mouseX, mouseY));
       numberOfPointsAdded++;
     }
