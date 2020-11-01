@@ -14,12 +14,12 @@ td.javascriptDesc {display:block;position:relative;top:-4px}
 #p{margin:0 auto;max-width:800px}
 p>span{padding:0 10px}
 pre>span,code>span{color:#555}
-div{width:100%;height:25px}
 svg{padding:0}
 article a,article a:visited,footer a,footer a:visited,div a,div a:visited{border:none;border-bottom:1px solid #999;fill:#111;stroke:#111;padding:1px 2px 1px 2px;margin:0;text-decoration:none}
 article a:hover,footer a:hover,div a:hover{color:#eee;border-color:#333;background-color:#333;fill:#eee;stroke:#eee}
 p a:hover{padding:1px 5px 1px 5px;margin:0 -3px 0 -3px}
 a svg{display:inline;vertical-align:middle;margin:0 3px 3px 1px}
+a.linkImage{display:block;vertical-align:middle;margin:0px auto 0px auto;padding:0px 0px 0px 0px;border:none}
 i,em{font-style:italic}
 strong,b{font-weight:bolder}
 small{font-size:smaller}
@@ -39,6 +39,6 @@ h2{font-weight:lighter;margin-top:15px}
 kbd{font-weight:bolder;font-family:monospace}
 pre kbd{font-family:monospace}
 kbd kbd{font-weight:normal;font-size:14px;background-color:#222;color:#eee;padding:1px 5px;margin:0 1px;border-radius:1px;white-space:nowrap}
-//#b{border-right:1px solid #ccc;border-bottom:1px solid #ccc;border-radius:0;color:#222;background-color:#eee;padding:0 3px 0 3px}
+/*#b{border-right:1px solid #ccc;border-bottom:1px solid #ccc;border-radius:0;color:#222;background-color:#eee;padding:0 3px 0 3px}*/
 footer{text-align:center;margin:50px 0 200px}
 footer a{display:inline-block;margin:8px;border:none;font-size:12px}
