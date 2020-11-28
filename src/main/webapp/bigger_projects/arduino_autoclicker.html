@@ -49,6 +49,7 @@
         <ul>
             <li>Put together the circuit either using the Clickotron board or a breadboard. If you do not use input devices that normally act as closed switches, you will have to modify the program to click when a “HIGH” voltage is read (basically just change all the "LOW"s into "HIGH"s). Then load the program onto your arduino—make sure that you have the “USB Host Shield Library 2.0” installed in the menu (Tools > Manage Libraries). You will also need an Arduino Leonardo and a USB Host Shield board.</li>
             <li>If your USB Host Shield board is not set up, you will have to bridge the 5V pad and the <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface" title="SPI (Wikipedia)" rel="nofollow">SPI</a> (a communciation protocol) lines so that power and data go to the circuits.</li>
+            <li>Note that if your scroll wheel only works if you scroll while moving the mouse, making an edit to the USB Host Shield library will fix it. On Windows you will have to go to Documents > Arduino > libraries > USB_Host_Shield_Library_2.0 > hiduniversal.h and add "virtual" on line 60 before the BuffersIdentical function so that it reads "virtual bool BuffersIdentical". For other operating systems you will have to figure out where the USB Host Shield Library is stored and make the same change to the code.</li>
             <li>One place to buy the USB Host board: <a href="https://shop.tkjelectronics.dk/product_info.php?products_id=43" title="Purchase the board" rel="nofollow">https://shop.tkjelectronics.dk/product_info.php?products_id=43</a>
             <li>USB Host hardware manual: <a href="https://chome.nerpa.tech/usb-host-shield-hardware-manual/" title="Hardware manual" rel="nofollow">https://chome.nerpa.tech/usb-host-shield-hardware-manual/</a>
             <li>USB Host library documentation: <a href="https://github.com/felis/USB_Host_Shield_2.0" title="Library documentation" rel="nofollow">https://github.com/felis/USB_Host_Shield_2.0</a>
@@ -67,7 +68,7 @@
         
         <h2>Notes</h2>
         <ul>
-            <li>Note 1: Some buttons may not work, because your computer will not detect that the specific mouse that you use is plugged in. This means that the computer won’t use the driver for your specific mouse and it will instead use a generic USB mouse driver that only deals with left, middle, and right clicks and mouse movement. Therefore, the scroll wheel probably won’t work. The device also has trouble with a lot of gaming mice because I think that they work as USB keyboards.</li>
+            <li>Note 1: The current code should work with normal USB mice, but some functions may or may not work depending on the exact mouse you use. If you use a more complicated mouse that reports input differently, you will have to change the code so that the HID report the Clickotron device sends to your computer is correct.</li>
         </ul>
     </article>
     
