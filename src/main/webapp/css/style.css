@@ -48,9 +48,13 @@ p{margin:12px auto;font-size:15px;color:#555;word-wrap:break-word;}
 li{font-size:15px;color:#555;}
 /*li a{font-size:15px;color:#555;}*/
 p.smallDesc{text-align:center;margin:6px 0 6px;font-size:13px;color:#555;}
+p.navBar{text-align:center;padding:0 0 8px;line-height:2;}
+p.navBar a{margin:0 3px;}
+
+/*
 ul.navBar{text-align:center;padding:8px 0 8px;margin:0px auto;}
 ul.navBar li{display:inline-block;margin:0 auto;}
-ul.navBar li a{padding:4px 10px 4px 10px;line-height:2.5;border:none;}
+ul.navBar li a{padding:4px 10px 4px 10px;line-height:2.5;border:none;}*/
 /*
 article a,article a:visited,div a,div a:visited {
     border:none;
