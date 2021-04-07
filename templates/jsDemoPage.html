@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% set squeeze = False %}
+
+{% block content %}
+    <section>
+        <div id="p5Container">
+            {{ pageJs }}
+            <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+        </div>
+        <div class="javascriptDesc">
+            {{ pageHtml }}
+        </div>
+    </section>
+{% endblock %}

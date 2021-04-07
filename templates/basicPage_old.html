@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if subtitle %}
+        <p class="smallDesc">{{ subtitle }}</p>
+    {% endif %}
+
+    {% for section in sections %}
+        {% if section.top %}
+            <h2>{{ section.top.title }}</h2>
+        {% endif %}
+
+        {% if section.subsections %}
+            {% for subsection in section.subsections %}
+                <p>{{ subsection }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if section.imageStruct %}
+            <p>
+                {% if section.imageStruct.link %}
+                    <a href="{{ section.imageStruct.link }}" class="linkImage" style="width:{{ section.imageStruct.width + 10 }}px">
+                {% endif %}
+                <img alt="{{ section.imageStruct.title }}" src="{{ section.imageStruct.file }}" width="{{ section.imageStruct.width }}" height="{{ section.imageStruct.height }}">
+                {% if section.imageStruct.link %}
+                    </a>
+                {% endif %}
+            </p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
