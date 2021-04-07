@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fractal Tree</title>
+    <meta name="description" content="Ramsey Boyce's Website">
+    <link rel="canonical" href="https://ramseyboyce.com/javascript_demos/fractal_tree/fractal_tree.html">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" type="image/png" href="../../resources/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../../resources/favicon_32x32.png" sizes="32x32">
+</head>
+<body>
+    <header>
+        <p class="navBar">
+            <a href="../../projects.html" title="My projects">Projects</a>
+            &middot;
+            <a href="../../javascript_demos.html" title="My Javascript programs (they run in the browser)">Javascript Demos</a>
+            &middot;
+            <a href="../../daily_crossword.html" title="Daily computer-generated crossword">Daily Crossword</a>
+            &middot;
+            <a href="../../index.html" title="About me">About</a>
+        </p>
+    </header>
+    
+    <article>
+        <h1>Fractal Tree</h1>
+        
+        <section>
+            <div id="p5Container">
+                <script src="fractal_tree.js" type="text/javascript"></script>
+                <script src="HScrollbar.js" type="text/javascript"></script>
+                <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+            </div>
+            <div class="javascriptDesc">
+                <p>See the code: <a href="https://github.com/rmboyce/fractal-tree" title="Fractal tree code" rel="nofollow">https://github.com/rmboyce/fractal-tree</a></p>
+                <p>Draws a fractal tree based on the number of child branches that split off from each parent branch, the size that each child branch will be compared to its parent branch, the minimum branch length the program draws, and the angle between branches.</p>
+                <p>The branch angle scrollbar is special; it has momentum and loops.</p>
+            </div>
+        </section>
+    </article>
+    
+    <footer>
+        <p class="smallDesc">By Ramsey Boyce</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Particle Life</title>
+    <meta name="description" content="Ramsey Boyce's Website">
+    <link rel="canonical" href="https://ramseyboyce.com/javascript_demos/particle_life/particle_life.html">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" type="image/png" href="../../resources/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../../resources/favicon_32x32.png" sizes="32x32">
+</head>
+<body>
+    <header>
+        <p class="navBar">
+            <a href="../../projects.html" title="My projects">Projects</a>
+            &middot;
+            <a href="../../javascript_demos.html" title="My Javascript programs (they run in the browser)">Javascript Demos</a>
+            &middot;
+            <a href="../../daily_crossword.html" title="Daily computer-generated crossword">Daily Crossword</a>
+            &middot;
+            <a href="../../index.html" title="About me">About</a>
+        </p>
+    </header>
+    
+    <article>
+        <h1>Particle Life</h1>
+        
+        <section>
+            <div id="p5Container">
+                <script src="particle_life.js" type="text/javascript"></script>
+                <script src="HScrollbar.js" type="text/javascript"></script>
+                <script src="Button.js" type="text/javascript"></script>
+                <script src="Checkbox.js" type="text/javascript"></script>
+                <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+            </div>
+            <div class="javascriptDesc">
+                <p>See the code: <a href="https://github.com/rmboyce/particle-life" title="Particle life code" rel="nofollow">https://github.com/rmboyce/particle-life</a></p>
+                <p>Simulates forces between particles to create lifelike shapes. Note that the forces don't follow the laws of physics.</p>
+                <p>Particle interactions:</p>
+                <ul>
+                    <li>The red particles are “mellow” and clump together</li>
+                    <li>The green particles repel each other, but are attracted to the blues and reds</li>
+                    <li>The blue particles are “energetic” and are repelled by reds and greens</li>
+                </ul>
+                <p>Inspired by CodeParade's video: <a href="https://www.youtube.com/watch?v=Z_zmZ23grXE" title="Particle life video" rel="nofollow">https://www.youtube.com/watch?v=Z_zmZ23grXE</a></p>
+            </div>
+        </section>
+    </article>
+    
+    <footer>
+        <p class="smallDesc">By Ramsey Boyce</p>
+    </footer>
+</body>
+</html>

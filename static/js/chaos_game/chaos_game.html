@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chaos Game</title>
+    <meta name="description" content="Ramsey Boyce's Website">
+    <link rel="canonical" href="https://ramseyboyce.com/javascript_demos/chaos_game/chaos_game.html">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" type="image/png" href="../../resources/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="../../resources/favicon_32x32.png" sizes="32x32">
+</head>
+<body>
+    <header>
+        <p class="navBar">
+            <a href="../../projects.html" title="My projects">Projects</a>
+            &middot;
+            <a href="../../javascript_demos.html" title="My Javascript programs (they run in the browser)">Javascript Demos</a>
+            &middot;
+            <a href="../../daily_crossword.html" title="Daily computer-generated crossword">Daily Crossword</a>
+            &middot;
+            <a href="../../index.html" title="About me">About</a>
+        </p>
+    </header>
+    
+    <article>
+        <h1>Chaos Game</h1>
+        
+        <section>
+            <div id="p5Container">
+                <script src="chaos_game.js" type="text/javascript"></script>
+                <script src="Button.js" type="text/javascript"></script>
+                <script src="Checkbox.js" type="text/javascript"></script>
+                <script src="HScrollbar.js" type="text/javascript"></script>
+                <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" type="text/javascript"></script>
+            </div>
+            <div class="javascriptDesc">
+                <p>See the code: <a href="https://github.com/rmboyce/chaos-game" title="Chaos game code" rel="nofollow">https://github.com/rmboyce/chaos-game</a></p>
+                <p>This program starts with a polygon and a point in a random location inside it. Then, the program chooses a random vertex from the polygon and makes a copy of the point some fraction of the way between the old point and the vertex. The process is repeated using the new point. Eventually, the points will make a pattern.</p>
+                <p>The Sierpinski Carpet Fraction is the ratio between the size of a polygon and the size of smaller polygons that can be put inside the original against its vertices without colliding the other small polygons. The Sierpinski Fraction causes the points to make nice patterns usually, and is calculated in the method CalculateCarpetFraction() if you want to look more into it.</p>
+                <p>More information:</p>
+                <ul>
+                    <li><a href="https://en.wikipedia.org/wiki/Sierpinski_carpet" title="Sierpinski carpet Wikipedia" rel="nofollow">https://en.wikipedia.org/wiki/Sierpinski_carpet</a></li>
+                    <li><a href="http://shiftingmind.com/chaosgame/" title="Shifting mind chaos game" rel="nofollow">http://shiftingmind.com/chaosgame/</a></li>
+                </ul>
+            </div>
+        </section>
+    </article>
+    
+    <footer>
+        <p class="smallDesc">By Ramsey Boyce</p>
+    </footer>
+</body>
+</html>
