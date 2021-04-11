@@ -1,7 +1,8 @@
-from flask import Flask, render_template, Markup, url_for
+from flask import Flask, render_template, Markup, url_for, send_from_directory
 
 app = Flask(__name__)
 
+import datetime
 #import projects
 #import javascript_demos
 #import daily_crossword
@@ -17,6 +18,9 @@ def projects():
 
         <h2><a href = "''' + url_for('serpent_fusion') + '''" title="Serpent Fusion">Serpent Fusion</a></h2>
         <p>A puzzle game created with the Unity engine and C#</p>
+
+        <h2><a href = "''' + url_for('crossword_generator') + '''" title="Crossword Generator">Crossword Generator</a></h2>
+        <p>asdf</p>
         
         <h2><a href = "''' + url_for('arduino_autoclicker') + '''" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
         <p>An Arduino shield to augment your mouse</p>
@@ -133,6 +137,27 @@ def this_website():
         </p>
     ''')
     return render_template('customPage.html', title='This Website', pageHtml=p)
+
+@app.route('/projects/crossword_generator')
+def crossword_generator():
+    p = Markup('''
+        <p class="smallDesc">asdf</p>
+        
+        <h2>Overview</h2>
+        <p>I programmed the entirety of my puzzle game Serpent Fusion on my own over about two years, and I regularly release updates. It is a challenging sokoban-style game based on Snake.</p>
+        <p>If you are interested, the game is here: <a href="https://store.steampowered.com/app/1126260/Serpent_Fusion/" title="Serpent Fusion" rel="nofollow">Serpent Fusion</a></p>
+        <p>Note: This is an extremely challenging puzzle game. (Don't say I didn't warn you!)</p>
+        
+        <p>
+            <img alt="Serpent Fusion" src="''' + url_for('static', filename='resources/serpent_fusion.png') + '''" width="635" height="308">
+        </p>
+        
+        <h2>About Creation</h2>
+        <p>Nearly all of the code is in C#, although I did tweak some ShaderLab programming to use for visual effects. Rather than program a level editor from scratch, which would take a long time, I decided to make levels in a spreadsheet. This quicker approach proved to help prototype levels faster and determine what would work sooner, aka "fail faster". I made a program that would take my level designs in the spreadsheet and convert them into JSON strings that I could plug into my game to generate levels.</p>
+        <p>The game was a learning project-I wanted to apply the programming I had learned to a larger task. Before this project, I had never programmed in C# (although I did have experience in Java), so I was able to pick up a new language. I also had a lot of fun making levels for other games, so I wanted to design my own puzzle game from scratch.</p>
+        <p>In recent updates I have been refactoring the code as I learn more, to make it easier to understand and work on.</p>
+    ''')
+    return render_template('customPage.html', title='Crossword Generator', pageHtml=p)
 
 @app.route('/projects/image_rater')
 def image_rater():
@@ -420,6 +445,14 @@ def voronoi_generator():
 #=        Daily Crossword          =
 #===================================
 
+@app.route('/daily_crossword/today.puz')
+def current_crossword():
+
+    d = datetime.date.today()
+    f = str(d.year) + '-' + str(d.month) + '-' + str(d.day) + '.puz'
+    print(f)
+    return send_from_directory('crosswords', filename='test1_18.puz')
+
 @app.route('/daily_crossword')
 def daily_crossword():
     h = Markup('''
@@ -442,15 +475,15 @@ def daily_crossword():
 
             <script>
                 (function(){
-                    CrosswordNexus.createCrossword($('div.crossword'));
+                    CrosswordNexus.createCrossword($('div.crossword'), "''' + url_for('current_crossword') + '''");
                 })();
             </script>
         </div>
         
         <p class="centered">
-            <a href="''' + url_for('serpent_fusion') + '''" title="My projects">How the puzzles are generated</a>
+            <a href="''' + url_for('crossword_generator') + '''" title="My projects">How the puzzles are generated</a>
             &middot;
-            <a href = "''' + url_for('serpent_fusion') + '''" title="Archive">Puzzle archive</a>
+            <a href = "''' + url_for('current_crossword') + '''" title="Archive">Download today's puz file</a>
         </p>
     ''')
     return render_template('customPage.html', title='Daily Crossword', headHtml=h, pageHtml=p, squeeze=False)
