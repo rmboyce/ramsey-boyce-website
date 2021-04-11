@@ -299,7 +299,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     }
 
     var CrosswordNexus = {
-        createCrossword: function (parent, user_config) {
+        createCrossword: function (parent, crosswordUrl, user_config) {
             var crossword;
             try {
                 if (typeof jQuery === TYPE_UNDEFINED) {
@@ -314,7 +314,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 if (user_config && user_config.hasOwnProperty(ZIPJS_CONFIG_OPTION)) {
                     ZIPJS_PATH = user_config[ZIPJS_CONFIG_OPTION];
                 }
-                crossword = new CrossWord(parent, user_config);
+                crossword = new CrossWord(parent, crosswordUrl, user_config);
             } catch (e) {
                 alert(e.message);
             }
@@ -322,8 +322,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }
     };
 
-    var CrossWord = function (parent, user_config) {
+    var CrossWord = function (parent, crosswordUrl, user_config) {
         this.parent = parent;
+        this.crosswordUrl = crosswordUrl;
         this.config = {};
         // Load solver config
         var solver_config_name = SETTINGS_STORAGE_KEY;
@@ -436,6 +437,15 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             }
         }
 
+        var loaded_callback;
+
+        loaded_callback = parsePUZ_callback;
+
+        loadFileFromServer(
+            this.crosswordUrl,
+            FILE_PUZ,
+          ).then(loaded_callback, error_callback);
+        /*
         // preload one puzzle
         if (
           this.config.puzzle_file &&
@@ -531,6 +541,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             }
 
         }
+        */
 
         // mapping of number to cells
 
