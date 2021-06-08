@@ -3,6 +3,7 @@ from flask import Flask, render_template, Markup, url_for, send_from_directory
 app = Flask(__name__)
 
 import datetime
+from zoneinfo import ZoneInfo
 #import projects
 #import javascript_demos
 #import daily_crossword
@@ -20,13 +21,13 @@ def projects():
         <p>A puzzle game created with the Unity engine and C#</p>
 
         <h2><a href = "''' + url_for('crossword_generator') + '''" title="Crossword Generator">Crossword Generator</a></h2>
-        <p>asdf</p>
+        <p>A program that generates a new crossword puzzle each day</p>
         
         <h2><a href = "''' + url_for('arduino_autoclicker') + '''" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
         <p>An Arduino shield to augment your mouse</p>
         
         <h2><a href = "''' + url_for('this_website') + '''" title="This website">This Website</a></h2>
-        <p>Place for my projects using HTML and Javascript</p>
+        <p>A place for my projects using Flask, HTML, and Javascript</p>
         
         
         <h2 class="centered">Smaller Projects</h2>
@@ -123,14 +124,14 @@ def arduino_autoclicker():
 @app.route('/projects/this_website')
 def this_website():
     p = Markup('''
-        <p class="smallDesc">Place for my projects</p>
+        <p class="smallDesc">A place for my projects using Flask, HTML, and Javascript</p>
         
         <h2>Overview</h2>
         <p>This website is a place for me to put my projects when I complete them. I thought that making a website would be fun, and as a bonus I could share the stuff I've made.</p>
             
         <h2>Technical Details</h2>
-        <p>I used HTML and CSS to make the web pages, and Javascript for the interactive demos.</p>
-        <p>For tools, I used Maven to organize the project and Google Cloud's App Engine to host the website.</p>
+        <p>I used Flask as a web framework along with HTML and CSS to make the web pages. I programmed the interactive demos using Javascript.</p>
+        <p>For tools, I used Google Cloud's App Engine to host the website.</p>
         
         <p>
             <img alt="Website code" src="''' + url_for('static', filename='resources/website_code.png') + '''" width="663" height="300">
@@ -141,21 +142,30 @@ def this_website():
 @app.route('/projects/crossword_generator')
 def crossword_generator():
     p = Markup('''
-        <p class="smallDesc">asdf</p>
+        <p class="smallDesc">A program that generates crossword puzzles</p>
+
+        <h2><a href="''' + url_for('daily_crossword') + '''" title="Daily computer-generated crossword">Try today's puzzle!</a></h2>
         
         <h2>Overview</h2>
-        <p>I programmed the entirety of my puzzle game Serpent Fusion on my own over about two years, and I regularly release updates. It is a challenging sokoban-style game based on Snake.</p>
-        <p>If you are interested, the game is here: <a href="https://store.steampowered.com/app/1126260/Serpent_Fusion/" title="Serpent Fusion" rel="nofollow">Serpent Fusion</a></p>
-        <p>Note: This is an extremely challenging puzzle game. (Don't say I didn't warn you!)</p>
-        
+        <p>This program generates crossword puzzles using a three step process: first, generate the grid; second, fill the grid with words; and third, clue the filled grid. To make a different puzzle available on my website each day, I began using the web framework Flask so I could do that in Python code.</p>
+
         <p>
-            <img alt="Serpent Fusion" src="''' + url_for('static', filename='resources/serpent_fusion.png') + '''" width="635" height="308">
+            <img alt="Crossword" src="''' + url_for('static', filename='resources/crossword.png') + '''" width="392" height="393">
         </p>
-        
-        <h2>About Creation</h2>
-        <p>Nearly all of the code is in C#, although I did tweak some ShaderLab programming to use for visual effects. Rather than program a level editor from scratch, which would take a long time, I decided to make levels in a spreadsheet. This quicker approach proved to help prototype levels faster and determine what would work sooner, aka "fail faster". I made a program that would take my level designs in the spreadsheet and convert them into JSON strings that I could plug into my game to generate levels.</p>
-        <p>The game was a learning project-I wanted to apply the programming I had learned to a larger task. Before this project, I had never programmed in C# (although I did have experience in Java), so I was able to pick up a new language. I also had a lot of fun making levels for other games, so I wanted to design my own puzzle game from scratch.</p>
-        <p>In recent updates I have been refactoring the code as I learn more, to make it easier to understand and work on.</p>
+
+        <h2>Generating the Puzzles</h2>
+        <p>Step one, generating the grid, is fairly simple. At the moment my code takes an empty grid, adds 1-2 rows and columns extending inwards from the sides, and fills the middle randomly. Since crossword grids must be rotationally symmetric, it only generates half of it and fills in the rest using the first half.</p>
+        <p>Step two, filling the grid with words, is the most complicated step. Trying to fill a crossword grid by brute-force is nearly impossible. The algorithm can be thought of as a tree search where the root of the tree represents an empty grid. Then, somehow pick a slot to fill with a word. For each word that fits in the slot, another partially-filled grid is generated. Then, just repeat with each of the newly generated grids. With enough time, this algorithm will generate a valid filling of the grid; however, it takes hours or days to work, and so it must be optimized. A few of the optimizations were:</p>
+        <ul>
+            <li>The first optimization was to keep track of the number of possible words that could fit in each slot of the crossword, and stop searching a branch of the tree if any of the numbers of possibilities dropped to zero. This sounds like a lot of extra work for the algorithm, and it is, but the time saved is more than worth it.</li>
+            <li>The next improvement was to choose the next word to fill based on which slot in the crossword had the least number of possible words that could fill it. This will likely make it faster to find areas where no words fit a certain slot.</li>
+            <li>The last change I made was for the algorithm to pick a word for a certain slot based on what would lead to the highest number of possibilities of words crossing that slot. This means that it's likelier for the algorithm to take profitable branches of the tree.</li>
+        </ul>
+        <p>With these optimizations, the filling process now usually takes somewhere between 30 seconds and 5 minutes (with code written all in Python).</p>
+        <p>Step three, clueing the filled grid, is also fairly simple. For each word in the filled grid, my code looks at past crosswords and randomly chooses a clue corresponding to that word. These generated puzzles aren't completely original, but computationally generating high-quality clues would be extremely hard or even impossible. This approach is much simpler and works well enough for the time being.</p>
+
+        <h2>Playing on my Website</h2>
+        <p>To make a different crossword available on my website each day, I had to use a web framework to make my site dynamic. I chose to use the framework Flask as I already knew how to use Python and Flask seemed good for small projects like this site. Python code selects which crossword puzzle to play on a given day. After that, the puzzle is loaded into a Javascript player that I got from Crossword Nexus, allowing the puzzles to be played in the browser.
     ''')
     return render_template('customPage.html', title='Crossword Generator', pageHtml=p)
 
@@ -448,10 +458,15 @@ def voronoi_generator():
 @app.route('/daily_crossword/today.puz')
 def current_crossword():
 
-    d = datetime.date.today()
+    d = datetime.datetime.now(ZoneInfo('America/Los_Angeles'))
+    #print(d)
     f = str(d.year) + '-' + str(d.month) + '-' + str(d.day) + '.puz'
-    print(f)
-    return send_from_directory('crosswords', filename='test1_18.puz')
+    #print(f)
+    try:
+        return send_from_directory('crosswords', filename=f)
+    except:
+        #Return the default puzzle if there was an error getting today's puzzle
+        return send_from_directory('crosswords', filename='default.puz')
 
 @app.route('/daily_crossword')
 def daily_crossword():
@@ -484,6 +499,8 @@ def daily_crossword():
             <a href="''' + url_for('crossword_generator') + '''" title="My projects">How the puzzles are generated</a>
             &middot;
             <a href = "''' + url_for('current_crossword') + '''" title="Archive">Download today's puz file</a>
+            &middot;
+            <a href = "https://crosswordnexus.com/" title="CrosswordNexus">Player from CrosswordNexus</a>
         </p>
     ''')
     return render_template('customPage.html', title='Daily Crossword', headHtml=h, pageHtml=p, squeeze=False)
@@ -499,9 +516,15 @@ def index():
     p = Markup('''
         <p>Hey, I'm Ramsey!</p>
         
-        <p>My main interests are programming, rock climbing, and puzzle design.</p>
+        <p>My main interests are engineering, programming, rock climbing, and puzzle design.</p>
 
         <p>Here's a gallery of my recent projects!</p>
+
+        <h2><a href = "''' + url_for('crossword_generator') + '''" title="Crossword Generator">Crossword Generator</a> (<a href="''' + url_for('daily_crossword') + '''" title="Daily computer-generated crossword">Try today's puzzle!</a>)</h2>
+        <p>A program that generates a new crossword puzzle each day</p>
+        <p><a href="''' + url_for('crossword_generator') + '''" class="linkImage" style="width:402px">
+            <img alt="Crossword" src="''' + url_for('static', filename='resources/crossword.png') + '''" width="392" height="393">
+        </a></p>
         
         <h2><a href="''' + url_for('serpent_fusion') + '''" title="Serpent Fusion">Serpent Fusion</a></h2>
         <p>A puzzle game created with the Unity engine and C#</p>
