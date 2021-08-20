@@ -9,8 +9,9 @@
 .history/
 
 
-target/*
+target/**
 src/**
+crosswords/**
 
 
 __pycache__/
