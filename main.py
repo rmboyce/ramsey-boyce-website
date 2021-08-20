@@ -1,12 +1,40 @@
 from flask import Flask, render_template, Markup, url_for, send_from_directory
+#from flask_talisman import Talisman
 
 app = Flask(__name__)
+#Talisman(app)
 
 import datetime
 from zoneinfo import ZoneInfo
 #import projects
 #import javascript_demos
 #import daily_crossword
+
+#response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+from flask import request, redirect
+
+def force_https():
+        """Redirect any non-https requests to https.
+        Based largely on flask-sslify.
+        """
+        if not app.debug:
+            app.config['SESSION_COOKIE_SECURE'] = True
+
+        criteria = [
+            app.debug,
+            request.is_secure,
+            request.headers.get('X-Forwarded-Proto', 'http') == 'https',
+        ]
+
+        if not any(criteria):
+            if request.url.startswith('http://'):
+                url = request.url.replace('http://', 'https://', 1)
+                #code = 302
+                code = 301
+                r = redirect(url, code=code)
+                return r
+
+app.before_request(force_https)
 
 #===================================
 #=            Projects             =
