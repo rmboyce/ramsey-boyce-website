@@ -19,5 +19,7 @@ __pycache__/
 /setup.cfg
 
 src/**
+src/
 target/**
+target/
 .vscode/

@@ -10,8 +10,16 @@
 
 
 target/**
+target/
 src/**
+src/
 crosswords/**
+
+nbactions.xml
+pom.xml
+projects.py
+daily_crossword.py
+javascript_demos.py
 
 
 __pycache__/
