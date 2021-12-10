@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 #response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
 from flask import request, redirect
 
+# Force https
 def force_https():
         """Redirect any non-https requests to https.
         Based largely on flask-sslify.
@@ -347,15 +348,15 @@ def javascript_demos():
         <h2>
             <a href="''' + url_for('voronoi_generator') + '''" title="Voronoi Generator">Voronoi Generator</a>
         </h2>
-        <p><a href="''' + url_for('voronoi_generator') + '''" class="linkImage" style="width:570px">
-           <img alt="Voronoi generator" src="''' + url_for('static', filename='resources/voronoi_generator.png') + '''" width="560" height="333">
+        <p><a href="''' + url_for('voronoi_generator') + '''" class="linkImage" style="width:417px">
+           <img alt="Voronoi generator" src="''' + url_for('static', filename='resources/voronoi_generator.png') + '''" width="407" height="333">
         </a></p>
 
         <h2>
             <a href="''' + url_for('fractal_tree') + '''" title="Fractal Tree">Fractal Tree</a>
         </h2>
-        <p><a href="''' + url_for('fractal_tree') + '''" class="linkImage" style="width:570px">
-            <img alt="Fractal tree" src="''' + url_for('static', filename='resources/fractal_tree.png') + '''" width="560" height="333">
+        <p><a href="''' + url_for('fractal_tree') + '''" class="linkImage" style="width:453px">
+            <img alt="Fractal tree" src="''' + url_for('static', filename='resources/fractal_tree.png') + '''" width="443" height="331">
         </a></p>
 
         <h2>
@@ -368,22 +369,22 @@ def javascript_demos():
         <h2>
             <a href="''' + url_for('particle_life') + '''" title="Particle Life">Particle Life</a>
         </h2>
-        <p><a href="''' + url_for('particle_life') + '''" class="linkImage" style="width:495px">
-            <img alt="Particle life" src="''' + url_for('static', filename='resources/particle_life.png') + '''" width="485" height="300">
+        <p><a href="''' + url_for('particle_life') + '''" class="linkImage" style="width:310px">
+            <img alt="Particle life" src="''' + url_for('static', filename='resources/particle_life.png') + '''" width="300" height="300">
         </a></p>
         
         <h2>
             <a href="''' + url_for('element_words') + '''" title="Element Words">Element Words</a>
         </h2>
-        <p><a href="''' + url_for('element_words') + '''" class="linkImage" style="width:457px">
-            <img alt="Element words" src="''' + url_for('static', filename='resources/element_words.png') + '''" width="447" height="296">
+        <p><a href="''' + url_for('element_words') + '''" class="linkImage" style="width:393px">
+            <img alt="Element words" src="''' + url_for('static', filename='resources/element_words.png') + '''" width="383" height="323">
         </a></p>
         
         <h2>
             <a href="''' + url_for('chaos_game') + '''" title="Chaos Game">Chaos Game</a>
         </h2>
-        <p><a href="''' + url_for('chaos_game') + '''" class="linkImage" style="width:570px">
-            <img alt="Chaos game" src="''' + url_for('static', filename='resources/chaos_game.png') + '''" width="560" height="333">
+        <p><a href="''' + url_for('chaos_game') + '''" class="linkImage" style="width:374px">
+            <img alt="Chaos game" src="''' + url_for('static', filename='resources/chaos_game.png') + '''" width="364" height="333">
         </a></p>
     ''')
     return render_template('customPage.html', title='Javascript Demos', pageHtml=p)
@@ -493,7 +494,7 @@ def current_crossword():
     try:
         return send_from_directory('crosswords', filename=f)
     except:
-        #Return the default puzzle if there was an error getting today's puzzle
+        # Return the default puzzle if there was an error getting today's puzzle
         return send_from_directory('crosswords', filename='default.puz')
 
 @app.route('/daily_crossword')
@@ -501,12 +502,12 @@ def daily_crossword():
     h = Markup('''
         <link rel="stylesheet" href="''' + url_for('static', filename='css/crosswordnexus.css') + '''">
 
-        <script src="''' + url_for('static', filename='daily_crossword/crosswords.js') + '''"></script>
-        <script src="''' + url_for('static', filename='daily_crossword/puz.min.js') + '''"></script>
+        <script src="''' + url_for('static', filename='js/daily_crossword/crosswords.js') + '''"></script>
+        <script src="''' + url_for('static', filename='js/daily_crossword/puz.min.js') + '''"></script>
         
-        <script src="''' + url_for('static', filename='daily_crossword/jquery.js') + '''"></script>
-        <script src="''' + url_for('static', filename='daily_crossword/zip.js') + '''"></script>
-        <script src="''' + url_for('static', filename='daily_crossword/jspdf.min.js') + '''"></script>
+        <script src="''' + url_for('static', filename='js/daily_crossword/jquery.js') + '''"></script>
+        <script src="''' + url_for('static', filename='js/daily_crossword/zip.js') + '''"></script>
+        <script src="''' + url_for('static', filename='js/daily_crossword/jspdf.min.js') + '''"></script>
         
         <style>
             div.crossword { position: absolute; left: 0; top: 0; width: 100%; height: 100%; text-align: center; }
@@ -569,8 +570,8 @@ def index():
         <h2><a href="''' + url_for('voronoi_generator') + '''" title="Voronoi Generator">Voronoi Generator</a></h2>
         <p>An interactive visualization of Voronoi diagrams</p>
         <p>Note: optimized for desktop use</p>
-        <p><a href="''' + url_for('voronoi_generator') + '''" class="linkImage" style="width:570px">
-           <img alt="Voronoi generator" src="''' + url_for('static', filename='resources/voronoi_generator.png') + '''" width="560" height="333">
+        <p><a href="''' + url_for('voronoi_generator') + '''" class="linkImage" style="width:417px">
+           <img alt="Voronoi generator" src="''' + url_for('static', filename='resources/voronoi_generator.png') + '''" width="407" height="333">
         </a></p>
         
         <p>My GitHub: <a href = "https://github.com/rmboyce" title="GitHub">https://github.com/rmboyce</a></p>
