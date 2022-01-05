@@ -1,39 +1,31 @@
-from flask import Flask, render_template, Markup, url_for, send_from_directory
-#from flask_talisman import Talisman
-
-app = Flask(__name__)
-#Talisman(app)
-
 import datetime
 from zoneinfo import ZoneInfo
-#import projects
-#import javascript_demos
-#import daily_crossword
-
-#response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+from flask import Flask, render_template, Markup, url_for, send_from_directory
 from flask import request, redirect
+
+app = Flask(__name__)
 
 # Force https
 def force_https():
-        """Redirect any non-https requests to https.
-        Based largely on flask-sslify.
-        """
-        if not app.debug:
-            app.config['SESSION_COOKIE_SECURE'] = True
+    """Redirect any non-https requests to https.
+    Based largely on flask-sslify.
+    """
+    if not app.debug:
+        app.config['SESSION_COOKIE_SECURE'] = True
 
-        criteria = [
-            app.debug,
-            request.is_secure,
-            request.headers.get('X-Forwarded-Proto', 'http') == 'https',
-        ]
+    criteria = [
+        app.debug,
+        request.is_secure,
+        request.headers.get('X-Forwarded-Proto', 'http') == 'https',
+    ]
 
-        if not any(criteria):
-            if request.url.startswith('http://'):
-                url = request.url.replace('http://', 'https://', 1)
-                #code = 302
-                code = 301
-                r = redirect(url, code=code)
-                return r
+    if not any(criteria):
+        if request.url.startswith('http://'):
+            url = request.url.replace('http://', 'https://', 1)
+            #code = 302
+            code = 301
+            r = redirect(url, code=code)
+            return r
 
 app.before_request(force_https)
 
@@ -43,47 +35,47 @@ app.before_request(force_https)
 
 @app.route('/projects')
 def projects():
-    p = Markup('''
+    p = Markup(f'''
         <h2 class="centered">Bigger Projects</h2>
 
-        <h2><a href = "''' + url_for('serpent_fusion') + '''" title="Serpent Fusion">Serpent Fusion</a></h2>
+        <h2><a href = "{url_for('serpent_fusion')}" title="Serpent Fusion">Serpent Fusion</a></h2>
         <p>A puzzle game created with the Unity engine and C#</p>
 
-        <h2><a href = "''' + url_for('crossword_generator') + '''" title="Crossword Generator">Crossword Generator</a></h2>
+        <h2><a href = "{url_for('crossword_generator')}" title="Crossword Generator">Crossword Generator</a></h2>
         <p>A program that generates a new crossword puzzle each day</p>
         
-        <h2><a href = "''' + url_for('arduino_autoclicker') + '''" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
+        <h2><a href = "{url_for('arduino_autoclicker')}" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
         <p>An Arduino shield to augment your mouse</p>
         
-        <h2><a href = "''' + url_for('this_website') + '''" title="This website">This Website</a></h2>
+        <h2><a href = "{url_for('this_website')}" title="This website">This Website</a></h2>
         <p>A place for my projects using Flask, HTML, and Javascript</p>
         
         
         <h2 class="centered">Smaller Projects</h2>
 
-        <h2><a href = "''' + url_for('image_rater') + '''" title="Image Rating Neural Network">Image Rating Neural Network</a></h2>
+        <h2><a href = "{url_for('image_rater')}" title="Image Rating Neural Network">Image Rating Neural Network</a></h2>
         <p>An image rater based on the average person's judgement</p>
         
-        <h2><a href = "''' + url_for('cube_timer') + '''" title="Rubik's Cube timer">Rubik's Cube Timer</a></h2>
+        <h2><a href = "{url_for('cube_timer')}" title="Rubik's Cube timer">Rubik's Cube Timer</a></h2>
         <p>A speed tracker for the Rubik's Cube</p>
     
-        <h2><a href = "''' + url_for('hp_tetris') + '''" title="HP Prime Tetris">HP Prime Tetris</a></h2>
+        <h2><a href = "{url_for('hp_tetris')}" title="HP Prime Tetris">HP Prime Tetris</a></h2>
         <p>A tetris clone for the HP Prime graphing calculator</p>
         
         
         <h2 class="centered">Other</h2>
 
-        <h2><a href = "''' + url_for('rock_climbing') + '''" title="Outdoor Climbing Log">Outdoor Climbing Log</a></h2>
+        <h2><a href = "{url_for('rock_climbing')}" title="Outdoor Climbing Log">Outdoor Climbing Log</a></h2>
         <p>My outdoor rock climbing projects</p>
         
-        <h2><a href = "''' + url_for('videogame_levels') + '''" title="Videogame levels">Videogame Levels</a></h2>
+        <h2><a href = "{url_for('videogame_levels')}" title="Videogame levels">Videogame Levels</a></h2>
         <p>Levels I made for fun using games like Portal 2 and Super Meat Boy</p>
     ''')
     return render_template('customPage.html', title='My Projects', pageHtml=p)
 
 @app.route('/projects/serpent_fusion')
 def serpent_fusion():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">A puzzle game created with the Unity engine and C#</p>
         
         <h2>Overview</h2>
@@ -92,7 +84,7 @@ def serpent_fusion():
         <p>Note: This is an extremely challenging puzzle game. (Don't say I didn't warn you!)</p>
         
         <p>
-            <img alt="Serpent Fusion" src="''' + url_for('static', filename='resources/serpent_fusion.png') + '''" width="635" height="308">
+            <img alt="Serpent Fusion" src="{url_for('static', filename='resources/serpent_fusion.png')}" width="635" height="308">
         </p>
         
         <h2>About Creation</h2>
@@ -104,17 +96,17 @@ def serpent_fusion():
 
 @app.route('/projects/arduino_autoclicker')
 def arduino_autoclicker():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">"The Clickotron-5000"</p>
         
         <h2>Overview</h2>
         <p>The Clickotron board is a shield for the Arduino Leonardo that I designed which extends the capabilities of a normal mouse. The Clickotron-5000 autoclicking device uses a Leonardo, a USB Host Shield board, and the Clickotron board on top, with my code loaded on the Arduino.</p>
         <p>The arduino can simulate mouse clicks on the computer, so other input devices can be used to create mouse clicks. For example, I use the Clickotron with two foot pedals as left and right click. The device can also continuously click the mouse buttons when the respective pedal is held down. I made the device because bad posture was causing numbness in my hands and I had trouble using a regular mouse (proper posture and exercises have fixed this!). I still use the autoclicker to play League of Legends with my friends, since over the Covid-19 pandemic it's the best way to stay in touch.</p>
         <p>Link to the code: <a href="https://github.com/rmboyce/arduino-autoclicker" title="Autoclicker code" rel="nofollow">https://github.com/rmboyce/arduino-autoclicker</a></p>
-        <p>Link to the schematic: <a href="''' + url_for('static', filename='resources/clickotron_schematic.pdf') + '''" title="Autoclicker schematic">Autoclicker schematic</a></p>
+        <p>Link to the schematic: <a href="{url_for('static', filename='resources/clickotron_schematic.pdf')}" title="Autoclicker schematic">Autoclicker schematic</a></p>
         
         <p>
-            <img alt="Autoclicker device" src="''' + url_for('static', filename='resources/clickotron_full.jpg') + '''" width="689" height="544">
+            <img alt="Autoclicker device" src="{url_for('static', filename='resources/clickotron_full.jpg')}" width="689" height="544">
         </p>
         
         <h2>About the Device</h2>
@@ -124,7 +116,7 @@ def arduino_autoclicker():
         <p>In autoclick mode, while a foot pedal is held down the device will constantly click at a speed that is set using a potentiometer soldered to the device. The number of clicks per second is shown by the two seven segment displays on the Clickotron. The click durations are generated based on a normal distribution so that the Clickotron will be indistinguishable from human clicking.</p>
         
         <p>
-            <img alt="Autoclicker pcb" src="''' + url_for('static', filename='resources/clickotron_pcb.png') + '''" width="484" height="679">
+            <img alt="Autoclicker pcb" src="{url_for('static', filename='resources/clickotron_pcb.png')}" width="484" height="679">
         </p>
         
         <h2>Usage</h2>
@@ -135,11 +127,11 @@ def arduino_autoclicker():
         <p>USB Host library documentation: <a href="https://github.com/felis/USB_Host_Shield_2.0" title="Library documentation" rel="nofollow">https://github.com/felis/USB_Host_Shield_2.0</a></p>
         
         <p>
-            <img alt="Autoclicker pcb camera" src="''' + url_for('static', filename='resources/clickotron_pcb_camera.jpg') + '''" width="348" height="489">
+            <img alt="Autoclicker pcb camera" src="{url_for('static', filename='resources/clickotron_pcb_camera.jpg')}" width="348" height="489">
         </p>
         
         <h2>Technical Details</h2>
-        <p>Link to the schematic: <a href="''' + url_for('static', filename='resources/clickotron_schematic.pdf') + '''" title="Autoclicker schematic">Autoclicker schematic</a></p>
+        <p>Link to the schematic: <a href="{url_for('static', filename='resources/clickotron_schematic.pdf')}" title="Autoclicker schematic">Autoclicker schematic</a></p>
         <p>When the switches are closed, current runs from the 5V pin through the 10 kiloohm resistor to ground and the input pins detect a voltage. When the switches open, the resistor pulls down the voltage of the input pins to ground. The foot pedals that I used have the switch normally closed, and pressing the pedal down opens the switch inside. Therefore, I made the program click when pins 12 or 13 read a "LOW" voltage.</p>
         <p>In the LED circuit, the pins of the arduino are set to high when the LED should turn on. There is also a resistor to limit the current and stop the LED from burning out.</p>
         <p>The potentiometer is soldered onto the Clickotron using wires. The device reads the value through pin A5 of the arduino and uses it to set the click speed in autoclick mode.</p>
@@ -152,7 +144,7 @@ def arduino_autoclicker():
 
 @app.route('/projects/this_website')
 def this_website():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">A place for my projects using Flask, HTML, and Javascript</p>
         
         <h2>Overview</h2>
@@ -163,23 +155,23 @@ def this_website():
         <p>For tools, I used Google Cloud's App Engine to host the website.</p>
         
         <p>
-            <img alt="Website code" src="''' + url_for('static', filename='resources/website_code.png') + '''" width="663" height="300">
+            <img alt="Website code" src="{url_for('static', filename='resources/website_code.png')}" width="663" height="300">
         </p>
     ''')
     return render_template('customPage.html', title='This Website', pageHtml=p)
 
 @app.route('/projects/crossword_generator')
 def crossword_generator():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">A program that generates crossword puzzles</p>
 
-        <h2><a href="''' + url_for('daily_crossword') + '''" title="Daily computer-generated crossword">Try today's puzzle!</a></h2>
+        <h2><a href="{url_for('daily_crossword')}" title="Daily computer-generated crossword">Try today's puzzle!</a></h2>
         
         <h2>Overview</h2>
         <p>This program generates crossword puzzles using a three step process: first, generate the grid; second, fill the grid with words; and third, clue the filled grid. To make a different puzzle available on my website each day, I began using the web framework Flask so I could do that in Python code.</p>
 
         <p>
-            <img alt="Crossword" src="''' + url_for('static', filename='resources/crossword.png') + '''" width="392" height="393">
+            <img alt="Crossword" src="{url_for('static', filename='resources/crossword.png')}" width="392" height="393">
         </p>
 
         <h2>Generating the Puzzles</h2>
@@ -200,24 +192,24 @@ def crossword_generator():
 
 @app.route('/projects/image_rater')
 def image_rater():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">An image rater based on the average person's judgement</p>
         
         <h2>Overview</h2>
         <p>This is a Python program I made that builds and trains a neural network which assigns aesthetic quality scores to images. The scores are based on what the average person would say. It is trained on images from the <a href="http://refbase.cvc.uab.es/files/MMP2012a.pdf" title="AVA dataset" rel="nofollow">AVA (Aesthetic Visual Analysis)</a> dataset, available <a href="https://academictorrents.com/details/71631f83b11d3d79d8f84efe0a7e12f0ac001460" title="Academictorrents AVA dataset" rel="nofollow">here</a>.</p>
-        <p>Uses Jupyter Notebook. Download pdf version of notebook <a href="''' + url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf') + '''" title="Jupyter Notebook pdf">here</a>.</p>
+        <p>Uses Jupyter Notebook. Download pdf version of notebook <a href="{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}" title="Jupyter Notebook pdf">here</a>.</p>
         
         <p>
-            <img alt="Network diagram" src="''' + url_for('static', filename='resources/network_visualization_two_hidden_layers.jpg') + '''" width="580" height="502">
+            <img alt="Network diagram" src="{url_for('static', filename='resources/network_visualization_two_hidden_layers.jpg')}" width="580" height="502">
         </p>
         
         <h2>Usage</h2>
-        <p>Download pdf version of Jupyter notebook file <a href="''' + url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf') + '''" title="Jupyter Notebook pdf">here</a>.</p>
+        <p>Download pdf version of Jupyter notebook file <a href="{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}" title="Jupyter Notebook pdf">here</a>.</p>
         <p>Get the code (an ipynb file): <a href="https://github.com/rmboyce/image_rater" title="Image rater code" rel="nofollow">https://github.com/rmboyce/image_rater</a></p>
         <p>The ipynb is a file you can run on your computer using Jupyter Notebook. If you run the notebook, you will need the AVA dataset on your local computer. Note the hardcoded location ("E:/AVA_dataset") in the python code.</p>
         
         <p>
-            <img alt="Transfer learning diagram" src="''' + url_for('static', filename='resources/transfer_learning.jpg') + '''" width="647" height="381">
+            <img alt="Transfer learning diagram" src="{url_for('static', filename='resources/transfer_learning.jpg')}" width="647" height="381">
         </p>
         
         <h2>Technical Details</h2>
@@ -228,7 +220,7 @@ def image_rater():
 
 @app.route('/projects/cube_timer')
 def cube_timer():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">A speed tracker for the Rubik's Cube</p>
         
         <h2>Overview</h2>
@@ -237,7 +229,7 @@ def cube_timer():
         <p>Link to see the code: <a href="https://github.com/rmboyce/cube-timer" title="Rubik's Cube timer code" rel="nofollow">https://github.com/rmboyce/cube-timer</a></p>
         
         <p>
-            <img alt="Cube timer" src="''' + url_for('static', filename='resources/cube_timer.png') + '''" width="663" height="546">
+            <img alt="Cube timer" src="{url_for('static', filename='resources/cube_timer.png')}" width="663" height="546">
         </p>
             
         <h2>Usage</h2>
@@ -248,14 +240,14 @@ def cube_timer():
 
 @app.route('/projects/hp_tetris')
 def hp_tetris():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">A tetris clone for the HP Prime graphing calculator</p>
         
         <h2>Overview</h2>
         <p>This is a tetris clone made for the HP Prime graphing calculator written in its HP BASIC programming language. I made it by making a bunch of improvements to Kevin Barbier's "BRICKS" game (you can see the changes in the changelog).</p>
         
         <p>
-            <img alt="HP Tetris game" src="''' + url_for('static', filename='resources/hp_tetris.jpg') + '''" width="198" height="388">
+            <img alt="HP Tetris game" src="{url_for('static', filename='resources/hp_tetris.jpg')}" width="198" height="388">
         </p>
         
         <h2>Getting the Game</h2>
@@ -320,14 +312,14 @@ def rock_climbing():
 
 @app.route('/projects/videogame_levels')
 def videogame_levels():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">Levels I made for fun using games like Portal 2 and Super Meat Boy</p>
         
         <h2>Portal 2</h2>
         <p>I made a lot of Portal 2 levels using Valve's editor and the community-made extension tool BEEmod (<a href="https://github.com/BEEmod/BEE2.4/releases" title="BEE2" rel="nofollow">https://github.com/BEEmod/BEE2.4/releases</a>). I had a lot of fun and learned a lot, but the levels aren't great looking back since I was inexperienced and made most of it when I was 13 or 14. If you want to check out my levels, go to <a href="https://steamcommunity.com/profiles/76561198166141294/myworkshopfiles" title="Portal 2 levels" rel="nofollow">my Steam workshop</a>.</p>
         
         <p>
-            <img alt="Portal 2 level" src="''' + url_for('static', filename='resources/portal_2.png') + '''" width="640" height="360">
+            <img alt="Portal 2 level" src="{url_for('static', filename='resources/portal_2.png')}" width="640" height="360">
         </p>
         
         <h2>Super Meat Boy</h2>
@@ -342,49 +334,49 @@ def videogame_levels():
 
 @app.route('/javascript_demos')
 def javascript_demos():
-    p = Markup('''
+    p = Markup(f'''
         <p class="smallDesc">Note: optimized for desktop use</p>
 
         <h2>
-            <a href="''' + url_for('voronoi_generator') + '''" title="Voronoi Generator">Voronoi Generator</a>
+            <a href="{url_for('voronoi_generator')}" title="Voronoi Generator">Voronoi Generator</a>
         </h2>
-        <p><a href="''' + url_for('voronoi_generator') + '''" class="linkImage" style="width:417px">
-           <img alt="Voronoi generator" src="''' + url_for('static', filename='resources/voronoi_generator.png') + '''" width="407" height="333">
+        <p><a href="{url_for('voronoi_generator')}" class="linkImage" style="width:417px">
+           <img alt="Voronoi generator" src="{url_for('static', filename='resources/voronoi_generator.png')}" width="407" height="333">
         </a></p>
 
         <h2>
-            <a href="''' + url_for('fractal_tree') + '''" title="Fractal Tree">Fractal Tree</a>
+            <a href="{url_for('fractal_tree')}" title="Fractal Tree">Fractal Tree</a>
         </h2>
-        <p><a href="''' + url_for('fractal_tree') + '''" class="linkImage" style="width:453px">
-            <img alt="Fractal tree" src="''' + url_for('static', filename='resources/fractal_tree.png') + '''" width="443" height="331">
+        <p><a href="{url_for('fractal_tree')}" class="linkImage" style="width:453px">
+            <img alt="Fractal tree" src="{url_for('static', filename='resources/fractal_tree.png')}" width="443" height="331">
         </a></p>
 
         <h2>
-            <a href="''' + url_for('orbit_sim') + '''" title="Orbit Simulator">Orbit Simulator</a>
+            <a href="{url_for('orbit_sim')}" title="Orbit Simulator">Orbit Simulator</a>
         </h2>
-        <p><a href="''' + url_for('orbit_sim') + '''" class="linkImage" style="width:345px">
-            <img alt="Orbit simulator" src="''' + url_for('static', filename='resources/orbit_sim.png') + '''" width="335" height="335">
+        <p><a href="{url_for('orbit_sim')}" class="linkImage" style="width:345px">
+            <img alt="Orbit simulator" src="{url_for('static', filename='resources/orbit_sim.png')}" width="335" height="335">
         </a></p>
 
         <h2>
-            <a href="''' + url_for('particle_life') + '''" title="Particle Life">Particle Life</a>
+            <a href="{url_for('particle_life')}" title="Particle Life">Particle Life</a>
         </h2>
-        <p><a href="''' + url_for('particle_life') + '''" class="linkImage" style="width:310px">
-            <img alt="Particle life" src="''' + url_for('static', filename='resources/particle_life.png') + '''" width="300" height="300">
+        <p><a href="{url_for('particle_life')}" class="linkImage" style="width:310px">
+            <img alt="Particle life" src="{url_for('static', filename='resources/particle_life.png')}" width="300" height="300">
         </a></p>
         
         <h2>
-            <a href="''' + url_for('element_words') + '''" title="Element Words">Element Words</a>
+            <a href="{url_for('element_words')}" title="Element Words">Element Words</a>
         </h2>
-        <p><a href="''' + url_for('element_words') + '''" class="linkImage" style="width:393px">
-            <img alt="Element words" src="''' + url_for('static', filename='resources/element_words.png') + '''" width="383" height="323">
+        <p><a href="{url_for('element_words')}" class="linkImage" style="width:393px">
+            <img alt="Element words" src="{url_for('static', filename='resources/element_words.png')}" width="383" height="323">
         </a></p>
         
         <h2>
-            <a href="''' + url_for('chaos_game') + '''" title="Chaos Game">Chaos Game</a>
+            <a href="{url_for('chaos_game')}" title="Chaos Game">Chaos Game</a>
         </h2>
-        <p><a href="''' + url_for('chaos_game') + '''" class="linkImage" style="width:374px">
-            <img alt="Chaos game" src="''' + url_for('static', filename='resources/chaos_game.png') + '''" width="364" height="333">
+        <p><a href="{url_for('chaos_game')}" class="linkImage" style="width:374px">
+            <img alt="Chaos game" src="{url_for('static', filename='resources/chaos_game.png')}" width="364" height="333">
         </a></p>
     ''')
     return render_template('customPage.html', title='Javascript Demos', pageHtml=p)
@@ -394,7 +386,7 @@ def generateJsMarkup(jsPath, fileList):
     for f in fileList:
         temp = '<script src="' + url_for('static', filename=('js' + jsPath + '/' + f)) + '" type="text/javascript"></script>' + '\n'
         js += temp
-    
+
     return Markup(js)
 
 @app.route('/javascript_demos/chaos_game')
@@ -486,48 +478,46 @@ def voronoi_generator():
 
 @app.route('/daily_crossword/today.puz')
 def current_crossword():
-
     d = datetime.datetime.now(ZoneInfo('America/Los_Angeles'))
-    #print(d)
     f = str(d.year) + '-' + str(d.month) + '-' + str(d.day) + '.puz'
-    #print(f)
+
     try:
         return send_from_directory('crosswords', filename=f)
-    except:
+    except Exception:
         # Return the default puzzle if there was an error getting today's puzzle
         return send_from_directory('crosswords', filename='default.puz')
 
 @app.route('/daily_crossword')
 def daily_crossword():
-    h = Markup('''
-        <link rel="stylesheet" href="''' + url_for('static', filename='css/crosswordnexus.css') + '''">
+    h = Markup(f'''
+        <link rel="stylesheet" href="{url_for('static', filename='css/crosswordnexus.css')}">
 
-        <script src="''' + url_for('static', filename='js/daily_crossword/crosswords.js') + '''"></script>
-        <script src="''' + url_for('static', filename='js/daily_crossword/puz.min.js') + '''"></script>
+        <script src="{url_for('static', filename='js/daily_crossword/crosswords.js')}"></script>
+        <script src="{url_for('static', filename='js/daily_crossword/puz.min.js')}"></script>
         
-        <script src="''' + url_for('static', filename='js/daily_crossword/jquery.js') + '''"></script>
-        <script src="''' + url_for('static', filename='js/daily_crossword/zip.js') + '''"></script>
-        <script src="''' + url_for('static', filename='js/daily_crossword/jspdf.min.js') + '''"></script>
+        <script src="{url_for('static', filename='js/daily_crossword/jquery.js')}"></script>
+        <script src="{url_for('static', filename='js/daily_crossword/zip.js')}"></script>
+        <script src="{url_for('static', filename='js/daily_crossword/jspdf.min.js')}"></script>
         
         <style>
-            div.crossword { position: absolute; left: 0; top: 0; width: 100%; height: 100%; text-align: center; }
+            div.crossword {{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; text-align: center; }}
         </style>
     ''')
-    p = Markup('''
+    p = Markup(f'''
         <div class="bigWrapper">
             <div class="crossword"></div>
 
             <script>
-                (function(){
-                    CrosswordNexus.createCrossword($('div.crossword'), "''' + url_for('current_crossword') + '''");
-                })();
+                (function(){{
+                    CrosswordNexus.createCrossword($('div.crossword'), "{url_for('current_crossword')}");
+                }})();
             </script>
         </div>
         
         <p class="centered">
-            <a href="''' + url_for('crossword_generator') + '''" title="My projects">How the puzzles are generated</a>
+            <a href="{url_for('crossword_generator')}" title="My projects">How the puzzles are generated</a>
             &middot;
-            <a href = "''' + url_for('current_crossword') + '''" title="Archive">Download today's puz file</a>
+            <a href = "{url_for('current_crossword')}" title="Archive">Download today's puz file</a>
             &middot;
             <a href = "https://crosswordnexus.com/" title="CrosswordNexus">Player from CrosswordNexus</a>
         </p>
@@ -542,41 +532,41 @@ def daily_crossword():
 @app.route('/')
 @app.route('/index')
 def index():
-    p = Markup('''
+    p = Markup(f'''
         <p>Hey, I'm Ramsey!</p>
         
         <p>My main interests are engineering, programming, rock climbing, and puzzle design.</p>
 
         <p>Here's a gallery of my recent projects!</p>
 
-        <h2><a href = "''' + url_for('crossword_generator') + '''" title="Crossword Generator">Crossword Generator</a> (<a href="''' + url_for('daily_crossword') + '''" title="Daily computer-generated crossword">Try today's puzzle!</a>)</h2>
+        <h2><a href = "{url_for('crossword_generator')}" title="Crossword Generator">Crossword Generator</a> (<a href="{url_for('daily_crossword')}" title="Daily computer-generated crossword">Try today's puzzle!</a>)</h2>
         <p>A program that generates a new crossword puzzle each day</p>
-        <p><a href="''' + url_for('crossword_generator') + '''" class="linkImage" style="width:402px">
-            <img alt="Crossword" src="''' + url_for('static', filename='resources/crossword.png') + '''" width="392" height="393">
+        <p><a href="{url_for('crossword_generator')}" class="linkImage" style="width:402px">
+            <img alt="Crossword" src="{url_for('static', filename='resources/crossword.png')}" width="392" height="393">
         </a></p>
         
-        <h2><a href="''' + url_for('serpent_fusion') + '''" title="Serpent Fusion">Serpent Fusion</a></h2>
+        <h2><a href="{url_for('serpent_fusion')}" title="Serpent Fusion">Serpent Fusion</a></h2>
         <p>A puzzle game created with the Unity engine and C#</p>
-        <p><a href="''' + url_for('serpent_fusion') + '''" class="linkImage" style="width:645px">
-           <img alt="Serpent Fusion" src="''' + url_for('static', filename='resources/serpent_fusion.png') + '''" width="635" height="308">
+        <p><a href="{url_for('serpent_fusion')}" class="linkImage" style="width:645px">
+           <img alt="Serpent Fusion" src="{url_for('static', filename='resources/serpent_fusion.png')}" width="635" height="308">
         </a></p>
         
-        <h2><a href = "''' + url_for('arduino_autoclicker') + '''" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
+        <h2><a href = "{url_for('arduino_autoclicker')}" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
         <p>An Arduino shield to augment your mouse</p>
-        <p><a href="''' + url_for('arduino_autoclicker') + '''" class="linkImage" style="width:494px">
-           <img alt="Autoclicker pcb" src="''' + url_for('static', filename='resources/clickotron_pcb.png') + '''" width="484" height="679">
+        <p><a href="{url_for('arduino_autoclicker')}" class="linkImage" style="width:494px">
+           <img alt="Autoclicker pcb" src="{url_for('static', filename='resources/clickotron_pcb.png')}" width="484" height="679">
         </a></p>
 
-        <h2><a href="''' + url_for('voronoi_generator') + '''" title="Voronoi Generator">Voronoi Generator</a></h2>
+        <h2><a href="{url_for('voronoi_generator')}" title="Voronoi Generator">Voronoi Generator</a></h2>
         <p>An interactive visualization of Voronoi diagrams</p>
         <p>Note: optimized for desktop use</p>
-        <p><a href="''' + url_for('voronoi_generator') + '''" class="linkImage" style="width:417px">
-           <img alt="Voronoi generator" src="''' + url_for('static', filename='resources/voronoi_generator.png') + '''" width="407" height="333">
+        <p><a href="{url_for('voronoi_generator')}" class="linkImage" style="width:417px">
+           <img alt="Voronoi generator" src="{url_for('static', filename='resources/voronoi_generator.png')}" width="407" height="333">
         </a></p>
         
         <p>My GitHub: <a href = "https://github.com/rmboyce" title="GitHub">https://github.com/rmboyce</a></p>
         
-        <p>I also enjoy rock climbing! See more on my <a href = "''' + url_for('rock_climbing') + '''" title="Outdoor climbing log">outdoor climbing log</a>!</p>
+        <p>I also enjoy rock climbing! See more on my <a href = "{url_for('rock_climbing')}" title="Outdoor climbing log">outdoor climbing log</a>!</p>
     ''')
     return render_template('customPage.html', title='About Me', pageHtml=p)
 
