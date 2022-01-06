@@ -2,14 +2,15 @@ import datetime
 from zoneinfo import ZoneInfo
 from flask import Flask, render_template, Markup, url_for, send_from_directory
 from flask import request, redirect
+from werkzeug.exceptions import NotFound
 
 app = Flask(__name__)
 
 # Force https
 def force_https():
-    """Redirect any non-https requests to https.
-    Based largely on flask-sslify.
-    """
+    # Redirect any non-https requests to https
+    # Based largely on flask-sslify
+
     if not app.debug:
         app.config['SESSION_COOKIE_SECURE'] = True
 
@@ -28,6 +29,7 @@ def force_https():
             return r
 
 app.before_request(force_https)
+
 
 #===================================
 #=            Projects             =
@@ -384,14 +386,13 @@ def javascript_demos():
 def generateJsMarkup(jsPath, fileList):
     js = ''
     for f in fileList:
-        temp = '<script src="' + url_for('static', filename=('js' + jsPath + '/' + f)) + '" type="text/javascript"></script>' + '\n'
-        js += temp
+        js += f'''<script src="{url_for('static', filename=(f'js/{jsPath}/{f}'))}" type="text/javascript"></script>\n'''
 
     return Markup(js)
 
 @app.route('/javascript_demos/chaos_game')
 def chaos_game():
-    j = generateJsMarkup('/chaos_game', ['chaos_game.js', 'Button.js', 'Checkbox.js', 'HScrollbar.js'])
+    j = generateJsMarkup('chaos_game', ['chaos_game.js', 'Button.js', 'Checkbox.js', 'HScrollbar.js'])
     p = Markup('''
         <p>See the code: <a href="https://github.com/rmboyce/chaos-game" title="Chaos game code" rel="nofollow">https://github.com/rmboyce/chaos-game</a></p>
         <p>This program starts with a polygon and a point in a random location inside it. Then, the program chooses a random vertex from the polygon and makes a copy of the point some fraction of the way between the old point and the vertex. The process is repeated using the new point. Eventually, the points will make a pattern.</p>
@@ -406,7 +407,7 @@ def chaos_game():
 
 @app.route('/javascript_demos/element_words')
 def element_words():
-    j = generateJsMarkup('/element_words', ['element_words.js', 'HScrollbar.js', 'console.js'])
+    j = generateJsMarkup('element_words', ['element_words.js', 'HScrollbar.js', 'console.js'])
     p = Markup('''
         <p>See the code: <a href="https://github.com/rmboyce/element-words" title="Element words code" rel="nofollow">https://github.com/rmboyce/element-words</a></p>
         <p>Uses atomic element symbols to spell an inputted word. This program finds all possible spellings of a word using elements. If the word cannot be spelled fully, the program goes as far as possible.</p>
@@ -423,7 +424,7 @@ def element_words():
 
 @app.route('/javascript_demos/fractal_tree')
 def fractal_tree():
-    j = generateJsMarkup('/fractal_tree', ['fractal_tree.js', 'HScrollbar.js'])
+    j = generateJsMarkup('fractal_tree', ['fractal_tree.js', 'HScrollbar.js'])
     p = Markup('''
         <p>See the code: <a href="https://github.com/rmboyce/fractal-tree" title="Fractal tree code" rel="nofollow">https://github.com/rmboyce/fractal-tree</a></p>
         <p>Draws a fractal tree based on the number of child branches that split off from each parent branch, the size that each child branch will be compared to its parent branch, the minimum branch length the program draws, and the angle between branches.</p>
@@ -433,7 +434,7 @@ def fractal_tree():
 
 @app.route('/javascript_demos/orbit_sim')
 def orbit_sim():
-    j = generateJsMarkup('/orbit_sim', ['orbit_sim.js', 'Button.js'])
+    j = generateJsMarkup('orbit_sim', ['orbit_sim.js', 'Button.js'])
     p = Markup('''
         <p>See the code: <a href="https://github.com/rmboyce/orbit-sim" title="Orbit simulator code" rel="nofollow">https://github.com/rmboyce/orbit-sim</a></p>
         <p>Simple orbit simulator that ignores interactions between planets. It finds where the planets should be and what speeds they should be moving at by solving the two-body problem with the <a href="https://en.wikipedia.org/wiki/Kepler%27s_equation" title="Kepler equation Wikipedia" rel="nofollow">Kepler Equation</a>. Uses Newton's Method to calculate a numerical approximation.</p>
@@ -443,7 +444,7 @@ def orbit_sim():
 
 @app.route('/javascript_demos/particle_life')
 def particle_life():
-    j = generateJsMarkup('/particle_life', ['particle_life.js', 'HScrollbar.js', 'Button.js', 'Checkbox.js'])
+    j = generateJsMarkup('particle_life', ['particle_life.js', 'HScrollbar.js', 'Button.js', 'Checkbox.js'])
     p = Markup('''
         <p>See the code: <a href="https://github.com/rmboyce/particle-life" title="Particle life code" rel="nofollow">https://github.com/rmboyce/particle-life</a></p>
         <p>Simulates forces between particles to create lifelike shapes. Note that the forces don't follow the laws of physics.</p>
@@ -459,7 +460,7 @@ def particle_life():
 
 @app.route('/javascript_demos/voronoi_generator')
 def voronoi_generator():
-    j = generateJsMarkup('/voronoi_generator', ['voronoi_generator.js', 'Checkbox.js', 'Button.js'])
+    j = generateJsMarkup('voronoi_generator', ['voronoi_generator.js', 'Checkbox.js', 'Button.js'])
     p = Markup('''
         <p>See the code: <a href="https://github.com/rmboyce/voronoi-generator" title="Voronoi generator code" rel="nofollow">https://github.com/rmboyce/voronoi-generator</a></p>
         <p>Generates Voronoi diagrams (diagrams where each point in a colored region is closer to the region's "seed point" than any other seed point) and the Delaunay triangulation (a triangulation where the circumcircle of each triangle contains no other points in the triangulation). Click to place "seed points".</p>
@@ -479,11 +480,11 @@ def voronoi_generator():
 @app.route('/daily_crossword/today.puz')
 def current_crossword():
     d = datetime.datetime.now(ZoneInfo('America/Los_Angeles'))
-    f = str(d.year) + '-' + str(d.month) + '-' + str(d.day) + '.puz'
+    f = f'{str(d.year)}-{str(d.month)}-{str(d.day)}.puz'
 
     try:
         return send_from_directory('crosswords', filename=f)
-    except Exception:
+    except NotFound:
         # Return the default puzzle if there was an error getting today's puzzle
         return send_from_directory('crosswords', filename='default.puz')
 
@@ -529,8 +530,8 @@ def daily_crossword():
 #=              Index              =
 #===================================
 
-@app.route('/')
 @app.route('/index')
+@app.route('/')
 def index():
     p = Markup(f'''
         <p>Hey, I'm Ramsey!</p>
