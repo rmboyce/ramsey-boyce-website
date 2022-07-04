@@ -92,10 +92,10 @@ section {
 
 div.javascriptDesc {
   flex:20%;
-  margin:0 12px;
+  margin:0 15px;
 }
 
-h1{font-weight:lighter;font-size:24px;text-align:center;margin:12px 0 0}
+h1{font-weight:lighter;font-size:24px;text-align:center;margin:12px 0 10px}
 h2{font-weight:lighter;font-size:18px;margin:16px 0 12px}
 
 p.centered,h2.centered {
@@ -110,3 +110,24 @@ footer a{display:inline-block;margin:8px;border:none;font-size:12px}
 i,em{font-style:italic}
 strong,b{font-weight:bolder}
 small{font-size:smaller}
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #eee;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 20px;
+    border: 3px solid #eee;
+}
