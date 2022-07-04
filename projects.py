@@ -10,55 +10,72 @@ def projects():
     p = Markup(f'''
         <h2 class="centered">Bigger Projects</h2>
 
-        <h2><a href = "{url_for('serpent_fusion')}" title="Serpent Fusion">Serpent Fusion</a></h2>
+        <h2><a href = "{url_for('serpent_fusion')}" 
+        title="Serpent Fusion">Serpent Fusion</a></h2>
         <p>A puzzle game created with the Unity engine and C#</p>
 
-        <h2><a href = "{url_for('crossword_generator')}" title="Crossword Generator">Crossword Generator</a></h2>
+        <h2><a href = "{url_for('crossword_generator')}" 
+        title="Crossword Generator">Crossword Generator</a></h2>
         <p>A program that generates a new crossword puzzle each day</p>
         
-        <h2><a href = "{url_for('arduino_autoclicker')}" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
+        <h2><a href = "{url_for('arduino_autoclicker')}" 
+        title="Arduino autoclicker">Arduino Autoclicker</a></h2>
         <p>An Arduino shield to augment your mouse</p>
         
-        <h2><a href = "{url_for('this_website')}" title="This website">This Website</a></h2>
+        <h2><a href = "{url_for('this_website')}" 
+        title="This website">This Website</a></h2>
         <p>A place for my projects using Flask, HTML, and Javascript</p>
         
         
         <h2 class="centered">Smaller Projects</h2>
 
-        <h2><a href = "{url_for('image_rater')}" title="Image Rating Neural Network">Image Rating Neural Network</a></h2>
+        <h2><a href = "{url_for('image_rater')}" 
+        title="Image Rating Neural Network">Image Rating Neural Network</a>
+        </h2>
         <p>An image rater based on the average person's judgement</p>
         
-        <h2><a href = "{url_for('cube_timer')}" title="Rubik's Cube timer">Rubik's Cube Timer</a></h2>
+        <h2><a href = "{url_for('cube_timer')}" 
+        title="Rubik's Cube timer">Rubik's Cube Timer</a></h2>
         <p>A speed tracker for the Rubik's Cube</p>
     
-        <h2><a href = "{url_for('hp_tetris')}" title="HP Prime Tetris">HP Prime Tetris</a></h2>
+        <h2><a href = "{url_for('hp_tetris')}" 
+        title="HP Prime Tetris">HP Prime Tetris</a></h2>
         <p>A tetris clone for the HP Prime graphing calculator</p>
         
         
         <h2 class="centered">Other</h2>
 
-        <h2><a href = "{url_for('rock_climbing')}" title="Outdoor Climbing Log">Outdoor Climbing Log</a></h2>
+        <h2><a href = "{url_for('rock_climbing')}" 
+        title="Outdoor Climbing Log">Outdoor Climbing Log</a></h2>
         <p>My outdoor rock climbing projects</p>
         
-        <h2><a href = "{url_for('videogame_levels')}" title="Videogame levels">Videogame Levels</a></h2>
-        <p>Levels I made for fun using games like Portal 2 and Super Meat Boy</p>
+        <h2><a href = "{url_for('videogame_levels')}" 
+        title="Videogame levels">Videogame Levels</a></h2>
+        <p>Levels I made for fun using games like Portal 2 and Super Meat 
+        Boy</p>
     ''')
     return render_template('customPage.html', title='My Projects', pageHtml=p)
 
 @app.route('/projects/serpent_fusion')
 def serpent_fusion():
     p = Markup(f'''
-        <p class="smallDesc">A puzzle game created with the Unity engine and C#</p>
+        <p class="smallDesc">A puzzle game created with the Unity engine and 
+        C#</p>
         
         <h2>Overview</h2>
         <p>I programmed the entirety of my puzzle game Serpent Fusion on my 
         own over about two years, and I regularly release updates. It is a 
         challenging sokoban-style game based on Snake.</p>
-        <p>If you are interested, the game is here: <a href="https://store.steampowered.com/app/1126260/Serpent_Fusion/" title="Serpent Fusion" rel="nofollow">Serpent Fusion</a></p>
-        <p>Note: This is an extremely challenging puzzle game. (Don't say I didn't warn you!)</p>
+        <p>If you are interested, the game is here: 
+        <a href="https://store.steampowered.com/app/1126260/Serpent_Fusion/" 
+        title="Serpent Fusion" rel="nofollow">Serpent Fusion</a></p>
+        <p>Note: This is an extremely challenging puzzle game. (Don't say I 
+        didn't warn you!)</p>
         
         <p>
-            <img alt="Serpent Fusion" src="{url_for('static', filename='resources/serpent_fusion.png')}" width="635" height="308">
+            <img alt="Serpent Fusion" 
+            src="{url_for('static', filename='resources/serpent_fusion.png')}" 
+            width="635" height="308">
         </p>
         
         <h2>About Creation</h2>
@@ -101,11 +118,18 @@ def arduino_autoclicker():
         mouse (proper posture and exercises have fixed this!). I still use the 
         autoclicker to play League of Legends with my friends, since over the 
         Covid-19 pandemic it's the best way to stay in touch.</p>
-        <p>Link to the code: <a href="https://github.com/rmboyce/arduino-autoclicker" title="Autoclicker code" rel="nofollow">https://github.com/rmboyce/arduino-autoclicker</a></p>
-        <p>Link to the schematic: <a href="{url_for('static', filename='resources/clickotron_schematic.pdf')}" title="Autoclicker schematic">Autoclicker schematic</a></p>
+        <p>Link to the code: 
+        <a href="https://github.com/rmboyce/arduino-autoclicker" 
+        title="Autoclicker code" rel="nofollow">
+        https://github.com/rmboyce/arduino-autoclicker</a></p>
+        <p>Link to the schematic: 
+        <a href="{url_for('static', filename='resources/clickotron_schematic.pdf')}" 
+        title="Autoclicker schematic">Autoclicker schematic</a></p>
         
         <p>
-            <img alt="Autoclicker device" src="{url_for('static', filename='resources/clickotron_full.jpg')}" width="689" height="544">
+            <img alt="Autoclicker device" 
+            src="{url_for('static', filename='resources/clickotron_full.jpg')}" 
+            width="689" height="544">
         </p>
         
         <h2>About the Device</h2>
@@ -130,7 +154,9 @@ def arduino_autoclicker():
         be indistinguishable from human clicking.</p>
         
         <p>
-            <img alt="Autoclicker pcb" src="{url_for('static', filename='resources/clickotron_pcb.png')}" width="484" height="679">
+            <img alt="Autoclicker pcb" 
+            src="{url_for('static', filename='resources/clickotron_pcb.png')}" 
+            width="484" height="679">
         </p>
         
         <h2>Usage</h2>
@@ -143,7 +169,8 @@ def arduino_autoclicker():
         Manage Libraries). You will also need an Arduino Leonardo and a USB 
         Host Shield board. If your USB Host Shield board is not set up, you 
         will have to bridge the 5V pad and the 
-        <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface" title="SPI (Wikipedia)" rel="nofollow">SPI</a> 
+        <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface" 
+        title="SPI (Wikipedia)" rel="nofollow">SPI</a> 
         (a communciation protocol) lines so that power and data go to the 
         circuits.</p>
         <p>Note that applies if your scroll wheel does not seem to be working 
@@ -155,16 +182,30 @@ def arduino_autoclicker():
         "virtual bool BuffersIdentical". For other operating systems you will 
         have to figure out where the USB Host Shield Library is stored and 
         make the same change to the code.</p>
-        <p>One place to buy the USB Host board: <a href="https://shop.tkjelectronics.dk/product_info.php?products_id=43" title="Purchase the board" rel="nofollow">https://shop.tkjelectronics.dk/product_info.php?products_id=43</a></p>
-        <p>USB Host hardware manual: <a href="https://chome.nerpa.tech/usb-host-shield-hardware-manual/" title="Hardware manual" rel="nofollow">https://chome.nerpa.tech/usb-host-shield-hardware-manual/</a></p>
-        <p>USB Host library documentation: <a href="https://github.com/felis/USB_Host_Shield_2.0" title="Library documentation" rel="nofollow">https://github.com/felis/USB_Host_Shield_2.0</a></p>
+        <p>One place to buy the USB Host board: 
+        <a href=
+        "https://shop.tkjelectronics.dk/product_info.php?products_id=43" 
+        title="Purchase the board" rel="nofollow">
+        https://shop.tkjelectronics.dk/product_info.php?products_id=43</a></p>
+        <p>USB Host hardware manual: 
+        <a href="https://chome.nerpa.tech/usb-host-shield-hardware-manual/" 
+        title="Hardware manual" rel="nofollow">
+        https://chome.nerpa.tech/usb-host-shield-hardware-manual/</a></p>
+        <p>USB Host library documentation: 
+        <a href="https://github.com/felis/USB_Host_Shield_2.0" 
+        title="Library documentation" rel="nofollow">
+        https://github.com/felis/USB_Host_Shield_2.0</a></p>
         
         <p>
-            <img alt="Autoclicker pcb camera" src="{url_for('static', filename='resources/clickotron_pcb_camera.jpg')}" width="348" height="489">
+            <img alt="Autoclicker pcb camera" 
+            src="{url_for('static', filename='resources/clickotron_pcb_camera.jpg')}" 
+            width="348" height="489">
         </p>
         
         <h2>Technical Details</h2>
-        <p>Link to the schematic: <a href="{url_for('static', filename='resources/clickotron_schematic.pdf')}" title="Autoclicker schematic">Autoclicker schematic</a></p>
+        <p>Link to the schematic: 
+        <a href="{url_for('static', filename='resources/clickotron_schematic.pdf')}" 
+        title="Autoclicker schematic">Autoclicker schematic</a></p>
         <p>When the switches are closed, current runs from the 5V pin through 
         the 10 kiloohm resistor to ground and the input pins detect a voltage. 
         When the switches open, the resistor pulls down the voltage of the 
@@ -210,7 +251,9 @@ def this_website():
         <p>For tools, I used Google Cloud's App Engine to host the website.</p>
         
         <p>
-            <img alt="Website code" src="{url_for('static', filename='resources/website_code.png')}" width="663" height="300">
+            <img alt="Website code" 
+            src="{url_for('static', filename='resources/website_code.png')}" 
+            width="663" height="300">
         </p>
     ''')
     return render_template('customPage.html', title='This Website', pageHtml=p)
@@ -220,7 +263,8 @@ def crossword_generator():
     p = Markup(f'''
         <p class="smallDesc">A program that generates crossword puzzles</p>
 
-        <h2><a href="{url_for('daily_crossword')}" title="Daily computer-generated crossword">Try today's puzzle!</a></h2>
+        <h2><a href="{url_for('daily_crossword')}" 
+        title="Daily computer-generated crossword">Try today's puzzle!</a></h2>
         
         <h2>Overview</h2>
         <p>This program generates crossword puzzles using a three step 
@@ -230,7 +274,9 @@ def crossword_generator():
         could do that in Python code.</p>
 
         <p>
-            <img alt="Crossword" src="{url_for('static', filename='resources/crossword.png')}" width="392" height="393">
+            <img alt="Crossword" 
+            src="{url_for('static', filename='resources/crossword.png')}" 
+            width="392" height="393">
         </p>
 
         <h2>Generating the Puzzles</h2>
@@ -249,9 +295,21 @@ def crossword_generator():
         a valid filling of the grid; however, it takes hours or days to work, 
         and so it must be optimized. A few of the optimizations were:</p>
         <ul>
-            <li>The first optimization was to keep track of the number of possible words that could fit in each slot of the crossword, and stop searching a branch of the tree if any of the numbers of possibilities dropped to zero. This sounds like a lot of extra work for the algorithm, and it is, but the time saved is more than worth it.</li>
-            <li>The next improvement was to choose the next word to fill based on which slot in the crossword had the least number of possible words that could fill it. This will likely make it faster to find areas where no words fit a certain slot.</li>
-            <li>The last change I made was for the algorithm to pick a word for a certain slot based on what would lead to the highest number of possibilities of words crossing that slot. This means that it's likelier for the algorithm to take profitable branches of the tree.</li>
+            <li>The first optimization was to keep track of the number of 
+            possible words that could fit in each slot of the crossword, and 
+            stop searching a branch of the tree if any of the numbers of 
+            possibilities dropped to zero. This sounds like a lot of extra 
+            work for the algorithm, and it is, but the time saved is more 
+            than worth it.</li>
+            <li>The next improvement was to choose the next word to fill based 
+            on which slot in the crossword had the least number of possible 
+            words that could fill it. This will likely make it faster to find 
+            areas where no words fit a certain slot.</li>
+            <li>The last change I made was for the algorithm to pick a word 
+            for a certain slot based on what would lead to the highest number 
+            of possibilities of words crossing that slot. This means that it's 
+            likelier for the algorithm to take profitable branches of the 
+            tree.</li>
         </ul>
         <p>With these optimizations, the filling process now usually takes 
         somewhere between 10 seconds and 3 minutes (with code written mostly 
@@ -277,33 +335,56 @@ def crossword_generator():
 @app.route('/projects/image_rater')
 def image_rater():
     p = Markup(f'''
-        <p class="smallDesc">An image rater based on the average person's judgement</p>
+        <p class="smallDesc">An image rater based on the average person's 
+        judgement</p>
         
         <h2>Overview</h2>
         <p>This is a Python program I made that builds and trains a neural 
         network which assigns aesthetic quality scores to images. The scores 
         are based on what the average person would say. It is trained on 
-        images from the <a href="http://refbase.cvc.uab.es/files/MMP2012a.pdf" title="AVA dataset" rel="nofollow">AVA (Aesthetic Visual Analysis)</a> dataset, available <a href="https://academictorrents.com/details/71631f83b11d3d79d8f84efe0a7e12f0ac001460" title="Academictorrents AVA dataset" rel="nofollow">here</a>.</p>
-        <p>Uses Jupyter Notebook. Download pdf version of notebook <a href="{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}" title="Jupyter Notebook pdf">here</a>.</p>
+        images from the <a href="http://refbase.cvc.uab.es/files/MMP2012a.pdf" 
+        title="AVA dataset" rel="nofollow">AVA (Aesthetic Visual Analysis)</a> 
+        dataset, available 
+        <a href="https://academictorrents.com/details/71631f83b11d3d79d8f84efe0a7e12f0ac001460" 
+        title="Academictorrents AVA dataset" rel="nofollow">here</a>.</p>
+        <p>Uses Jupyter Notebook. Download pdf version of notebook 
+        <a href="{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}" 
+        title="Jupyter Notebook pdf">here</a>.</p>
         
         <p>
-            <img alt="Network diagram" src="{url_for('static', filename='resources/network_visualization_two_hidden_layers.jpg')}" width="580" height="502">
+            <img alt="Network diagram" 
+            src="{url_for('static', filename='resources/network_visualization_two_hidden_layers.jpg')}" 
+            width="580" height="502">
         </p>
         
         <h2>Usage</h2>
-        <p>Download pdf version of Jupyter notebook file <a href="{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}" title="Jupyter Notebook pdf">here</a>.</p>
-        <p>Get the code (an ipynb file): <a href="https://github.com/rmboyce/image_rater" title="Image rater code" rel="nofollow">https://github.com/rmboyce/image_rater</a></p>
+        <p>Download pdf version of Jupyter notebook file 
+        <a href="{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}" 
+        title="Jupyter Notebook pdf">here</a>.</p>
+        <p>Get the code (an ipynb file): 
+        <a href="https://github.com/rmboyce/image_rater" 
+        title="Image rater code" rel="nofollow">
+        https://github.com/rmboyce/image_rater</a></p>
         <p>The ipynb is a file you can run on your computer using Jupyter 
         Notebook. If you run the notebook, you will need the AVA dataset on 
         your local computer. Note the hardcoded location ("E:/AVA_dataset") 
         in the python code.</p>
         
         <p>
-            <img alt="Transfer learning diagram" src="{url_for('static', filename='resources/transfer_learning.jpg')}" width="647" height="381">
+            <img alt="Transfer learning diagram" 
+            src="{url_for('static', filename='resources/transfer_learning.jpg')}" 
+            width="647" height="381">
         </p>
         
         <h2>Technical Details</h2>
-        <p>The image rater first uses the <a href="https://github.com/machrisaa/tensorflow-vgg" title="VGG Github" rel="nofollow">VGG19</a> network to convert images from the AVA dataset into codes, then runs the codes through a fully-connected network with two hidden layers to return image ratings (see figure 1 above). The rating for an image is in the form of a probability distribution over the integers from 1 (lowest quality) to 10 (highest quality).</p>
+        <p>The image rater first uses the 
+        <a href="https://github.com/machrisaa/tensorflow-vgg" 
+        title="VGG Github" rel="nofollow">VGG19</a> network to convert images 
+        from the AVA dataset into codes, then runs the codes through a 
+        fully-connected network with two hidden layers to return image ratings 
+        (see figure 1 above). The rating for an image is in the form of a 
+        probability distribution over the integers from 1 (lowest quality) to 
+        10 (highest quality).</p>
         <p>The network achieves a correlation coefficient of 0.52 between the 
         predicted and actual ratings for a validation set of images. 
         Additionally, I do a factor analysis to determine which VGG19 codes 
@@ -323,11 +404,19 @@ def cube_timer():
         track how fast the user can solve a cube. The program also saves every 
         past logged time in a text file with timestamps, so you can see your 
         improvement in the long run.</p>
-        <p>Link to get it: <a href="https://github.com/rmboyce/cube-timer/releases/" title="Rubik's Cube timer releases" rel="nofollow">https://github.com/rmboyce/cube-timer/releases/</a></p>
-        <p>Link to see the code: <a href="https://github.com/rmboyce/cube-timer" title="Rubik's Cube timer code" rel="nofollow">https://github.com/rmboyce/cube-timer</a></p>
+        <p>Link to get it: 
+        <a href="https://github.com/rmboyce/cube-timer/releases/" 
+        title="Rubik's Cube timer releases" rel="nofollow">
+        https://github.com/rmboyce/cube-timer/releases/</a></p>
+        <p>Link to see the code: 
+        <a href="https://github.com/rmboyce/cube-timer" 
+        title="Rubik's Cube timer code" rel="nofollow">
+        https://github.com/rmboyce/cube-timer</a></p>
         
         <p>
-            <img alt="Cube timer" src="{url_for('static', filename='resources/cube_timer.png')}" width="663" height="546">
+            <img alt="Cube timer" 
+            src="{url_for('static', filename='resources/cube_timer.png')}" 
+            width="663" height="546">
         </p>
             
         <h2>Usage</h2>
@@ -345,7 +434,8 @@ def cube_timer():
 @app.route('/projects/hp_tetris')
 def hp_tetris():
     p = Markup(f'''
-        <p class="smallDesc">A tetris clone for the HP Prime graphing calculator</p>
+        <p class="smallDesc">A tetris clone for the HP Prime graphing 
+        calculator</p>
         
         <h2>Overview</h2>
         <p>This is a tetris clone made for the HP Prime graphing calculator 
@@ -354,13 +444,24 @@ def hp_tetris():
         the changes in the changelog).</p>
         
         <p>
-            <img alt="HP Tetris game" src="{url_for('static', filename='resources/hp_tetris.jpg')}" width="198" height="388">
+            <img alt="HP Tetris game" 
+            src="{url_for('static', filename='resources/hp_tetris.jpg')}" 
+            width="198" height="388">
         </p>
         
         <h2>Getting the Game</h2>
         <p>The easiest way to get the program onto an HP Prime is to install 
-        the HP Prime Connectivity Kit (<a href="http://www.hp-prime.de/en/category/15-software" title="HP Prime Connectivity Kit" rel="nofollow">http://www.hp-prime.de/en/category/15-software</a>) on your computer and to connect your computer and HP Prime with the charging cable. Then you can make a new file (call it "BLOCKS") and copy the program over. To run the game, use Shift + 1 to get to the programs menu and just run the "BLOCKS" program.</p>
-        <p>Get the code here: <a href="https://github.com/rmboyce/hp-tetris" title="HP Prime Tetris code" rel="nofollow">https://github.com/rmboyce/hp-tetris</a></p>
+        the HP Prime Connectivity Kit 
+        (<a href="http://www.hp-prime.de/en/category/15-software" 
+        title="HP Prime Connectivity Kit" rel="nofollow">
+        http://www.hp-prime.de/en/category/15-software</a>) 
+        on your computer and to connect your computer and HP Prime with the 
+        charging cable. Then you can make a new file (call it "BLOCKS") and 
+        copy the program over. To run the game, use Shift + 1 to get to the 
+        programs menu and just run the "BLOCKS" program.</p>
+        <p>Get the code here: <a href="https://github.com/rmboyce/hp-tetris" 
+        title="HP Prime Tetris code" rel="nofollow">
+        https://github.com/rmboyce/hp-tetris</a></p>
             
         <h2>Controls</h2>
         <ul>
@@ -368,7 +469,8 @@ def hp_tetris():
             <li>"SIN" to drop the current piece</li>
             <li>"Enter" to hard drop the piece</li>
             <li>The delete key to rotate the piece</li>
-            <li>"x<sup>y</sup>" (the power key) to hold the piece (you can only hold a piece once each time you get a new piece)</li>
+            <li>"x<sup>y</sup>" (the power key) to hold the piece (you can 
+            only hold a piece once each time you get a new piece)</li>
             <li>"Apps" to pause</li>
             <li>"Esc" to quit</li>
             <li>"Help" for help</li>
@@ -380,9 +482,13 @@ def hp_tetris():
         <h2>Changelog</h2>
         <ul>
             <li>Added a grid in the back</li>
-            <li>Changed the colors of the pieces to match the standard tetris color scheme</li>
-            <li>Changed the way the program picks the next piece to make it feel more random (for example, made the chance of getting the same piece twice in a row much lower) </li>
-            <li>Added the tetris super rotation system (makes the pieces rotate intuitively)</li>
+            <li>Changed the colors of the pieces to match the standard tetris 
+            color scheme</li>
+            <li>Changed the way the program picks the next piece to make it 
+            feel more random (for example, made the chance of getting the same 
+            piece twice in a row much lower) </li>
+            <li>Added the tetris super rotation system (makes the pieces 
+            rotate intuitively)</li>
             <li>Added the hold function to store a piece</li>
         </ul>
     ''')
@@ -399,7 +505,9 @@ def rock_climbing():
         tall, try the left heel hook; it's incredible when you set it 
         right.</p>
         <div class="videoContainer">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/utpF7Am3ZTg" title="Triple Crown rock climb"></iframe>
+            <iframe width="640" height="360" 
+            src="https://www.youtube.com/embed/utpF7Am3ZTg" 
+            title="Triple Crown rock climb"></iframe>
         </div>
         
         <h2>Ketron Classic, V4</h2>
@@ -407,7 +515,9 @@ def rock_climbing():
         <p>A classic, and my first outdoor V4! The leap for the final hold 
         feels epic to stick.</p>
         <div class="videoContainer">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/5OAm6z_8Pdw" title="Ketron Classic rock climb"></iframe>
+            <iframe width="640" height="360" 
+            src="https://www.youtube.com/embed/5OAm6z_8Pdw" 
+            title="Ketron Classic rock climb"></iframe>
         </div>
         
         <h2>Serengeti, V5</h2>
@@ -415,7 +525,9 @@ def rock_climbing():
         <p>My first V5 outside. There are a lot of ways to do the bottom 
         section, it took a while to figure out the easiest approach for me.</p>
         <div class="videoContainer">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/fzJA3p7K6dU" title="Serengeti rock climb"></iframe>
+            <iframe width="640" height="360" 
+            src="https://www.youtube.com/embed/fzJA3p7K6dU" 
+            title="Serengeti rock climb"></iframe>
         </div>
         
         <p>This page is in progess. I'm planning to add the other climbs I've 
@@ -426,17 +538,24 @@ def rock_climbing():
 @app.route('/projects/videogame_levels')
 def videogame_levels():
     p = Markup(f'''
-        <p class="smallDesc">Levels I made for fun using games like Portal 2 and Super Meat Boy</p>
+        <p class="smallDesc">Levels I made for fun using games like Portal 2 
+        and Super Meat Boy</p>
         
         <h2>Portal 2</h2>
         <p>I made a lot of Portal 2 levels using Valve's editor and the 
-        community-made extension tool BEEmod (<a href="https://github.com/BEEmod/BEE2.4/releases" title="BEE2" rel="nofollow">https://github.com/BEEmod/BEE2.4/releases</a>). 
+        community-made extension tool BEEmod 
+        (<a href="https://github.com/BEEmod/BEE2.4/releases" title="BEE2" 
+        rel="nofollow">https://github.com/BEEmod/BEE2.4/releases</a>). 
         I had a lot of fun and learned a lot, but the levels aren't great 
         looking back since I was inexperienced and made most of it when I was 
-        13 or 14. If you want to check out my levels, go to <a href="https://steamcommunity.com/profiles/76561198166141294/myworkshopfiles" title="Portal 2 levels" rel="nofollow">my Steam workshop</a>.</p>
+        13 or 14. If you want to check out my levels, go to 
+        <a href="https://steamcommunity.com/profiles/76561198166141294/myworkshopfiles" 
+        title="Portal 2 levels" rel="nofollow">my Steam workshop</a>.</p>
         
         <p>
-            <img alt="Portal 2 level" src="{url_for('static', filename='resources/portal_2.png')}" width="640" height="360">
+            <img alt="Portal 2 level" 
+            src="{url_for('static', filename='resources/portal_2.png')}" 
+            width="640" height="360">
         </p>
         
         <h2>Super Meat Boy</h2>
