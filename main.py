@@ -41,6 +41,12 @@ def index():
         
         <p>My main interests are engineering, programming, rock climbing, and puzzle design.</p>
 
+        <p>Some of my links: 
+            <a href="https://github.com/rmboyce">github.com/rmboyce</a>
+            &middot;
+            <a href="https://www.linkedin.com/in/ramseyboyce/">linkedin.com/in/ramseyboyce</a>
+        </p>
+
         <p>Here's a gallery of my recent projects!</p>
 
         <h2><a href = "{url_for('crossword_generator')}" 
@@ -78,8 +84,6 @@ def index():
            src="{url_for('static', filename='resources/voronoi_generator.png')}" 
            width="407" height="333">
         </a></p>
-        
-        <p>My GitHub: <a href = "https://github.com/rmboyce" title="GitHub">https://github.com/rmboyce</a></p>
         
         <p>I also enjoy rock climbing! See more on my 
         <a href = "{url_for('rock_climbing')}" title="Outdoor climbing log">
