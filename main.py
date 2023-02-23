@@ -35,6 +35,7 @@ app.before_request(force_https)
 #=              Index              =
 #===================================
 
+
 @app.route('/index')
 @app.route('/')
 def index():

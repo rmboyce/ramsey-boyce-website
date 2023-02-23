@@ -2,9 +2,11 @@ from flask import Markup, render_template, url_for
 
 from route_config import app
 
+
 #===================================
 #=            Projects             =
 #===================================
+
 
 @app.route('/projects')
 def projects():
@@ -57,6 +59,7 @@ def projects():
     ''')
     return render_template('customPage.html', title='My Projects', pageHtml=p)
 
+
 @app.route('/projects/serpent_fusion')
 def serpent_fusion():
     p = Markup(f'''
@@ -98,6 +101,7 @@ def serpent_fusion():
         to make it easier to understand and work on.</p>
     ''')
     return render_template('customPage.html', title='Serpent Fusion', pageHtml=p)
+
 
 @app.route('/projects/arduino_autoclicker')
 def arduino_autoclicker():
@@ -236,6 +240,7 @@ def arduino_autoclicker():
     ''')
     return render_template('customPage.html', title='Arduino Autoclicker', pageHtml=p)
 
+
 @app.route('/projects/this_website')
 def this_website():
     p = Markup(f'''
@@ -258,6 +263,7 @@ def this_website():
         </p>
     ''')
     return render_template('customPage.html', title='This Website', pageHtml=p)
+
 
 @app.route('/projects/crossword_generator')
 def crossword_generator():
@@ -333,6 +339,7 @@ def crossword_generator():
     ''')
     return render_template('customPage.html', title='Crossword Generator', pageHtml=p)
 
+
 @app.route('/projects/image_rater')
 def image_rater():
     p = Markup(f'''
@@ -395,6 +402,7 @@ def image_rater():
     ''')
     return render_template('customPage.html', title='Image Rating Neural Network', pageHtml=p)
 
+
 @app.route('/projects/cube_timer')
 def cube_timer():
     p = Markup(f'''
@@ -431,6 +439,7 @@ def cube_timer():
         algorithms to permute the last layer of the Rubik's cube.</p>
     ''')
     return render_template('customPage.html', title='Rubik\'s Cube Timer', pageHtml=p)
+
 
 @app.route('/projects/hp_tetris')
 def hp_tetris():
@@ -495,6 +504,7 @@ def hp_tetris():
     ''')
     return render_template('customPage.html', title='HP Prime Tetris', pageHtml=p)
 
+
 @app.route('/projects/rock_climbing')
 def rock_climbing():
     p = Markup('''
@@ -535,6 +545,7 @@ def rock_climbing():
         done and my future projects (climbs I'm planning to do).</p>
     ''')
     return render_template('customPage.html', title='Outdoor Climbing Log', pageHtml=p)
+
 
 @app.route('/projects/videogame_levels')
 def videogame_levels():
