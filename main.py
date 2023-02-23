@@ -1,8 +1,10 @@
-from flask import Markup, url_for, render_template, request, redirect
-from route_config import app
-from projects import *
-from javascript_demos import *
+from flask import Markup, redirect, render_template, request, url_for
+
 from daily_crossword import *
+from javascript_demos import *
+from projects import *
+from route_config import app
+
 
 # Force https
 def force_https():
