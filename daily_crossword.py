@@ -1,7 +1,9 @@
 import datetime
 from zoneinfo import ZoneInfo
-from flask import Markup, url_for, render_template, send_from_directory
+
+from flask import Markup, render_template, send_from_directory, url_for
 from werkzeug.exceptions import NotFound
+
 from route_config import app
 
 #===================================
@@ -14,11 +16,11 @@ def current_crossword():
     f = f'{str(d.year)}-{str(d.month)}-{str(d.day)}.puz'
 
     try:
-        return send_from_directory('crosswords', filename=f)
+        return send_from_directory('crosswords', f)
     except NotFound:
-        # Return the default puzzle if there was an error getting today's 
+        # Return the default puzzle if there was an error getting today's
         # puzzle
-        return send_from_directory('crosswords', filename='default.puz')
+        return send_from_directory('crosswords', 'default.puz')
 
 @app.route('/daily_crossword')
 def daily_crossword():

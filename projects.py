@@ -1,4 +1,5 @@
-from flask import Markup, url_for, render_template
+from flask import Markup, render_template, url_for
+
 from route_config import app
 
 #===================================
