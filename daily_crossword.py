@@ -6,9 +6,11 @@ from werkzeug.exceptions import NotFound
 
 from route_config import app
 
+
 #===================================
 #=        Daily Crossword          =
 #===================================
+
 
 @app.route('/daily_crossword/today.puz')
 def current_crossword():
@@ -21,6 +23,7 @@ def current_crossword():
         # Return the default puzzle if there was an error getting today's
         # puzzle
         return send_from_directory('crosswords', 'default.puz')
+
 
 @app.route('/daily_crossword')
 def daily_crossword():

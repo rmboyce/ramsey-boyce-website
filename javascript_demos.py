@@ -2,9 +2,11 @@ from flask import Markup, render_template, url_for
 
 from route_config import app
 
+
 #===================================
 #=        Javascript Demos         =
 #===================================
+
 
 @app.route('/javascript_demos')
 def javascript_demos():
@@ -55,12 +57,14 @@ def javascript_demos():
     ''')
     return render_template('customPage.html', title='Javascript Demos', pageHtml=p)
 
+
 def generateJsMarkup(jsPath, fileList):
     js = ''
     for f in fileList:
         js += f'''<script src="{url_for('static', filename=(f'js/{jsPath}/{f}'))}" type="text/javascript"></script>\n'''
 
     return Markup(js)
+
 
 @app.route('/javascript_demos/chaos_game')
 def chaos_game():

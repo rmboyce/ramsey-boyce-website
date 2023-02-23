@@ -18,9 +18,8 @@ __pycache__/
 # Ignored by the build system
 /setup.cfg
 
-src/**
-src/
-target/**
-target/
+
+# Project
+README.md
 .vscode/
 .pylintrc

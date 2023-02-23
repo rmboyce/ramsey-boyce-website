@@ -1,4 +1,4 @@
-# VSCODE
+# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -10,16 +10,9 @@
 .history/
 
 
-# PYTHON
+# Python
 __pycache__/
 
 
-target/**
-target/
-src/**
-src/
-nbactions.xml
-pom.xml
-
-
+# Project
 crosswords/**
