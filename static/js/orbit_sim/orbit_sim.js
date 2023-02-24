@@ -76,10 +76,10 @@ function draw() {
   background(0, 0, 0);
   fill(0, 0, 0, 0);
 
-  //Draw sun
+  // Draw sun
   ellipse(sol.sunX, sol.sunY, sol.sunDiam, sol.sunDiam);
   
-  //Draw planet paths
+  // Draw planet paths
   if (sol.planets != null) {
     for (let i = 0; i < sol.planets.length; i++) {
       let p = sol.planets[i];
@@ -92,12 +92,12 @@ function draw() {
       ellipse(c, 0, 2 * p.a, 2 * b);
       pop();
       
-      //Increment time
+      // Increment time
       p.t += 3;
     }
   }
   
-  //Draw planets
+  // Draw planets
   fill(0, 0, 0);
   if (sol.planets != null) {
     for (let i = 0; i < sol.planets.length; i++) {
@@ -112,7 +112,7 @@ function draw() {
     }
   }
   
-  //Draw inital circle
+  // Draw inital circle
   if (state == 1) {
     let diam = 2 * sqrt(pow((sol.sunX - mouseX), 2) + pow((sol.sunY - mouseY), 2));
     if (diam < sol.sunDiam) {
@@ -122,7 +122,7 @@ function draw() {
     ellipse(sol.sunX, sol.sunY, diam, diam);
     radius = diam / 2;
   }
-  //Turn orbit into ellipse
+  // Turn orbit into ellipse
   else if (state == 2) {
     let theta = atan((mouseY - sol.sunY)/(mouseX - sol.sunX));
     if (mouseX < sol.sunX) {
@@ -149,7 +149,7 @@ function draw() {
     state2 = createVector(sol.sunX + ((dist - radius)/2 + (radius + dist)/2) * cos(theta), 
     sol.sunY + ((dist - radius)/2 + (radius + dist)/2) * sin(theta));
   }
-  //Create the planet
+  // Create the planet
   else if (state == 3) {
     fill(0, 0, 0, 0);
     push();    
@@ -191,7 +191,7 @@ function MouseOnPlanet() {
 }
 
 function mousePressed() {
-  //If the cursor is not over the clear button
+  // If the cursor is not over the clear button
   if (mouseX < b1.rectX || mouseX > b1.rectX + b1.rectXSize ||
       mouseY < b1.rectY || mouseY > b1.rectY + b1.rectYSize) {
     if (state == 0 && MouseOnPlanet() != -1) {

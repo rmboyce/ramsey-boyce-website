@@ -1,5 +1,5 @@
-//Helper functions
-//Checks to see if point d is in the circumcircle of the triangle abc (abc need to be ccw)
+// Helper functions
+// Checks to see if point d is in the circumcircle of the triangle abc (abc need to be ccw)
 function InCircle(a, b, c, d) {
   if (!ccw(a, b, c)) {
     let temp = a;
@@ -27,7 +27,7 @@ function InCircle(a, b, c, d) {
   ) > 0;
 }
 
-//Checks to see if abc are ccw
+// Checks to see if abc are ccw
 function ccw (a, b, c) {
   let ax = a.x;
   let ay = a.y;
@@ -38,7 +38,7 @@ function ccw (a, b, c) {
   return (bx - ax)*(cy - ay)-(cx - ax)*(by - ay) > 0;
 }
 
-//Gets the circumcenter of triangle abc
+// Gets the circumcenter of triangle abc
 function circumcenter(a, b, c) 
 { 
   let cx = c.x; 
@@ -58,7 +58,7 @@ function circumcenter(a, b, c)
   return createVector(ccx, ccy); 
 }
 
-//Determinant of 2x2 matrix
+// Determinant of 2x2 matrix
 function det(m00, m01, m10, m11) 
 { 
   return m00 * m11 - m01 * m10; 
@@ -68,7 +68,7 @@ var points = new Array(0);         // User-selected points
 var triangles = new Array(0);      // Triangles
 var circles = false;               // Turn circumcircles off/on
 var voronoi = false;               // Switch between voronoi/delaunay
-var fast = true;                   // Much faster if this is turned on
+const fast = true;                 // Much faster if this is turned on
 var noiseVal = false;              // Turn noise off/on
 var addPointOnCursor = true;       // Draw point on the cursor
 var cursorTooCloseToPoint = false; // Is the cursor too close to a point?
@@ -130,12 +130,12 @@ function draw() {
     }
   }
   
-  //Draw points
+  // Draw points
   for (let i = 0; i < points.length; i++) {
     let v = points[i];
     let nX = 0;
 	let nY = 0;
-    //Turn noise on
+    // Turn noise on
     if (noiseVal) {
       nX = pow(noise(i), 0.5)*2;
 	  nY = pow(noise(2*i), 0.5)*2;
@@ -146,7 +146,7 @@ function draw() {
     point(v.x, v.y);
   }
   
-  //Draw delaunay triangulation
+  // Draw delaunay triangulation
   for (let i = 0; i < points.length; i++) {
     for (let j = i+1; j < points.length; j++) {
       for (let k = j+1; k < points.length; k++) {
@@ -165,12 +165,12 @@ function draw() {
           let c = circumcenter(ip, jp, kp);
           if (!voronoi) {
             stroke(255, 255, 255);
-            //stroke(255, 0, 0);
+            // stroke(255, 0, 0);
             line(ip.x, ip.y, jp.x, jp.y);
             line(ip.x, ip.y, kp.x, kp.y);
             line(kp.x, kp.y, jp.x, jp.y);
           }
-          //can remove
+          // can remove
           else {
             triangles.push(new Triangle(ip, jp, kp));
           }
@@ -184,30 +184,30 @@ function draw() {
     }
   }
   stroke(255, 255, 255);
-  
-  //Voronoi generation from delaunay triangles
+
+  // Voronoi generation from delaunay triangles
   if (voronoi) {
-    for(let i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length; i++) {
       let p = points[i];
-      //can remove
+      // can remove
       point(p.x, p.y);
     }
-    //Fast method
+    // Fast method
     if (fast) {
       for (let i = 0; i < triangles.length; i++) {
         let t1 = triangles[i];
         let c = circumcenter(t1.v1, t1.v2, t1.v3);
         
-        //--First side--
-        //Angle in triangle
+        // --First side--
+        // Angle in triangle
         let vector_1 = createVector(t1.v1.x - t1.v3.x, t1.v1.y - t1.v3.y);
         let vector_2 = createVector(t1.v2.x - t1.v3.x, t1.v2.y - t1.v3.y);
         let angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
-        //Angle in adjacent triangle
+        // Angle in adjacent triangle
         let other = ThirdPoint(t1.v1, t1.v2, t1.v3);
-        //If triangle is on the edge, extend line to edge
+        // If triangle is on the edge, extend line to edge
         if (other == null) {
-          //Find which side of the edge the point is on
+          // Find which side of the edge the point is on
           let side;
           if (t1.v2.x < t1.v1.x) {
             side = (t1.v2.x - t1.v1.x) * (t1.v3.y - t1.v1.y) - (t1.v2.y - t1.v1.y) * (t1.v3.x - t1.v1.x);
@@ -215,15 +215,13 @@ function draw() {
           else {
             side = (t1.v1.x - t1.v2.x) * (t1.v3.y - t1.v2.y) - (t1.v1.y - t1.v2.y) * (t1.v3.x - t1.v2.x);
           }
-          //Draw extending lines
+          // Draw extending lines
+          let slope = (t1.v2.x - t1.v1.x)/(t1.v2.y - t1.v1.y);
+          slope = -1/slope;
           if (side > 0) {
-            let slope = (t1.v2.x - t1.v1.x)/(t1.v2.y - t1.v1.y);
-            slope = -1/slope;
             line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
           }
           else if (side < 0) {
-            let slope = (t1.v2.x - t1.v1.x)/(t1.v2.y - t1.v1.y);
-            slope = -1/slope;
             line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
           }
         }
@@ -240,14 +238,14 @@ function draw() {
           }
         }
         
-        //--Second side--
+        // --Second side--
         vector_1 = createVector(t1.v3.x - t1.v1.x, t1.v3.y - t1.v1.y);
         vector_2 = createVector(t1.v2.x - t1.v1.x, t1.v2.y - t1.v1.y);
         angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         
         other = ThirdPoint(t1.v2, t1.v3, t1.v1);
         if (other == null) {
-          //Find which side of the edge the point is on
+          // Find which side of the edge the point is on
           let side;
           if (t1.v2.x < t1.v3.x) {
             side = (t1.v2.x - t1.v3.x) * (t1.v1.y - t1.v3.y) - (t1.v2.y - t1.v3.y) * (t1.v1.x - t1.v3.x);
@@ -255,15 +253,13 @@ function draw() {
           else {
             side = (t1.v3.x - t1.v2.x) * (t1.v1.y - t1.v2.y) - (t1.v3.y - t1.v2.y) * (t1.v1.x - t1.v2.x);
           }
-          //Draw extending lines
+          // Draw extending lines
+          let slope = (t1.v2.x - t1.v3.x)/(t1.v2.y - t1.v3.y);
+          slope = -1/slope;
           if (side > 0) {
-            let slope = (t1.v2.x - t1.v3.x)/(t1.v2.y - t1.v3.y);
-            slope = -1/slope;
             line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
           }
           else if (side < 0) {
-            let slope = (t1.v2.x - t1.v3.x)/(t1.v2.y - t1.v3.y);
-            slope = -1/slope;
             line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
           }
         }
@@ -280,14 +276,14 @@ function draw() {
           }
         }
         
-        //--Third side--
+        // --Third side--
         vector_1 = createVector(t1.v1.x - t1.v2.x, t1.v1.y - t1.v2.y);
         vector_2 = createVector(t1.v3.x - t1.v2.x, t1.v3.y - t1.v2.y);
         angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         
         other = ThirdPoint(t1.v1, t1.v3, t1.v2);
         if (other == null) {
-          //Find which side of the edge the point is on
+          // Find which side of the edge the point is on
           let side;
           if (t1.v3.x < t1.v1.x) {
             side = (t1.v3.x - t1.v1.x) * (t1.v2.y - t1.v1.y) - (t1.v3.y - t1.v1.y) * (t1.v2.x - t1.v1.x);
@@ -295,15 +291,13 @@ function draw() {
           else {
             side = (t1.v1.x - t1.v3.x) * (t1.v2.y - t1.v3.y) - (t1.v1.y - t1.v3.y) * (t1.v2.x - t1.v3.x);
           }
-          //Draw extending lines
+          // Draw extending lines
+          let slope = (t1.v3.x - t1.v1.x)/(t1.v3.y - t1.v1.y);
+          slope = -1/slope;
           if (side > 0) {
-            let slope = (t1.v3.x - t1.v1.x)/(t1.v3.y - t1.v1.y);
-            slope = -1/slope;
             line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
           }
-          else if (side < 0) {
-            let slope = (t1.v3.x - t1.v1.x)/(t1.v3.y - t1.v1.y);
-            slope = -1/slope;
+          else if (side < 0) { 
             line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
           }
         }
@@ -321,7 +315,7 @@ function draw() {
         }
       }
     }
-    //Slow method
+    // Slow method
     else {
       for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
@@ -353,7 +347,7 @@ function draw() {
   }
   triangles = new Array(0);
   
-  //Interface
+  // Interface
   noStroke();
   fill(100, 100, 100);
   rect(INTERFACE_X, 0, width, height);
@@ -385,7 +379,7 @@ function TextButton(b, s) {
   text(s, b.rectX + 5.5, b.rectY + 25);
 }
 
-//Finds third point of a triangle in the delaunay triangulation, given two points and one point it will NOT return
+// Finds third point of a triangle in the delaunay triangulation, given two points and one point it will NOT return
 function ThirdPoint(a, b, no) {
   for (let q = 0; q < triangles.length; q++) {
     let t = triangles[q];
@@ -414,7 +408,7 @@ function ThirdPoint(a, b, no) {
   return null;
 }
 
-//Check if the cursor is too close to a point
+// Check if the cursor is too close to a point
 function CheckTooClose() {
   let tooClose = false;
   for (let i = 0; i < points.length; i++) {
@@ -426,7 +420,7 @@ function CheckTooClose() {
   return tooClose;
 }
 
-//Callback when the user clicks at (x, y)
+// Callback when the user clicks at (x, y)
 function mousePressed() {
   if (mouseX < INTERFACE_X && mouseY < height) {
     if (!cursorTooCloseToPoint) {
@@ -465,7 +459,7 @@ function mouseReleased() {
   }
 }
 
-//Triangle class stores three PVectors
+// Triangle class stores three PVectors
 class Triangle {
   constructor(a, b, c) {
     this.v1 = a;

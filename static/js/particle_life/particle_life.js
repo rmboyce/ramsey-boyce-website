@@ -1,17 +1,17 @@
 class Particle {
-  //Three types, red - 0, green - 1, blue - 2
+  // Three types, red - 0, green - 1, blue - 2
   constructor(particleType, pos, mass, velocity) {
     this.pType = particleType;
     this.position = pos;
     this.m = mass;
     this.v = velocity;
 		
-    //For testing only
+    // For testing only
     this.a = 0;
   }
 }
 
-//Input
+// Input
 var mouseHeld = false;
 var timeStep = 0.75;
 var circles = false;
@@ -22,14 +22,14 @@ var sideWrap = false;
 var restart = false;
 var randomOption = false;
 
-//Particle stuff
+// Particle stuff
 var numParticles = 200;
 var particleList = new Array(numParticles);
 
-//Negative is attract, positive is repel
-//                 r   g  b
-var rForces = [-1, -1, 2];
-var gForces = [-1, 2, -5];
+// Negative is attract, positive is repel
+//              r   g   b
+var rForces = [-1, -1,  2];
+var gForces = [-1,  2, -5];
 var bForces = [15, 15, -5];
 var forces = [rForces, gForces, bForces];
 
@@ -44,10 +44,10 @@ var centerX = 50;
 var centerY = 50;
 var circleRadius = 150;
 
-//Cool combo: 0r 40g 60b
+// Cool combo: 0r 40g 60b
 // 40r 40g 20b
 
-//Percent of particles
+// Percent of particles
 var percentRed = 0;
 var percentGreen = 40;
 var percentBlue = 100 - percentRed - percentGreen;
@@ -85,7 +85,7 @@ function setup() {
   hs2.setNormalPos(percentGreen / 100);
 }
 
-//hs: HScrollbar, s: text above, per: percentage text below
+// hs: HScrollbar, s: text above, per: percentage text below
 function TextHScrollbar(hs, s, per) {
   textSize(15);
   text(s, hs.xpos, hs.ypos - 5);
@@ -169,7 +169,7 @@ function draw() {
     RandomizeParticles();
   }
   
-  //Draw circle when clicking with mouse
+  // Draw circle when clicking with mouse
   if (mouseHeld) {
     for (let i = 0; i < numParticles; i++) {
       let p = particleList[i];
@@ -191,12 +191,12 @@ function draw() {
     }
   }
   
-  //Draw bounding circle
+  // Draw bounding circle
   noFill();
   strokeWeight(1);
   circle(centerX, centerY, circleRadius * 2 + particleRadius);
   
-  //Apply forces from particles
+  // Apply forces from particles
   for (let i = 0; i < numParticles; i++) {
     let p = particleList[i];
     let pPos = p.position;
@@ -233,7 +233,7 @@ function draw() {
             forceMultiplier = 1;
           }
           
-          //Force away from edges of screen
+          // Force away from edges of screen
           vX += (dX * distFunction * forceMultiplier) / p.m;
           vY += (dY * distFunction * forceMultiplier) / p.m;
         }
@@ -246,8 +246,8 @@ function draw() {
     }
   }
   
-  //Change positions
-  //Draw particles
+  // Change positions
+  // Draw particles
   let changeTime = timeStep * (millis() - oldTime);
   for (let i = 0; i < numParticles; i++) {
     let p = particleList[i];

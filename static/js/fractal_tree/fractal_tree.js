@@ -1,18 +1,16 @@
-//Angle
+// Angle
 var angle;
 
-//Branch
-var numBranches = 0;//3;
-var reduct = 0;//0.5;
-var min_len = 4.5;
+// Branch
+var numBranches = 0;
+var reduct = 0;
+var depth = 0;
 
-//Test number of operations
-var numTreeLoop = 150;
-var operations = 0;
-var max_op = 50000;
-var tmax_op = 200000;
+// Test number of operations
+const initLen = 150;
+const max_op = 3000;
 
-//Input
+// Input
 var hs1;
 var hs2;
 var hs3;
@@ -34,7 +32,7 @@ function setup() {
   hs4.rollingSpeed = 0.5;
 }
 
-//hs: HScrollbar, s: title above, lowVal: low value of the scrollbar, highVal: high value of the scrollbar, per: percentage text below
+// hs: HScrollbar, s: title above, lowVal: low value of the scrollbar, highVal: high value of the scrollbar, per: percentage text below
 function TextHScrollbar(hs, s, lowVal, highVal, per) {
   hs.update();
   hs.display();
@@ -50,88 +48,80 @@ function TextHScrollbar(hs, s, lowVal, highVal, per) {
 function draw() {
   background(0, 0, 0);
   
-  //Input
+  // Input
   numBranches = (int) (2.5 + hs1.normalPos * 3);
   TextHScrollbar(hs1, "Number of branches", 2, 5, numBranches);
   
   reduct = hs2.normalPos;
   TextHScrollbar(hs2, "Fractional branch length", 0, 1, round(reduct, 3));
   
-  min_len = hs3.normalPos * 10;
-  TextHScrollbar(hs3, "Minimum branch length", 0, 10, round(min_len, 3));
+  depth = (int) (1.5 + hs3.normalPos * 7);
+  TextHScrollbar(hs3, "Depth", 1, 8, depth);
   
   angle = hs4.normalPos * TWO_PI;
   TextHScrollbar(hs4, "Branch angle", 0, round(TWO_PI, 3), round(angle, 3));
   
-  //Drawing the tree
+  // Drawing the tree
   stroke(255, 255, 255);
   translate(height / 2.0, 0);
   
-  //Count number of operations
-  operationsCount(numTreeLoop);
-  if (operations >= tmax_op) {
-    text("Way too many operations! (operations > " + tmax_op + ")", 50 - height/2, 50);
-  }
+  // Count number of operations
+  let operations = operationsCount();
   if (operations >= max_op) {
-    text("Too many operations (" + operations + "), " + max_op + " is the max", 50 - height/2, 80);
+    text("Too many operations (" + operations + "), " + max_op + " is the max", 50 - height/2, 50);
   }
   else {
-    //Else if the number of operations is okay draw the tree
+    // Else if the number of operations is okay draw the tree
     if (numBranches % 2 == 0) {
-      branchEven(numTreeLoop);
+      branchEven(initLen, 0);
     }
     else {
-      branchOdd(numTreeLoop);
+      branchOdd(initLen, 0);
     }
   }
-  operations = 0;
 }
 
-function branchEven(len) {
+function branchEven(len, level) {
+  if (level > depth) {
+    return;
+  }
   line(0, 0, 0, len);
   translate(0, len);
-  if (min_len != 0 && len > min_len && operations < max_op) {
-    rotate(angle/2);
-    for (let i = 0; i < numBranches/2; i++) {
-      push();
-      rotate(angle * i);
-      branchEven(len * reduct);
-      pop();
-    }
-    rotate(-angle);
-    for (let i = 0; i < numBranches/2; i++) {
-      push();
-      rotate(-angle * i);
-      branchEven(len * reduct);
-      pop();
-    }
+  rotate(angle/2);
+  for (let i = 0; i < numBranches/2; i++) {
+    push();
+    rotate(angle * i);
+    branchEven(len * reduct, level + 1);
+    pop();
+  }
+  rotate(-angle);
+  for (let i = 0; i < numBranches/2; i++) {
+    push();
+    rotate(-angle * i);
+    branchEven(len * reduct, level + 1);
+    pop();
   }
 }
 
-function branchOdd(len) {
+function branchOdd(len, level) {
+  if (level > depth) {
+    return;
+  }
   line(0, 0, 0, len);
   translate(0, len);
-  if (min_len != 0 && len > min_len && operations < max_op) {
-    for (let i = 0; i <= numBranches/2; i++) {
-      push();
-      rotate(angle * i);
-      branchOdd(len * reduct);
-      pop();
-      push();
-      rotate(-angle * i);
-      branchOdd(len * reduct);
-      pop();
-    }
+  for (let i = 0; i <= numBranches/2; i++) {
+    push();
+    rotate(angle * i);
+    branchOdd(len * reduct, level + 1);
+    pop();
+    push();
+    rotate(-angle * i);
+    branchOdd(len * reduct, level + 1);
+    pop();
   }
 }
 
-//Count number of operations drawing a tree would take
-function operationsCount(len) {
-  operations++;
-  if (len > min_len && operations < tmax_op) {
-    for (let i = 0; i <= numBranches/2; i++) {
-      operationsCount(len * reduct);
-      operationsCount(len * reduct);
-    }
-  }
+// Count number of operations drawing a tree would take
+function operationsCount() {
+  return Math.pow(numBranches, depth);
 }

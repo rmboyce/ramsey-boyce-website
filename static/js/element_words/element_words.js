@@ -87,7 +87,7 @@ function RemoveDuplicates(input) {
   return tempList;
 }
 
-//Outputs string
+// Outputs string
 function AddSpaces(input) {
   if (input.length > 0) {
     let output = "" + input.charAt(0);
@@ -107,7 +107,7 @@ function AddSpaces(input) {
   return "";
 }
 
-//Outputs array of strings
+// Outputs array of strings
 function AddSpacesToArray(input) {
   if (input.length > 0) {
     let output = new Array(0);
@@ -148,7 +148,7 @@ function draw() {
     
     background(200, 200, 200);
     
-    //Draw HUD
+    // Draw HUD
     hs1.update();
     hs1.display();
     fill(0, 0, 0);
@@ -159,7 +159,7 @@ function draw() {
 		
     c.display();
     
-    //Elementize word
+    // Elementize word
     let targetWord = c.chars;
     let searching = true;
     let potentialList = new Array(0);
@@ -174,10 +174,10 @@ function draw() {
       
       potentialList = new Array(0);
       
-      //Add failed spellings to failedList
+      // Add failed spellings to failedList
       for (let i = 0; i < tempList.length; i++) {
         let failedWord = tempList[i];
-				//Remove "failed" from start
+				// Remove "failed" from start
         if (failedWord.length > 6) {
           failedWord = failedWord.substring(6, failedWord.length);
           if (!failedList.includes(failedWord)) {
@@ -186,7 +186,7 @@ function draw() {
         }
       }
       
-      //Remove all but the longest failed spellings
+      // Remove all but the longest failed spellings
       let longestFail = 0;
       for (let i = 0; i < failedList.length; i++) {
         let temp = failedList[i];
@@ -201,7 +201,7 @@ function draw() {
         }
       }
       
-      //Remove failed attempts to add an element symbol
+      // Remove failed attempts to add an element symbol
       for (let j = 0; j < tempList.length; j++) {
         let temp = tempList[j];
         if (temp.length >= 6) {
@@ -214,11 +214,11 @@ function draw() {
         }
       }
       
-      //If there are no more potential spellings, break the loop
+      // If there are no more potential spellings, break the loop
       if (potentialList.length == 0) {
         searching = false;
       }
-      //If all the element spellings are the proper length, break out of the loop
+      // If all the element spellings are the proper length, break out of the loop
       else {
         for (let k = 0; k < potentialList.length; k++) {
           searching &= potentialList[k].length == targetWord.length;
@@ -231,21 +231,24 @@ function draw() {
     
     potentialList = RemoveDuplicates(potentialList);
     
-    //---------------DISPLAY SPELLINGS---------------
-    //Show working spelling(s), if any
+    // ---------------DISPLAY SPELLINGS---------------
+    // Show working spelling(s), if any
     textSize(20);
     noStroke();
     strokeWeight(1);
     if (potentialList.length > 0) {
       potentialList = sort(potentialList);
       for (let i = 0; i < potentialList.length; i++) {
-        if (displayCase == 0) { //Without spaces
+        if (displayCase == 0) {
+          // Without spaces
           text(potentialList[i], TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
         }
-        else if (displayCase == 1) { //With spaces
+        else if (displayCase == 1) {
+          // With spaces
           text(AddSpaces(potentialList[i]), TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
         }
-        else if (displayCase == 2) { //Boxes
+        else if (displayCase == 2) {
+          // Boxes
           let oneWord = AddSpacesToArray(potentialList[i]);
           if (oneWord != null) {
             for (let x = 0; x < oneWord.length; x++) {
@@ -265,19 +268,22 @@ function draw() {
         }
       }
     }
-    //Else show failed spellings
+    // Else show failed spellings
     else {
       fill(255, 0, 0);
       if (failedList.length > 0) {
         failedList = sort(failedList);
         for (let i = 0; i < failedList.length; i++) {
-          if (displayCase == 0) { //Without spaces
+          if (displayCase == 0) {
+            // Without spaces
             text(failedList[i], TEXT_X_START, 90 + 30 * i);
           }
-          else if (displayCase == 1) { //With spaces
+          else if (displayCase == 1) {
+            // With spaces
             text(AddSpaces(failedList[i]), TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
           }
-          else if (displayCase == 2) { //Boxes
+          else if (displayCase == 2) {
+            // Boxes
             let oneWord = AddSpacesToArray(failedList[i]);
             if (oneWord != null) {
               for (let x = 0; x < oneWord.length; x++) {

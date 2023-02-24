@@ -1,9 +1,9 @@
-var points;                 //Array of points
-var numSides = 6;                 //Number of sides of the polygon
-var fraction = 0.5;             //The length fraction used to find the next point based on the current one
-var chaos = true;             //To prevent the points from being redrawn every frame
-var twoSteps = false;         //If true, points from the polygon can be picked multiple times in a row
-var arePointsHalfway = false; //If true, add points to the midpoints of edges of the polygon
+var points;                   // Array of points
+var numSides = 6;             // Number of sides of the polygon
+var fraction = 0.5;           // The length fraction used to find the next point based on the current one
+var chaos = true;             // To prevent the points from being redrawn every frame
+var twoSteps = false;         // If true, points from the polygon can be picked multiple times in a row
+var arePointsHalfway = false; // If true, add points to the midpoints of edges of the polygon
 
 var current;
 var previous;
@@ -17,7 +17,7 @@ var c3;
 
 var arraySize = 250;
 
-//For the estimated dimension of the fractal shape
+// For the estimated dimension of the fractal shape
 var countGrid = new Array(arraySize);
 for (let i = 0; i < countGrid.length; i++) { 
   countGrid[i] = new Array(arraySize);
@@ -34,17 +34,17 @@ function setup() {
   let cnv = createCanvas(750, 450);
   cnv.parent("p5Container");
   
-  //Start the first point at a random location in the window
+  // Start the first point at a random location in the window
   current = createVector(random(width), random(height));
   
-  hs1 = new HScrollbar(500, 165, 200, 10, 3); //Scrollbar to choose the length fraction
-  hs2 = new HScrollbar(500, 95, 200, 10, 3); //Scrollbar to choose the number of sides of the polygon
+  hs1 = new HScrollbar(500, 165, 200, 10, 3); // Scrollbar to choose the length fraction
+  hs2 = new HScrollbar(500, 95, 200, 10, 3);  // Scrollbar to choose the number of sides of the polygon
   hs2.setNormalPos(0.4);
-  b1 = new Button(550, 365, 100, 37.5);  //Button to update the points
-  c1 = new Checkbox(500, 215, 20, 20); //Checkbox to use carpet fraction
+  b1 = new Button(550, 365, 100, 37.5);       // Button to update the points
+  c1 = new Checkbox(500, 215, 20, 20);        // Checkbox to use carpet fraction
   c1.pressed = true;
-  c2 = new Checkbox(500, 255, 20, 20); //Checkbox to allow a point to be picked multiple times in a row
-  c3 = new Checkbox(500, 295, 20, 20); //Checkbox to add points to the midpoints of the edges of the polygon
+  c2 = new Checkbox(500, 255, 20, 20);        // Checkbox to allow a point to be picked multiple times in a row
+  c3 = new Checkbox(500, 295, 20, 20);        // Checkbox to add points to the midpoints of the edges of the polygon
   
   for (let i = 0; i < arraySize; i++) {
     for (let j = 0; j < arraySize; j++) {
@@ -58,7 +58,7 @@ function setup() {
   }
 }
 
-//Function to draw a polygon
+// Function to draw a polygon
 function polygon(x, y, radius, npoints, halfway) {
   if (halfway) {
     points = new Array(numSides * 2);
@@ -97,7 +97,7 @@ function calculateCarpetFraction(sides) {
   fraction = 1 / (2 * (1 + sum));
 }
 
-//hs: HScrollbar, s: text above, lowVal: low value of scrollbar, highVal: high value of scrollbar, per: percentage text below
+// hs: HScrollbar, s: text above, lowVal: low value of scrollbar, highVal: high value of scrollbar, per: percentage text below
 function TextHScrollbar(hs, s, lowVal, highVal, per) {
   hs.update();
   hs.display();
@@ -133,7 +133,7 @@ function TextCheckbox(c, one, two, isNumTextOne) {
 }
 
 function draw() {
-  //Dealing with the user input
+  // Dealing with the user input
   noStroke();
   fill(200, 200, 200);
   rect(475, 0, 750, 450);
@@ -158,7 +158,7 @@ function draw() {
   strokeWeight(2);
   stroke(10);
   
-  //Drawing the polygon and points
+  // Drawing the polygon and points
   if (chaos) {
     chaos = false;
     
@@ -173,11 +173,11 @@ function draw() {
       point(points[i].x, points[i].y, 8);
     }
     
-    //Calculate carpet fraction
+    // Calculate carpet fraction
     if (arePointsHalfway) {
       calculateCarpetFraction(numSides * 2);
       if (numSides == 4) {
-        //Makes Menger sponge
+        // Makes Menger sponge
         //fraction = 1f / 3f;
       }
     }

@@ -90,6 +90,7 @@ def chaos_game():
     ''')
     return render_template('jsDemoPage.html', title='Chaos Game', pageJs=j, pageHtml=p)
 
+
 @app.route('/javascript_demos/element_words')
 def element_words():
     j = generateJsMarkup('element_words', ['element_words.js', 'HScrollbar.js', 'console.js'])
@@ -109,6 +110,7 @@ def element_words():
     ''')
     return render_template('jsDemoPage.html', title='Element Words', pageJs=j, pageHtml=p)
 
+
 @app.route('/javascript_demos/fractal_tree')
 def fractal_tree():
     j = generateJsMarkup('fractal_tree', ['fractal_tree.js', 'HScrollbar.js'])
@@ -121,6 +123,7 @@ def fractal_tree():
         <p>The branch angle scrollbar is special; it has momentum and loops.</p>
     ''')
     return render_template('jsDemoPage.html', title='Fractal Tree', pageJs=j, pageHtml=p)
+
 
 @app.route('/javascript_demos/orbit_sim')
 def orbit_sim():
@@ -135,6 +138,7 @@ def orbit_sim():
         and the last two set the planet radius.</p>
     ''')
     return render_template('jsDemoPage.html', title='Orbit Simulator', pageJs=j, pageHtml=p)
+
 
 @app.route('/javascript_demos/particle_life')
 def particle_life():
@@ -152,6 +156,7 @@ def particle_life():
         <p>Inspired by CodeParade's video: <a href="https://www.youtube.com/watch?v=Z_zmZ23grXE" title="Particle life video" rel="nofollow">https://www.youtube.com/watch?v=Z_zmZ23grXE</a></p>
     ''')
     return render_template('jsDemoPage.html', title='Particle Life', pageJs=j, pageHtml=p)
+
 
 @app.route('/javascript_demos/voronoi_generator')
 def voronoi_generator():
