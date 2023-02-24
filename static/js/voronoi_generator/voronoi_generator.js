@@ -206,7 +206,7 @@ function draw() {
         // Angle in adjacent triangle
         let other = ThirdPoint(t1.v1, t1.v2, t1.v3);
         // If triangle is on the edge, extend line to edge
-        if (other == null) {
+        if (other === null) {
           // Find which side of the edge the point is on
           let side;
           if (t1.v2.x < t1.v1.x) {
@@ -217,12 +217,22 @@ function draw() {
           }
           // Draw extending lines
           let slope = (t1.v2.x - t1.v1.x)/(t1.v2.y - t1.v1.y);
-          slope = -1/slope;
-          if (side > 0) {
-            line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
+          if (slope === 0) {
+            if (t1.v3.x > t1.v2.x) {
+              line(-10, c.y, c.x, c.y);
+            }
+            else {
+              line(width + 10, c.y, c.x, c.y);
+            }
           }
-          else if (side < 0) {
-            line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
+          else {
+            slope = -1/slope;
+            if (side > 0) {
+              line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
+            }
+            else if (side < 0) {
+              line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
+            }
           }
         }
         else {
@@ -244,7 +254,7 @@ function draw() {
         angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         
         other = ThirdPoint(t1.v2, t1.v3, t1.v1);
-        if (other == null) {
+        if (other === null) {
           // Find which side of the edge the point is on
           let side;
           if (t1.v2.x < t1.v3.x) {
@@ -255,12 +265,22 @@ function draw() {
           }
           // Draw extending lines
           let slope = (t1.v2.x - t1.v3.x)/(t1.v2.y - t1.v3.y);
-          slope = -1/slope;
-          if (side > 0) {
-            line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
+          if (slope === 0) {
+            if (t1.v1.x > t1.v2.x) {
+              line(-10, c.y, c.x, c.y);
+            }
+            else {
+              line(width + 10, c.y, c.x, c.y);
+            }
           }
-          else if (side < 0) {
-            line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
+          else {
+            slope = -1/slope;
+            if (side > 0) {
+              line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
+            }
+            else if (side < 0) {
+              line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
+            }
           }
         }
         else {
@@ -282,7 +302,7 @@ function draw() {
         angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         
         other = ThirdPoint(t1.v1, t1.v3, t1.v2);
-        if (other == null) {
+        if (other === null) {
           // Find which side of the edge the point is on
           let side;
           if (t1.v3.x < t1.v1.x) {
@@ -293,12 +313,22 @@ function draw() {
           }
           // Draw extending lines
           let slope = (t1.v3.x - t1.v1.x)/(t1.v3.y - t1.v1.y);
-          slope = -1/slope;
-          if (side > 0) {
-            line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
+          if (slope === 0) {
+            if (t1.v2.x > t1.v3.x) {
+              line(-10, c.y, c.x, c.y);
+            }
+            else {
+              line(width + 10, c.y, c.x, c.y);
+            }
           }
-          else if (side < 0) { 
-            line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
+          else {
+            slope = -1/slope;
+            if (side > 0) {
+              line((height + 10 - c.y) * slope + c.x, height + 10, c.x, c.y);
+            }
+            else if (side < 0) { 
+              line((-10 - c.y) * slope + c.x, -10, c.x, c.y);
+            }
           }
         }
         else {
