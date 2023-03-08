@@ -1,0 +1,28 @@
+<div class="bigWrapper">
+  <div class="crossword"></div>
+
+  <script>
+    (function () {
+      {
+        CrosswordNexus.createCrossword(
+          $("div.crossword"),
+          "{{url_for('current_crossword')}}"
+        );
+      }
+    })();
+  </script>
+</div>
+
+<p class="centered">
+  <a href="/projects/crossword_generator" title="My projects"
+    >How the puzzles are generated</a
+  >
+  &middot;
+  <a href="{{url_for('current_crossword')}}" title="Archive"
+    >Download today's puz file</a
+  >
+  &middot;
+  <a href="https://crosswordnexus.com/" title="CrosswordNexus"
+    >Player from CrosswordNexus</a
+  >
+</p>

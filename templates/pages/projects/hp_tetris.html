@@ -1,0 +1,76 @@
+<p class="smallDesc">A tetris clone for the HP Prime graphing calculator</p>
+
+<h2>Overview</h2>
+<p>
+  This is a tetris clone made for the HP Prime graphing calculator written in
+  its HP BASIC programming language. I made it by making a bunch of improvements
+  to Kevin Barbier's "BRICKS" game (you can see the changes in the changelog).
+</p>
+
+<p>
+  <img
+    alt="HP Tetris game"
+    src="{{url_for('static', filename='resources/hp_tetris.jpg')}}"
+    width="198"
+    height="388"
+  />
+</p>
+
+<h2>Getting the Game</h2>
+<p>
+  The easiest way to get the program onto an HP Prime is to install the HP Prime
+  Connectivity Kit (<a
+    href="http://www.hp-prime.de/en/category/15-software"
+    title="HP Prime Connectivity Kit"
+    rel="nofollow"
+    >http://www.hp-prime.de/en/category/15-software</a
+  >) on your computer and to connect your computer and HP Prime with the
+  charging cable. Then you can make a new file (call it "BLOCKS") and copy the
+  program over. To run the game, use Shift + 1 to get to the programs menu and
+  just run the "BLOCKS" program.
+</p>
+<p>
+  Get the code here:
+  <a
+    href="https://github.com/rmboyce/hp-tetris"
+    title="HP Prime Tetris code"
+    rel="nofollow"
+  >
+    https://github.com/rmboyce/hp-tetris
+  </a>
+</p>
+
+<h2>Controls</h2>
+<ul>
+  <li>"Vars" and the toolbox key to move left/right</li>
+  <li>"SIN" to drop the current piece</li>
+  <li>"Enter" to hard drop the piece</li>
+  <li>The delete key to rotate the piece</li>
+  <li>
+    "x<sup>y</sup>" (the power key) to hold the piece (you can only hold a piece
+    once each time you get a new piece)
+  </li>
+  <li>"Apps" to pause</li>
+  <li>"Esc" to quit</li>
+  <li>"Help" for help</li>
+  <li>"View" to choose custom keys</li>
+  <li>"Menu" to set keys to default</li>
+  <li>"CAS" to reset the game</li>
+</ul>
+
+<h2>Changelog</h2>
+<ul>
+  <li>Added a grid in the back</li>
+  <li>
+    Changed the colors of the pieces to match the standard tetris color scheme
+  </li>
+  <li>
+    Changed the way the program picks the next piece to make it feel more random
+    (for example, made the chance of getting the same piece twice in a row much
+    lower)
+  </li>
+  <li>
+    Added the tetris super rotation system (makes the pieces rotate intuitively)
+  </li>
+  <li>Added the hold function to store a piece</li>
+</ul>
