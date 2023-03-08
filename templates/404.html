@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 Not Found</title>
+    <meta name="description" content="Ramsey Boyce's Website" />
+    <!--
+    <link rel="canonical" href="https://ramseyboyce.com/index.html">
+    -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='resources/favicon_16x16.png') }}"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='resources/favicon_32x32.png') }}"
+      sizes="32x32"
+    />
+  </head>
+  <body>
+    <div id="container">
+      <h1>Not Found</h1>
+      <p>
+        The requested URL was not found on the server. If you entered the URL
+        manually please check your spelling and try again.
+      </p>
+      <p>
+        <a href="/" title="About me">Back to home</a>
+      </p>
+    </div>
+  </body>
+</html>

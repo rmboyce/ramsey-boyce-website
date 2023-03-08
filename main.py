@@ -1,4 +1,4 @@
-from flask import Markup, redirect, render_template, request, url_for
+from flask import redirect, render_template, request
 
 from daily_crossword import *
 from javascript_demos import *
@@ -30,69 +30,20 @@ def force_https():
 
 app.before_request(force_https)
 
-
 #===================================
 #=              Index              =
 #===================================
 
-
 @app.route('/index')
 @app.route('/')
 def index():
-    p = Markup(f'''
-        <p>Hey, I'm Ramsey!</p>
-        
-        <p>My main interests are engineering, programming, rock climbing, and puzzle design.</p>
+    return render_template('custom_page.html', title='About Me', page_content='pages/index.html')
 
-        <p>Some of my links: 
-            <a href="https://github.com/rmboyce">github.com/rmboyce</a>
-            &middot;
-            <a href="https://www.linkedin.com/in/ramseyboyce/">linkedin.com/in/ramseyboyce</a>
-        </p>
 
-        <p>Here's a gallery of my recent projects!</p>
-
-        <h2><a href = "{url_for('crossword_generator')}" 
-        title="Crossword Generator">Crossword Generator</a> 
-        (<a href="{url_for('daily_crossword')}" 
-        title="Daily computer-generated crossword">Try today's puzzle!</a>)</h2>
-        <p>A program that generates a new crossword puzzle each day</p>
-        <p><a href="{url_for('crossword_generator')}" class="linkImage" style="width:402px">
-            <img alt="Crossword" 
-            src="{url_for('static', filename='resources/crossword.png')}" 
-            width="392" height="393">
-        </a></p>
-        
-        <h2><a href="{url_for('serpent_fusion')}" title="Serpent Fusion">Serpent Fusion</a></h2>
-        <p>A puzzle game created with the Unity engine and C#</p>
-        <p><a href="{url_for('serpent_fusion')}" class="linkImage" style="width:645px">
-           <img alt="Serpent Fusion" 
-           src="{url_for('static', filename='resources/serpent_fusion.png')}" 
-           width="635" height="308">
-        </a></p>
-        
-        <h2><a href = "{url_for('arduino_autoclicker')}" title="Arduino autoclicker">Arduino Autoclicker</a></h2>
-        <p>An Arduino shield to augment your mouse</p>
-        <p><a href="{url_for('arduino_autoclicker')}" class="linkImage" style="width:494px">
-           <img alt="Autoclicker pcb" 
-           src="{url_for('static', filename='resources/clickotron_pcb.png')}" 
-           width="484" height="679">
-        </a></p>
-
-        <h2><a href="{url_for('voronoi_generator')}" title="Voronoi Generator">Voronoi Generator</a></h2>
-        <p>An interactive visualization of Voronoi diagrams</p>
-        <p>Note: optimized for desktop use</p>
-        <p><a href="{url_for('voronoi_generator')}" class="linkImage" style="width:417px">
-           <img alt="Voronoi generator" 
-           src="{url_for('static', filename='resources/voronoi_generator.png')}" 
-           width="407" height="333">
-        </a></p>
-        
-        <p>I also enjoy rock climbing! See more on my 
-        <a href = "{url_for('rock_climbing')}" title="Outdoor climbing log">
-        outdoor climbing log</a>!</p>
-    ''')
-    return render_template('customPage.html', title='About Me', pageHtml=p)
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':

@@ -1,0 +1,90 @@
+<p class="smallDesc">A program that generates crossword puzzles</p>
+
+<h2>
+  <a
+    href="/daily_crossword"
+    title="Daily computer-generated crossword"
+  >
+    Try today's puzzle!</a
+  >
+</h2>
+
+<h2>Overview</h2>
+<p>
+  This program generates crossword puzzles using a three step process: first,
+  generate the grid; second, fill the grid with words; and third, clue the
+  filled grid. To make a different puzzle available on my website each day, I
+  began using the web framework Flask so I could do that in Python code.
+</p>
+
+<p>
+  <img
+    alt="Crossword"
+    src="{{url_for('static', filename='resources/crossword.png')}}"
+    width="392"
+    height="393"
+  />
+</p>
+
+<h2>Generating the Puzzles</h2>
+<p>
+  Step one, generating the grid, is fairly simple. At the moment my code takes
+  an empty grid, adds 1-2 rows and columns extending inwards from the sides, and
+  fills the middle randomly. Since crossword grids must be rotationally
+  symmetric, it only generates half of it and fills in the rest using the first
+  half.
+</p>
+<p>
+  Step two, filling the grid with words, is the most complicated step. Trying to
+  fill a crossword grid by brute-force is nearly impossible. The algorithm can
+  be thought of as a tree search where the root of the tree represents an empty
+  grid. Then, somehow pick a slot to fill with a word. For each word that fits
+  in the slot, another partially-filled grid is generated. Then, just repeat
+  with each of the newly generated grids. With enough time, this algorithm will
+  generate a valid filling of the grid; however, it takes hours or days to work,
+  and so it must be optimized. A few of the optimizations were:
+</p>
+<ul>
+  <li>
+    The first optimization was to keep track of the number of possible words
+    that could fit in each slot of the crossword, and stop searching a branch of
+    the tree if any of the numbers of possibilities dropped to zero. This sounds
+    like a lot of extra work for the algorithm, and it is, but the time saved is
+    more than worth it.
+  </li>
+  <li>
+    The next improvement was to choose the next word to fill based on which slot
+    in the crossword had the least number of possible words that could fill it.
+    This will likely make it faster to find areas where no words fit a certain
+    slot.
+  </li>
+  <li>
+    The last change I made was for the algorithm to pick a word for a certain
+    slot based on what would lead to the highest number of possibilities of
+    words crossing that slot. This means that it's likelier for the algorithm to
+    take profitable branches of the tree.
+  </li>
+</ul>
+<p>
+  With these optimizations, the filling process now usually takes somewhere
+  between 10 seconds and 3 minutes (with code written mostly in Python, and some
+  C++).
+</p>
+<p>
+  Step three, clueing the filled grid, is also fairly simple. For each word in
+  the filled grid, my code looks at past crosswords and randomly chooses a clue
+  corresponding to that word. These generated puzzles aren't completely
+  original, but computationally generating high-quality clues would be extremely
+  hard or even impossible. This approach is much simpler and works well enough
+  for the time being.
+</p>
+
+<h2>Playing on my Website</h2>
+<p>
+  To make a different crossword available on my website each day, I had to use a
+  web framework to make my site dynamic. I chose to use the framework Flask as I
+  already knew how to use Python and Flask seemed good for small projects like
+  this site. Python code selects which crossword puzzle to play on a given day.
+  After that, the puzzle is loaded into a Javascript player that I got from
+  Crossword Nexus, allowing the puzzles to be played in the browser.
+</p>
