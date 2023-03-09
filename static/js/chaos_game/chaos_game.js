@@ -15,7 +15,7 @@ var c1;
 var c2;
 var c3;
 
-var arraySize = 250;
+const arraySize = 250;
 
 // For the estimated dimension of the fractal shape
 var countGrid = new Array(arraySize);
@@ -98,7 +98,7 @@ function calculateCarpetFraction(sides) {
 }
 
 // hs: HScrollbar, s: text above, lowVal: low value of scrollbar, highVal: high value of scrollbar, per: percentage text below
-function TextHScrollbar(hs, s, lowVal, highVal, per) {
+function textHScrollbar(hs, s, lowVal, highVal, per) {
   hs.update();
   hs.display();
   fill(0, 0, 0);
@@ -110,7 +110,7 @@ function TextHScrollbar(hs, s, lowVal, highVal, per) {
   text(per, hs.xpos, hs.ypos + 25);
 }
 
-function TextButton(b, s) {
+function textButton(b, s) {
   b.update();
   b.display();
   fill(255, 255, 255);
@@ -118,7 +118,7 @@ function TextButton(b, s) {
   text(s, b.rectX + 17.5, b.rectY + 25);
 }
 
-function TextCheckbox(c, one, two, isNumTextOne) {
+function textCheckbox(c, one, two, isNumTextOne) {
   c.update();
   c.display();
   fill(0, 0, 0);
@@ -138,17 +138,17 @@ function draw() {
   fill(200, 200, 200);
   rect(475, 0, 750, 450);
   
-  TextHScrollbar(hs1, "Length Fraction", "0", "1", round(hs1.normalPos, 3));
-  TextHScrollbar(hs2, "Number of Sides", "3", "10", (int) (3.5 + hs2.normalPos * 7));
+  textHScrollbar(hs1, "Length Fraction", "0", "1", round(hs1.normalPos, 3));
+  textHScrollbar(hs2, "Number of Sides", "3", "10", (int) (3.5 + hs2.normalPos * 7));
   
-  TextButton(b1, "Update");
+  textButton(b1, "Update");
   
   fill(0, 0, 0);
   text("Other Options", 500, 205);
   
-  TextCheckbox(c1, "Use Sierpinski Carpet Fraction", "", true);
-  TextCheckbox(c2, "Allow the same point to be", "picked multiple times in a row", false);
-  TextCheckbox(c3, "Add points to the midpoints", "of the edges of the polygon", false);
+  textCheckbox(c1, "Use Sierpinski Carpet Fraction", "", true);
+  textCheckbox(c2, "Allow the same point to be", "picked multiple times in a row", false);
+  textCheckbox(c3, "Add points to the midpoints", "of the edges of the polygon", false);
   
   fill(0, 0, 0);
   textSize(20);

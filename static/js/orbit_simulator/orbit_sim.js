@@ -5,7 +5,8 @@ class Planet {
     this.rot = rot1;
     this.a = a1;
     this.f = f1;
-    this.T = sqrt(k * pow(a1, 3));
+    let mu = G * sol.m;
+    this.T = 2 * pi * sqrt(pow(a1, 3) / mu);
     this.t = 0;
   }
 }
@@ -15,19 +16,20 @@ class SolarSystem {
     this.sunX = x;
     this.sunY = y;
     this.sunDiam = d;
+    this.m = 10;
     this.planets = p;
   }
 }
 
 
-function CalculateNextPosition(planet) {
-  let E = CalculateE(planet);
+function calculateNextPosition(planet) {
+  let E = calculateE(planet);
   let x = -planet.a * (cos(E) - planet.f);
   let y = -planet.a * sqrt(1 - pow(planet.f, 2)) * sin(E);
   return createVector(x, y);
 }
 
-function CalculateE(planet) {
+function calculateE(planet) {
   if (planet.t > planet.T) {
     planet.t = 0;
   }
@@ -50,11 +52,9 @@ var newRot = 0;
 var newA = 0;
 var newF = 0;
 
-var pi = 3.1415;
-var t = 0;
-var k = 4.2;
-var p = null;
-var sol = new SolarSystem(225, 225, 25, p);
+const G = 1;
+const pi = 3.1415;
+const sol = new SolarSystem(225, 225, 25, null);
 
 var b1;
 
@@ -101,7 +101,7 @@ function draw() {
   fill(0, 0, 0);
   if (sol.planets != null) {
     for (let i = 0; i < sol.planets.length; i++) {
-      let newPos = CalculateNextPosition(sol.planets[i]);
+      let newPos = calculateNextPosition(sol.planets[i]);
       sol.planets[i].xy = newPos;
       
       push();    
@@ -175,12 +175,12 @@ function draw() {
   stroke(255, 255, 255);
 }
 
-function MouseOnPlanet() {
+function mouseOnPlanet() {
   let num = -1;
   if (sol.planets != null) {
     for (let i = 0; i < sol.planets.length; i++) {
       let p = sol.planets[i];
-      let pos = CalculateNextPosition(p);
+      let pos = calculateNextPosition(p);
       let toSol = sqrt(pow(mouseX, 2) + pow(mouseY, 2));
       if (dist(toSol * cos(p.rot), toSol * sin(p.rot), pos.x, pos.y) <= p.r) {
         num = i;
@@ -194,7 +194,7 @@ function mousePressed() {
   // If the cursor is not over the clear button
   if (mouseX < b1.rectX || mouseX > b1.rectX + b1.rectXSize ||
       mouseY < b1.rectY || mouseY > b1.rectY + b1.rectYSize) {
-    if (state == 0 && MouseOnPlanet() != -1) {
+    if (state == 0 && mouseOnPlanet() != -1) {
       let temp = sol.planets;
       sol.planets = new Array(temp.length - 1);
       if (temp.length == 1) {
@@ -202,10 +202,10 @@ function mousePressed() {
       }
       else {
         for (let i = 0; i < temp.length; i++) {
-          if (i < MouseOnPlanet()) {
+          if (i < mouseOnPlanet()) {
             sol.planets[i] = temp[i];
           }
-          else if (i > MouseOnPlanet()) {
+          else if (i > mouseOnPlanet()) {
             sol.planets[i - 1] = temp[i];
           }
         }
@@ -248,6 +248,6 @@ function mousePressed() {
 function mouseReleased() {
   b1.tryClick();
   if (b1.pressed) {
-    sol.planets = p;
+    sol.planets = null;
   }
 }

@@ -23,26 +23,24 @@ var restart = false;
 var randomOption = false;
 
 // Particle stuff
-var numParticles = 200;
+const numParticles = 200;
 var particleList = new Array(numParticles);
 
 // Negative is attract, positive is repel
-//              r   g   b
-var rForces = [-1, -1,  2];
-var gForces = [-1,  2, -5];
-var bForces = [15, 15, -5];
-var forces = [rForces, gForces, bForces];
+//                r   g   b
+const rForces = [-1, -1,  2];
+const gForces = [-1,  2, -5];
+const bForces = [15, 15, -5];
+const forces = [rForces, gForces, bForces];
 
 var oldTime;
-var frictionCoefficient = 0.15;
-var particleRadius = 2.5;
-var sightDist = 75;
-
-var padding = 50;
+const frictionCoefficient = 0.15;
+const particleRadius = 2.5;
+const sightDist = 75;
 
 var centerX = 50;
 var centerY = 50;
-var circleRadius = 150;
+const circleRadius = 150;
 
 // Cool combo: 0r 40g 60b
 // 40r 40g 20b
@@ -80,7 +78,7 @@ function setup() {
   strokeWeight(0);
   textSize(20);
   oldTime = millis();
-  RandomizeParticles();
+  randomizeParticles();
   hs1.setNormalPos(percentRed / 100);
   hs2.setNormalPos(percentGreen / 100);
 }
@@ -166,7 +164,7 @@ function draw() {
   
   if (restart) {
     restart = false;
-    RandomizeParticles();
+    randomizeParticles();
   }
   
   // Draw circle when clicking with mouse
@@ -181,7 +179,7 @@ function draw() {
       if (dist < MOUSE_CIRCLE_RADIUS) {
         dX /= dist;
         dY /= dist;
-        p.v = createVector(p.v.x + -GetSign(dX) * distFunction, p.v.y + -GetSign(dY) * distFunction);
+        p.v = createVector(p.v.x + -getSign(dX) * distFunction, p.v.y + -getSign(dY) * distFunction);
       }
     }
     noFill();
@@ -228,8 +226,8 @@ function draw() {
               inAnotherParticleDetected = true;
             }
             distFunction = pow(2, 4 - abs(dist/1.6));
-            dX = GetSign(dX);
-            dY = GetSign(dY);
+            dX = getSign(dX);
+            dY = getSign(dY);
             forceMultiplier = 1;
           }
           
@@ -323,7 +321,7 @@ function draw() {
   oldTime = millis();
 }
 
-function RandomizeParticles() {
+function randomizeParticles() {
   for (let i = 0; i < numParticles; i++) {
     let r = (int)(random(100));
     let rand;
@@ -364,7 +362,7 @@ function mouseReleased() {
   velocityLines = c2.pressed;
 }
 
-function GetSign(input) {
+function getSign(input) {
   if (input < 0) {
     return -1;
   }

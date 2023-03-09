@@ -33,7 +33,7 @@ function setup() {
 }
 
 // hs: HScrollbar, s: title above, lowVal: low value of the scrollbar, highVal: high value of the scrollbar, per: percentage text below
-function TextHScrollbar(hs, s, lowVal, highVal, per) {
+function textHScrollbar(hs, s, lowVal, highVal, per) {
   hs.update();
   hs.display();
   fill(255, 255, 255);
@@ -50,16 +50,16 @@ function draw() {
   
   // Input
   numBranches = (int) (2.5 + hs1.normalPos * 3);
-  TextHScrollbar(hs1, "Number of branches", 2, 5, numBranches);
+  textHScrollbar(hs1, "Number of branches", 2, 5, numBranches);
   
   reduct = hs2.normalPos;
-  TextHScrollbar(hs2, "Fractional branch length", 0, 1, round(reduct, 3));
+  textHScrollbar(hs2, "Fractional branch length", 0, 1, round(reduct, 3));
   
   depth = (int) (1.5 + hs3.normalPos * 7);
-  TextHScrollbar(hs3, "Depth", 1, 8, depth);
+  textHScrollbar(hs3, "Depth", 1, 8, depth);
   
   angle = hs4.normalPos * TWO_PI;
-  TextHScrollbar(hs4, "Branch angle", 0, round(TWO_PI, 3), round(angle, 3));
+  textHScrollbar(hs4, "Branch angle", 0, round(TWO_PI, 3), round(angle, 3));
   
   // Drawing the tree
   stroke(255, 255, 255);
@@ -68,6 +68,7 @@ function draw() {
   // Count number of operations
   let operations = operationsCount();
   if (operations >= max_op) {
+    noStroke();
     text("Too many operations (" + operations + "), " + max_op + " is the max", 50 - height/2, 50);
   }
   else {
