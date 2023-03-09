@@ -17,8 +17,7 @@ def current_crossword():
     try:
         return send_from_directory('crosswords', f)
     except NotFound:
-        # Return the default puzzle if there was an error getting today's
-        # puzzle
+        # Return the default puzzle if there was an error getting today's puzzle
         return send_from_directory('crosswords', 'default.puz')
 
 @app.route('/daily_crossword')
