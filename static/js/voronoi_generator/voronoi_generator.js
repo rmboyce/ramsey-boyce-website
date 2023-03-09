@@ -1,6 +1,6 @@
 // Helper functions
 // Checks to see if point d is in the circumcircle of the triangle abc (abc need to be ccw)
-function InCircle(a, b, c, d) {
+function inCircle(a, b, c, d) {
   if (!ccw(a, b, c)) {
     let temp = a;
     a = c;
@@ -28,7 +28,7 @@ function InCircle(a, b, c, d) {
 }
 
 // Checks to see if abc are ccw
-function ccw (a, b, c) {
+function ccw(a, b, c) {
   let ax = a.x;
   let ay = a.y;
   let bx = b.x;
@@ -64,8 +64,8 @@ function det(m00, m01, m10, m11)
   return m00 * m11 - m01 * m10; 
 }
 
-var points = new Array(0);         // User-selected points
-var triangles = new Array(0);      // Triangles
+var points = [];                   // User-selected points
+var triangles = [];                // Triangles
 var circles = false;               // Turn circumcircles off/on
 var voronoi = false;               // Switch between voronoi/delaunay
 const fast = true;                 // Much faster if this is turned on
@@ -114,12 +114,12 @@ function draw() {
   stroke(255, 255, 255);
   strokeWeight(3);
   
-  cursorTooCloseToPoint = CheckTooClose();
+  cursorTooCloseToPoint = checkTooClose();
   if (addPointOnCursor) {
     if (points.length > numberOfPointsAdded) {
       points.pop();
     }
-    cursorTooCloseToPoint = CheckTooClose();
+    cursorTooCloseToPoint = checkTooClose();
     if (!cursorTooCloseToPoint) {
       points.push(createVector(mouseX, mouseY));
     }
@@ -156,7 +156,7 @@ function draw() {
         let kp = points[k];
         for (let a = 0; a < points.length; a++) {
           if (a == i || a == j || a == k) continue;
-          if (InCircle(ip, jp, kp, points[a])) {
+          if (inCircle(ip, jp, kp, points[a])) {
              isTriangle = false;
              break;
           }
@@ -204,7 +204,7 @@ function draw() {
         let vector_2 = createVector(t1.v2.x - t1.v3.x, t1.v2.y - t1.v3.y);
         let angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         // Angle in adjacent triangle
-        let other = ThirdPoint(t1.v1, t1.v2, t1.v3);
+        let other = thirdPoint(t1.v1, t1.v2, t1.v3);
         // If triangle is on the edge, extend line to edge
         if (other === null) {
           // Find which side of the edge the point is on
@@ -253,7 +253,7 @@ function draw() {
         vector_2 = createVector(t1.v2.x - t1.v1.x, t1.v2.y - t1.v1.y);
         angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         
-        other = ThirdPoint(t1.v2, t1.v3, t1.v1);
+        other = thirdPoint(t1.v2, t1.v3, t1.v1);
         if (other === null) {
           // Find which side of the edge the point is on
           let side;
@@ -301,7 +301,7 @@ function draw() {
         vector_2 = createVector(t1.v3.x - t1.v2.x, t1.v3.y - t1.v2.y);
         angle = abs(atan2(det(vector_1.x, vector_1.y, vector_2.x, vector_2.y), vector_1.dot(vector_2)));
         
-        other = ThirdPoint(t1.v1, t1.v3, t1.v2);
+        other = thirdPoint(t1.v1, t1.v3, t1.v2);
         if (other === null) {
           // Find which side of the edge the point is on
           let side;
@@ -375,23 +375,23 @@ function draw() {
       }
     }
   }
-  triangles = new Array(0);
+  triangles = [];
   
   // Interface
   noStroke();
   fill(100, 100, 100);
   rect(INTERFACE_X, 0, width, height);
   
-  TextCheckbox(c1, "Voronoi?");
-  TextCheckbox(c2, "Circles?");
-  TextCheckbox(c3, "Noise?");
-  TextCheckbox(c4, "Cursor Point?");
+  textCheckbox(c1, "Voronoi?");
+  textCheckbox(c2, "Circles?");
+  textCheckbox(c3, "Noise?");
+  textCheckbox(c4, "Cursor Point?");
   
-  TextButton(b1, "Point Circle");
-  TextButton(b2, "Clear Points");
+  textButton(b1, "Point Circle");
+  textButton(b2, "Clear Points");
 }
 
-function TextCheckbox(c, s) {
+function textCheckbox(c, s) {
   fill(255, 255, 255);
   textSize(20);
   text(s, c.rectX - 130, c.rectY + 15);
@@ -400,7 +400,7 @@ function TextCheckbox(c, s) {
   c.display();
 }
 
-function TextButton(b, s) {
+function textButton(b, s) {
   fill(255, 255, 255);
   b.update();
   b.display();
@@ -410,7 +410,7 @@ function TextButton(b, s) {
 }
 
 // Finds third point of a triangle in the delaunay triangulation, given two points and one point it will NOT return
-function ThirdPoint(a, b, no) {
+function thirdPoint(a, b, no) {
   for (let q = 0; q < triangles.length; q++) {
     let t = triangles[q];
     let i = t.v1;
@@ -439,7 +439,7 @@ function ThirdPoint(a, b, no) {
 }
 
 // Check if the cursor is too close to a point
-function CheckTooClose() {
+function checkTooClose() {
   let tooClose = false;
   for (let i = 0; i < points.length; i++) {
     if (dist(points[i].x, points[i].y, mouseX, mouseY) < TOO_CLOSE) {
@@ -473,7 +473,7 @@ function mouseReleased() {
   
   b1.tryClick();
   if (b1.pressed) {
-    points = new Array(0);
+    points = [];
     numberOfPointsAdded = 0;
     for (let i = 0; i < 50; i++) {
       let angle = i * TWO_PI / 50;
@@ -484,7 +484,7 @@ function mouseReleased() {
   }
   b2.tryClick();
   if (b2.pressed) {
-    points = new Array(0);
+    points = [];
     numberOfPointsAdded = 0;
   }
 }

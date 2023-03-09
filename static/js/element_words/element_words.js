@@ -2,18 +2,18 @@ var changedText = false;
 var space = false;
 var c;
 var hs1;
-var elements = [ "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
-                 "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", 
-                 "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", 
-                 "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", 
-                 "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", 
-                 "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", 
-                 "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", 
-                 "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", 
-                 "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", 
-                 "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", 
-                 "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", 
-                 "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og" ];
+const elements = [ "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
+                   "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", 
+                   "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", 
+                   "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", 
+                   "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", 
+                   "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", 
+                   "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", 
+                   "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", 
+                   "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", 
+                   "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", 
+                   "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", 
+                   "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og" ];
 
 var displayCase = 2;
 
@@ -36,7 +36,7 @@ function setup() {
   c.numChars = 8;
 }
 
-function MatchNextOneElement(prev, target) {
+function matchNextSingleCharElement(prev, target) {
   if (prev.length >= target.length) {
     return prev;
   }
@@ -50,15 +50,15 @@ function MatchNextOneElement(prev, target) {
       return prev;
     }
   }
-  return "failed" + prev;
+  return "$" + prev;
 }
 
-function MatchNextTwoElements(prev, target) {
+function matchNextDoubleCharElement(prev, target) {
   if (prev.length >= target.length) {
     return prev;
   }
   if (prev.length + 1 >= target.length) {
-    return "failed" + prev;
+    return "$" + prev;
   }
   for (let i = 0; i < elements.length; i++) {
     let element = elements[i];
@@ -70,70 +70,30 @@ function MatchNextTwoElements(prev, target) {
       return prev;
     }
   }
-  return "failed" + prev;
+  return "$" + prev;
 }
 
-function RemoveDuplicates(input) {
-  if (input.length == 0) {
-    return input;
-  }
-  let tempList = new Array(0);
+// Outputs array of elements
+function splitElements(input) {
+  let output = [];
+  let temp = "";
   for (let i = 0; i < input.length; i++) {
-    let temp = input[i];
-    if (!tempList.includes(temp)) {
-      tempList.push(temp);
+    let c = input.charAt(i);
+    if (c >= 'A' && c <= 'Z') {
+      if (temp.length > 0) {
+        output.push(temp);
+      }
+      temp = c;
+    }
+    else {
+      temp += c;
     }
   }
-  return tempList;
-}
-
-// Outputs string
-function AddSpaces(input) {
-  if (input.length > 0) {
-    let output = "" + input.charAt(0);
-    if (input.length > 1) {
-      for (let i = 1; i < input.length; i++) {
-        let c = input.charAt(i);
-        if (c >= 'A' && c <= 'Z') {
-          output += " " + c;
-        }
-        else {
-          output += c;
-        }
-      }
-    }
-    return output;
-  }
-  return "";
-}
-
-// Outputs array of strings
-function AddSpacesToArray(input) {
-  if (input.length > 0) {
-    let output = new Array(0);
-    let temp = "";
-    for (let i = 0; i < input.length; i++) {
-      let c = input.charAt(i);
-      if (c >= 'A' && c <= 'Z') {
-        if (temp.length > 0) {
-          output = output.concat(temp);
-        }
-        temp = "" + c;
-      }
-      else {
-        temp += c;
-      }
-    }
-    output = output.concat(temp);
-    return output;
-  }
-  else {
-    return null;
-  }
+  output.push(temp);
+  return output;
 }
 
 function draw() {
-  //DrawHud();
   hs1.update();
   hs1.display();
   
@@ -161,156 +121,112 @@ function draw() {
     
     // Elementize word
     let targetWord = c.chars;
-    let searching = true;
-    let potentialList = new Array(0);
-    let tempList = new Array(0);
+    let allFailed = true;
+    let potentialList = [];
+    let tempList = [];
     potentialList.push("");
-    let failedList = new Array(0);
-    while (searching) {
+    while (true) {
       for (let i = 0; i < potentialList.length; i++) {
-        tempList.push(MatchNextOneElement(potentialList[i], targetWord));
-        tempList.push(MatchNextTwoElements(potentialList[i], targetWord));
+        tempList.push(matchNextSingleCharElement(potentialList[i], targetWord));
+        tempList.push(matchNextDoubleCharElement(potentialList[i], targetWord));
       }
       
-      potentialList = new Array(0);
-      
-      // Add failed spellings to failedList
+      // Count number of failures
+      allFailed = true;
       for (let i = 0; i < tempList.length; i++) {
-        let failedWord = tempList[i];
-				// Remove "failed" from start
-        if (failedWord.length > 6) {
-          failedWord = failedWord.substring(6, failedWord.length);
-          if (!failedList.includes(failedWord)) {
-            failedList.push(failedWord);
-          }
+        let word = tempList[i];
+        if (word[0] !== "$") {
+          allFailed = false;
         }
       }
-      
-      // Remove all but the longest failed spellings
-      let longestFail = 0;
-      for (let i = 0; i < failedList.length; i++) {
-        let temp = failedList[i];
-        if (temp.length > longestFail) {
-          longestFail = temp.length;
+
+      potentialList = [];
+      if (allFailed) {
+        // Add failures to potential list and exit
+        for (let i = 0; i < tempList.length; i++) {
+          let word = tempList[i];
+          word = word.substring(1, word.length);
+          potentialList.push(word);
         }
+        break;
       }
-      for (let i = failedList.length - 1; i >= 0; i--) {
-        let temp = failedList[i];
-        if (temp.length < longestFail) {
-          failedList.splice(i, 1);
-        }
-      }
-      
-      // Remove failed attempts to add an element symbol
-      for (let j = 0; j < tempList.length; j++) {
-        let temp = tempList[j];
-        if (temp.length >= 6) {
-          if (temp.substring(0, 6) !== "failed") {
-            potentialList.push(temp);
-          }
-        }
-        else {
-          potentialList.push(temp);
-        }
-      }
-      
-      // If there are no more potential spellings, break the loop
-      if (potentialList.length == 0) {
-        searching = false;
-      }
-      // If all the element spellings are the proper length, break out of the loop
       else {
-        for (let k = 0; k < potentialList.length; k++) {
-          searching &= potentialList[k].length == targetWord.length;
+        // Continue with non-failures
+        let allRightLength = true;
+        for (let j = 0; j < tempList.length; j++) {
+          let word = tempList[j];
+          if (word[0] !== "$") {
+            potentialList.push(word);
+            if (word.length < targetWord.length) {
+              allRightLength = false;
+            }
+          }
         }
-        searching = !searching;
+        // If all potential words are the right length, break
+        if (allRightLength) {
+          break;
+        }
       }
       
-      tempList = new Array(0);
+      tempList = [];
     }
     
-    potentialList = RemoveDuplicates(potentialList);
+    // Remove duplicates
+    potentialList = [...new Set(potentialList)];
     
     // ---------------DISPLAY SPELLINGS---------------
     // Show working spelling(s), if any
     textSize(20);
     noStroke();
     strokeWeight(1);
-    if (potentialList.length > 0) {
-      potentialList = sort(potentialList);
-      for (let i = 0; i < potentialList.length; i++) {
-        if (displayCase == 0) {
-          // Without spaces
-          text(potentialList[i], TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
-        }
-        else if (displayCase == 1) {
-          // With spaces
-          text(AddSpaces(potentialList[i]), TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
-        }
-        else if (displayCase == 2) {
-          // Boxes
-          let oneWord = AddSpacesToArray(potentialList[i]);
-          if (oneWord != null) {
-            for (let x = 0; x < oneWord.length; x++) {
-              if (oneWord[x].length == 1) {
-                text(oneWord[x], TEXT_X_START + TEXT_X_OFFSET_BOXES * x + 5, TEXT_Y_START + TEXT_Y_OFFSET * i);
-              }
-              else {
-                text(oneWord[x], TEXT_X_START + TEXT_X_OFFSET_BOXES * x, TEXT_Y_START + TEXT_Y_OFFSET * i);
-              }
-              noFill();
-              stroke(0);
-              rect(TEXT_X_START - 2 + TEXT_X_OFFSET_BOXES * x, TEXT_Y_START - 20 + TEXT_Y_OFFSET * i, TEXT_X_OFFSET_BOXES - 4, TEXT_Y_OFFSET - 2);
-              fill(0, 0, 0);
-              noStroke();
-            }
-          }
-        }
-      }
+    if (!allFailed) {
+      //console.log(potentialList);
+      displayWords(displayCase, potentialList, [0, 0, 0]);
     }
     // Else show failed spellings
     else {
-      fill(255, 0, 0);
-      if (failedList.length > 0) {
-        failedList = sort(failedList);
-        for (let i = 0; i < failedList.length; i++) {
-          if (displayCase == 0) {
-            // Without spaces
-            text(failedList[i], TEXT_X_START, 90 + 30 * i);
-          }
-          else if (displayCase == 1) {
-            // With spaces
-            text(AddSpaces(failedList[i]), TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
-          }
-          else if (displayCase == 2) {
-            // Boxes
-            let oneWord = AddSpacesToArray(failedList[i]);
-            if (oneWord != null) {
-              for (let x = 0; x < oneWord.length; x++) {
-                if (oneWord[x].length == 1) {
-                  text(oneWord[x], TEXT_X_START + TEXT_X_OFFSET_BOXES * x + 5, TEXT_Y_START + TEXT_Y_OFFSET * i);
-                }
-                else {
-                  text(oneWord[x], TEXT_X_START + TEXT_X_OFFSET_BOXES * x, TEXT_Y_START + TEXT_Y_OFFSET * i);
-                }
-                noFill();
-                stroke(255, 0, 0);
-                rect(TEXT_X_START - 2 + TEXT_X_OFFSET_BOXES * x, TEXT_Y_START - 20 + TEXT_Y_OFFSET * i, TEXT_X_OFFSET_BOXES - 4, TEXT_Y_OFFSET - 2);
-                fill(255, 0, 0);
-                noStroke();
-              }
-            }
-          }
-        }
+      if (potentialList.length > 0) {
+        displayWords(displayCase, potentialList, [255, 0, 0]);
       }
       else {
         text("Nothing found", TEXT_X_START, TEXT_Y_START);
       }
       fill(0, 0, 0);
     }
-    
-    potentialList = new Array(0);
-    failedList = new Array(0);
+  }
+}
+
+function displayWords(displayCase, list, color) {
+  fill(...color);
+  list = sort(list);
+  for (let i = 0; i < list.length; i++) {
+    if (displayCase == 0) {
+      // Without spaces
+      text(list[i], TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
+    }
+    else if (displayCase == 1) {
+      // With spaces
+      text(splitElements(list[i]).join(" "), TEXT_X_START, TEXT_Y_START + TEXT_Y_OFFSET * i);
+    }
+    else if (displayCase == 2) {
+      // Boxes
+      let oneWord = splitElements(list[i]);
+      if (oneWord != null) {
+        for (let x = 0; x < oneWord.length; x++) {
+          noStroke();
+          if (oneWord[x].length == 1) {
+            text(oneWord[x], TEXT_X_START + TEXT_X_OFFSET_BOXES * x + 5, TEXT_Y_START + TEXT_Y_OFFSET * i);
+          }
+          else {
+            text(oneWord[x], TEXT_X_START + TEXT_X_OFFSET_BOXES * x, TEXT_Y_START + TEXT_Y_OFFSET * i);
+          }
+          stroke(...color);
+          noFill();
+          rect(TEXT_X_START - 2 + TEXT_X_OFFSET_BOXES * x, TEXT_Y_START - 20 + TEXT_Y_OFFSET * i, TEXT_X_OFFSET_BOXES - 4, TEXT_Y_OFFSET - 2);
+          fill(...color);
+        }
+      }
+    }
   }
 }
 
