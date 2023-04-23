@@ -6,7 +6,7 @@
       {
         CrosswordNexus.createCrossword(
           $("div.crossword"),
-          "{{url_for('current_crossword')}}"
+          "{{url_for('daily_crossword_pages.current_crossword')}}"
         );
       }
     })();
@@ -18,7 +18,7 @@
     >How the puzzles are generated</a
   >
   &middot;
-  <a href="{{url_for('current_crossword')}}" title="Archive"
+  <a href="{{url_for('daily_crossword_pages.current_crossword')}}" title="Archive"
     >Download today's puz file</a
   >
   &middot;
