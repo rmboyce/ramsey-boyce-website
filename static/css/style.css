@@ -30,16 +30,7 @@ footer a {
 }
 
 /* Text */
-h1,
-h2,
-li,
-kbd,
-kbd kbd,
-code,
-samp,
-p,
-svg,
-footer {
+* {
   font-family: sans-serif;
   line-height: 1.5;
   color: #222;

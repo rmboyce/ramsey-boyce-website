@@ -1,16 +1,17 @@
 import datetime
 from zoneinfo import ZoneInfo
 
-from flask import Markup, render_template, send_from_directory, url_for
+from flask import (Blueprint, Markup, render_template, send_from_directory,
+                   url_for)
 from werkzeug.exceptions import NotFound
-
-from route_config import app
 
 #===================================
 #=        Daily Crossword          =
 #===================================
 
-@app.route('/daily_crossword/today.puz')
+daily_crossword_pages = Blueprint('daily_crossword_pages', __name__, template_folder='templates')
+
+@daily_crossword_pages.route('/today.puz')
 def current_crossword():
     d = datetime.datetime.now(ZoneInfo('America/Los_Angeles'))
     f = f'{str(d.year)}-{str(d.month)}-{str(d.day)}.puz'
@@ -20,7 +21,7 @@ def current_crossword():
         # Return the default puzzle if there was an error getting today's puzzle
         return send_from_directory('crosswords', 'default.puz')
 
-@app.route('/daily_crossword')
+@daily_crossword_pages.route('/')
 def daily_crossword():
     h = Markup(f'''
         <link rel="stylesheet" href="{url_for('static', filename='css/crosswordnexus.css')}">
