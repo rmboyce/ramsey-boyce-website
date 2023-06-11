@@ -10,20 +10,34 @@
     -->
     <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik"
+    >
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter"
+    >
+    <!--
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk"
+    >
+    -->
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
-    />
+    >
     <link
       rel="icon"
       type="image/png"
       href="{{ url_for('static', filename='resources/favicon_16x16.png') }}"
       sizes="16x16"
-    />
+    >
     <link
       rel="icon"
       type="image/png"
       href="{{ url_for('static', filename='resources/favicon_32x32.png') }}"
       sizes="32x32"
-    />
+    >
 
     {% block head %}{% endblock %}
   </head>
@@ -49,7 +63,7 @@
         </p>
       </header>
 
-      <h1>{{ title }}</h1>
+      <h1 class="centered">{{ title }}</h1>
 
       {% block content %}{% endblock %}
 

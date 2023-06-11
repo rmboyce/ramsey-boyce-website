@@ -118,9 +118,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         '<div class="cw-option cw-color-selected"><span class="cw-option-text">Selected</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>' +
         '<div class="cw-option cw-color-word"><span class="cw-option-text">Word</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>' +
         '<div class="cw-option cw-color-hilite"><span class="cw-option-text">Highlight</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>' +
-        '<div class="cw-option cw-cell-size"><span class="cw-option-text">Size</span><input class="cw-input-size" type="text"><label><input type="checkbox">Auto</label></div>' +
-        '<div class="cw-option cw-skip-filled"><label><input type="checkbox">Skip filled letters</label></div>' +
-        '<button>Ok</button>' +
+        '<div class="cw-option cw-cell-size"><span class="cw-option-text">Size</span><input class="cw-input-size" type="text"><label class="cw-option label"><input type="checkbox">Auto</label></div>' +
+        '<div class="cw-option cw-skip-filled"><label class="cw-option label"><input type="checkbox">Skip filled letters</label></div>' +
+        '<button class="cw-option okbutton">Ok</button>' +
         '</div>' +
         '<div class="cw-top-text"></div>' +
         '<div class="cw-full-height"></div>' +
@@ -1331,7 +1331,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 if (cell.letter) {
                     var cell_letter_length = cell.letter.length;
                     this.context.font =
-                      this.cell_size / (1.1 + 0.5 * cell_letter_length) + 'px sans-serif';
+                      this.cell_size / (1.1 + 0.5 * cell_letter_length) + 'px Rubik';
                     if (cell.revealed) {
                         this.context.font = 'bold ' + this.context.font;
                     }
@@ -1347,7 +1347,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     this.context.fillText(
                       cell.letter,
                       cell_x + this.cell_size / 2,
-                      cell_y + 2 * this.cell_size / 3
+                      cell_y + this.cell_size * 3 / 5
                     );
                   }
             }

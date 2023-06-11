@@ -31,62 +31,56 @@ footer a {
 
 /* Text */
 * {
-  font-family: sans-serif;
+  font-family: "Rubik";
   line-height: 1.5;
-  color: #222;
+  color: #555;
 }
 
-h1 {
+h1, h1 a {
+  font-family: "Inter";
   font-weight: lighter;
   font-size: 24px;
-  text-align: center;
   margin: 12px 0 10px;
 }
 
-h2 {
+h2, h2 a {
+  font-family: "Inter";
   font-weight: lighter;
   font-size: 18px;
   margin: 16px 0 12px;
 }
 
-h2.centered,
-p.centered {
+.centered {
   text-align: center;
-  margin: 24px 0 12px;
 }
 
 p {
   margin: 12px auto;
-  font-size: 15px;
-  color: #555;
+  font-size: 16px;
   word-wrap: break-word;
 }
 
 p.smallDesc {
   text-align: center;
   margin: 15px 0 12px;
-  font-size: 13px;
-  color: #555;
+  font-size: 14px;
 }
 
 p.navBar {
+  font-family: "Inter";
   text-align: center;
   padding: 0 0 8px;
   line-height: 2;
 }
 
 p.navBar a {
+  font-family: "Inter";
   margin: 0 3px;
 }
 
 ul {
   margin: 12px 0;
   padding: 0 0 0 30px;
-}
-
-li {
-  font-size: 15px;
-  color: #555;
 }
 
 a:not(.linkImage) {
@@ -139,6 +133,7 @@ a.linkImage {
   margin: 0px auto 0px auto;
   padding: 0px 0px 0px 0px;
   border: none;
+  border-radius: 4px;
   max-width: 100%;
   height: auto;
 }
@@ -169,14 +164,33 @@ small {
   font-size: smaller;
 }
 
-/* Scrollbar stuff*/
+/* Forms */
+input.login {
+  margin-bottom: 5px;
+}
+
+button.login {
+  background-color: #777777;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-top: 10px;
+}
+
+button.login:hover {
+  background-color: #608afe;
+  transition: 0.2s;
+}
+
+/* Scrollbar stuff */
 /* Works on Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #888 #eee;
 }
 
-/* Works on Chrome, Edge, and Safari */
+/* Make scrollbar pretty. Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 12px;
 }
