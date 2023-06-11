@@ -129,18 +129,9 @@ img {
 }
 
 a.linkImage {
-  display: block;
-  margin: 0px auto 0px auto;
-  padding: 0px 0px 0px 0px;
-  border: none;
-  border-radius: 4px;
-  max-width: 100%;
-  height: auto;
-}
-
-a:focus.linkImage,
-a:hover.linkImage {
-  background: #737373;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Javascript demo stuff */
