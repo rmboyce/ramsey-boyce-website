@@ -1306,24 +1306,24 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 }
 
                 if (cell.number) {
-                    this.context.font = Math.ceil(this.cell_size / 4) + 'px sans-serif';
+                    this.context.font = Math.ceil(this.cell_size / 5) + 'px sans-serif';
                     this.context.textAlign = 'left';
                     this.context.textBaseline = 'top';
                     this.context.fillText(
                         cell.number,
-                        Math.floor(cell_x + this.cell_size * 0.1),
-                        Math.floor(cell_y + this.cell_size * 0.1)
+                        Math.floor(cell_x + this.cell_size * 0.08),
+                        Math.floor(cell_y + this.cell_size * 0.08)
                     );
                 }
 
                 if (cell.top_right_number) {
-                    this.context.font = Math.ceil(this.cell_size / 4) + "px sans-serif";
+                    this.context.font = Math.ceil(this.cell_size / 5) + "px sans-serif";
                     this.context.textAlign = "right";
                     this.context.textBaseline = "top";
                     this.context.fillText(
                         cell.top_right_number,
-                        Math.floor(cell_x + this.cell_size * 0.9),
-                        Math.floor(cell_y + this.cell_size * 0.1)
+                        Math.floor(cell_x + this.cell_size * 0.92),
+                        Math.floor(cell_y + this.cell_size * 0.08)
                     );
                 }
 
