@@ -26,3 +26,9 @@ def force_https():
             code = 301
             r = redirect(url, code=code)
             return r
+
+def clear_trailing():
+    # Clear trailing /s from urls
+    rp = request.path 
+    if rp != '/' and rp.endswith('/'):
+        return redirect(rp[:-1])

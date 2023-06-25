@@ -5,13 +5,14 @@ from javascript_demos import javascript_demo_pages
 #from my import my_pages
 from projects import project_pages
 from route_config import app
-from utils import force_https
+from utils import clear_trailing, force_https
 
 #===================================
 #=              Index              =
 #===================================
 
 app.before_request(force_https)
+app.before_request(clear_trailing)
 
 
 @app.route('/index')
@@ -32,8 +33,7 @@ app.register_blueprint(javascript_demo_pages, url_prefix='/javascript_demos')
 #app.register_blueprint(my_pages, url_prefix='/my')
 app.register_blueprint(project_pages, url_prefix='/projects')
 
-print(app.url_map)
-
 
 if __name__ == '__main__':
+    print(app.url_map)
     app.run(debug=True)
