@@ -19,8 +19,8 @@ JS_MAP = {
 
 def generate_js_markup(js_path, file_list):
     js = ''
-    for f in file_list:
-        js += f'''<script src="{url_for('static', filename=(f'js/{js_path}/{f}'))}" type="text/javascript"></script>\n'''
+    for file in file_list:
+        js += f'''<script src="{url_for('static', filename=(f'js/{js_path}/{file}'))}" type="text/javascript"></script>\n'''
     return Markup(js)
 
 
@@ -33,7 +33,7 @@ def javascript_demos():
 @javascript_demo_pages.route('/<page>')
 def show(page):
     try:
-        j = generate_js_markup(page, JS_MAP[page])
-        return render_template('js_demo_page.html', title=title(page), page_js=j, page_content=f'pages/javascript_demos/{page}.html')
+        JS = generate_js_markup(page, JS_MAP[page])
+        return render_template('js_demo_page.html', title=title(page), page_js=JS, page_content=f'pages/javascript_demos/{page}.html')
     except TemplateNotFound:
         abort(404)

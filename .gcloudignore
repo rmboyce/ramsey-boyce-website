@@ -23,3 +23,6 @@ __pycache__/
 README.md
 .vscode/
 .pylintrc
+test.py
+pyproject.toml
+poetry.lock
