@@ -1,4 +1,5 @@
-from flask import Blueprint, Markup, abort, render_template, url_for
+from flask import Blueprint, abort, render_template, url_for
+from markupsafe import Markup
 from jinja2 import TemplateNotFound
 
 from utils import title
