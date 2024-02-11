@@ -16,3 +16,6 @@ __pycache__/
 
 # Project
 crosswords/**
+.env
+mysecrets.py
+test.py
