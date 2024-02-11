@@ -1,8 +1,8 @@
 import datetime
 from zoneinfo import ZoneInfo
 
-from flask import (Blueprint, Markup, render_template, send_from_directory,
-                   url_for)
+from flask import Blueprint, render_template, send_from_directory, url_for
+from markupsafe import Markup
 from werkzeug.exceptions import NotFound
 
 #===================================
