@@ -1,10 +1,10 @@
 from time import sleep
 
+import os
 from dotenv import load_dotenv
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import LoginManager, UserMixin, login_required, login_user
 from markupsafe import Markup
-import os
 from werkzeug.security import check_password_hash #, generate_password_hash
 
 from route_config import app
