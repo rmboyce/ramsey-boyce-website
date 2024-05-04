@@ -1,7 +1,7 @@
 from flask import render_template
 
 from daily_crossword import daily_crossword_pages
-from javascript_demos import javascript_demo_pages
+from visualizations import visualization_pages
 from my import my_pages
 from projects import project_pages
 from route_config import app
@@ -18,7 +18,7 @@ app.before_request(clear_trailing)
 @app.route('/index')
 @app.route('/')
 def index():
-    return render_template('custom_page.html', title='About Me', page_content='pages/index.html')
+    return render_template('custom_page.html', title='Ramsey Boyce', page_content='pages/index.html')
 
 # Error page
 @app.errorhandler(404)
@@ -29,7 +29,7 @@ def page_not_found(_):
 
 # Register blueprints for pages
 app.register_blueprint(daily_crossword_pages, url_prefix='/daily_crossword')
-app.register_blueprint(javascript_demo_pages, url_prefix='/javascript_demos')
+app.register_blueprint(visualization_pages, url_prefix='/visualizations')
 app.register_blueprint(my_pages, url_prefix='/my')
 app.register_blueprint(project_pages, url_prefix='/projects')
 

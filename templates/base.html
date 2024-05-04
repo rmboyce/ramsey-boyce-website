@@ -47,19 +47,19 @@
       {% endif %}
       <header>
         <p class="navBar">
-          <a href="/projects" title="My projects">Personal Projects</a>
+          <a href="/projects" title="My projects">personal projects</a>
           &middot;
           <a
-            href="/javascript_demos"
-            title="My Javascript programs (they run in the browser)"
-            >Javascript Demos</a
+            href="/visualizations"
+            title="Visualizations using p5.js"
+            >p5.js visualizations</a
           >
           &middot;
           <a href="/daily_crossword" title="Daily computer-generated crossword"
-            >Daily Crossword</a
+            >daily crossword</a
           >
           &middot;
-          <a href="/" title="About me">About</a>
+          <a href="/" title="About me">about</a>
         </p>
       </header>
 
@@ -68,6 +68,21 @@
       {% block content %}{% endblock %}
 
       <footer>
+        <hr>
+        <p class="centered">
+          <a href="https://www.linkedin.com/in/ramseyboyce/" class="unstyled"
+            ><i data-lucide="linkedin" class="vcentered"></i></a>
+          &middot;
+          <a href="https://github.com/rmboyce" class="unstyled"
+            ><i data-lucide="github" class="vcentered"></i></a>
+          &middot;
+          <a href="https://twitter.com/RamseyBoyce" class="unstyled"
+            ><i data-lucide="twitter" class="vcentered"></i></a>
+        </p>
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <script>
+          lucide.createIcons();
+        </script>
         <p class="smallDesc">By Ramsey Boyce</p>
       </footer>
       {% if squeeze or squeeze is not defined %}
