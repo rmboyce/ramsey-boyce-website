@@ -5,7 +5,7 @@ from jinja2 import TemplateNotFound
 from utils import title
 
 #===================================
-#=        Javascript Demos         =
+#=         Visualizations          =
 #===================================
 
 JS_MAP = {
@@ -24,16 +24,16 @@ def generate_js_markup(js_path, file_list):
     return Markup(js)
 
 
-javascript_demo_pages = Blueprint('javascript_demo_pages', __name__, template_folder='templates')
+visualization_pages = Blueprint('visualization_pages', __name__, template_folder='templates')
 
-@javascript_demo_pages.route('/')
-def javascript_demos():
-    return render_template('custom_page.html', title='Javascript Demos', page_content='pages/javascript_demos.html')
+@visualization_pages.route('/')
+def visualizations():
+    return render_template('custom_page.html', title='Visualizations', page_content='pages/visualizations.html')
 
-@javascript_demo_pages.route('/<page>')
+@visualization_pages.route('/<page>')
 def show(page):
     try:
         JS = generate_js_markup(page, JS_MAP[page])
-        return render_template('js_demo_page.html', title=title(page), page_js=JS, page_content=f'pages/javascript_demos/{page}.html')
+        return render_template('js_demo_page.html', title=title(page), page_js=JS, page_content=f'pages/visualizations/{page}.html')
     except TemplateNotFound:
         abort(404)

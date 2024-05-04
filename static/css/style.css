@@ -29,6 +29,17 @@ footer a {
   font-size: 12px;
 }
 
+hr {
+  height: 1px;
+  border: 0;
+  /*background-color: #555;*/
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgb(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+  /*
+  background-image:    -moz-linear-gradient(left, rgb(0, 0, 0), rgba(0,0,0,0.15), rgba(0,0,0,0)); 
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0)); 
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));*/
+}
+
 /* Text */
 * {
   font-family: "Rubik";
@@ -82,7 +93,7 @@ ul {
   padding: 0 0 0 30px;
 }
 
-a:not(.linkImage) {
+a:not(.linkImage, .unstyled) {
   text-decoration: none;
   outline: none;
   background-image: linear-gradient(currentColor, currentColor);
@@ -94,9 +105,14 @@ a:not(.linkImage) {
   /*#0087bd*/
 }
 
-a:focus:not(.linkImage),
-a:hover:not(.linkImage) {
+a:focus:not(.linkImage, .unstyled),
+a:hover:not(.linkImage, .unstyled) {
   background-size: 100% 1px;
+}
+
+.vcentered {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 /* Image stuff */
