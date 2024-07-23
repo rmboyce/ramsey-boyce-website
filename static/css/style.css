@@ -19,14 +19,7 @@ body {
 
 footer {
   text-align: center;
-  margin: 36px 0 0;
-}
-
-footer a {
-  display: inline-block;
-  margin: 8px;
-  border: none;
-  font-size: 12px;
+  margin: 1rem 0 0;
 }
 
 hr {
@@ -40,6 +33,15 @@ hr {
   background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.15), rgba(0,0,0,0));*/
 }
 
+.flexbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
 /* Text */
 * {
   font-family: "Rubik";
@@ -50,15 +52,15 @@ hr {
 h1, h1 a {
   font-family: "Inter";
   font-weight: lighter;
-  font-size: 24px;
-  margin: 12px 0 10px;
+  font-size: 1.5rem;
+  margin: 1.25rem 0 0.6rem;
 }
 
 h2, h2 a {
   font-family: "Inter";
   font-weight: lighter;
-  font-size: 18px;
-  margin: 16px 0 12px;
+  font-size: 1.2rem;
+  margin: 0.75rem 0 0.4rem;
 }
 
 .centered {
@@ -66,31 +68,20 @@ h2, h2 a {
 }
 
 p {
-  margin: 12px auto;
-  font-size: 16px;
+  font-size: 1rem;
+  margin: 0.5rem 0 0.25rem;
   word-wrap: break-word;
 }
 
 p.smallDesc {
   text-align: center;
-  font-size: 14px;
-}
-
-p.navBar {
-  font-family: "Inter";
-  text-align: center;
-  padding: 0 0 8px;
-  line-height: 2;
-}
-
-p.navBar a {
-  font-family: "Inter";
-  margin: 0 3px;
+  font-size: 0.9rem;
+  color: #888;
 }
 
 ul {
-  margin: 12px 0;
-  padding: 0 0 0 30px;
+  margin: 0.2rem 0 0;
+  padding: 0 0 0 2rem;
 }
 
 a:not(.linkImage, .unstyled) {
@@ -110,16 +101,11 @@ a:hover:not(.linkImage, .unstyled) {
   background-size: 100% 1px;
 }
 
-.vcentered {
-  display: table-cell;
-  vertical-align: middle;
-}
-
 /* Image stuff */
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -166,8 +152,12 @@ b {
   font-weight: bolder;
 }
 
-small {
-  font-size: smaller;
+.inter * {
+  font-family: "Inter";
+}
+
+.font-norm, .font-norm * {
+  font-size: 1rem;
 }
 
 /* Forms */

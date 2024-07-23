@@ -2,7 +2,7 @@ from flask import render_template
 
 from daily_crossword import daily_crossword_pages
 from visualizations import visualization_pages
-from my import my_pages
+#from my import my_pages
 from projects import project_pages
 from route_config import app
 from utils import clear_trailing, force_https
@@ -30,7 +30,7 @@ def page_not_found(_):
 # Register blueprints for pages
 app.register_blueprint(daily_crossword_pages, url_prefix='/daily_crossword')
 app.register_blueprint(visualization_pages, url_prefix='/visualizations')
-app.register_blueprint(my_pages, url_prefix='/my')
+#app.register_blueprint(my_pages, url_prefix='/my')
 app.register_blueprint(project_pages, url_prefix='/projects')
 
 
