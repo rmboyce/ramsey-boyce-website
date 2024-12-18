@@ -29,9 +29,9 @@ def page_not_found(_):
 
 # Register blueprints for pages
 app.register_blueprint(daily_crossword_pages, url_prefix='/daily_crossword')
-app.register_blueprint(visualization_pages, url_prefix='/visualizations')
 #app.register_blueprint(my_pages, url_prefix='/my')
 app.register_blueprint(project_pages, url_prefix='/projects')
+app.register_blueprint(visualization_pages, url_prefix='/projects/visualizations')
 
 
 if __name__ == '__main__':
