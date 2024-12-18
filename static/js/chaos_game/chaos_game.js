@@ -32,7 +32,7 @@ var dimensionEstimate = 2;
 
 function setup() {
   let cnv = createCanvas(750, 450);
-  cnv.parent("p5Container");
+  cnv.parent("p5-container");
   
   // Start the first point at a random location in the window
   current = createVector(random(width), random(height));

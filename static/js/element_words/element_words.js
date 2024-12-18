@@ -24,7 +24,7 @@ const TEXT_Y_OFFSET = 30;
 
 function setup() {
   let cnv = createCanvas(600, 400);
-  cnv.parent("p5Container");
+  cnv.parent("p5-container");
 	
   hs1 = new HScrollbar(480, 50, 100, 20, 3);
   hs1.setNormalPos(0.9);

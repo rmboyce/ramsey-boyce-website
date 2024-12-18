@@ -63,7 +63,7 @@ var c2;
 
 function setup() {
   let cnv = createCanvas(650, 400);
-  cnv.parent("p5Container");
+  cnv.parent("p5-container");
 	
   hs1 = new HScrollbar(400, 100, 200, 10, 3);
   hs2 = new HScrollbar(400, 150, 200, 10, 3);

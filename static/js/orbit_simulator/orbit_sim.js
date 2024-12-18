@@ -60,7 +60,7 @@ var b1;
 
 function setup() {
   let cnv = createCanvas(450, 450);
-  cnv.parent("p5Container");
+  cnv.parent("p5-container");
   stroke(255, 255, 255);
   strokeWeight(2);
 	
