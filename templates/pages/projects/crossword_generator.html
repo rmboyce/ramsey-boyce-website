@@ -1,4 +1,4 @@
-<p class="smallDesc">A program that generates crossword puzzles</p>
+<p class="smallDesc">A program that generates crossword puzzles very fast</p>
 
 <h2>
   <a href="/daily_crossword" title="Daily computer-generated crossword">
@@ -27,45 +27,55 @@
 <p>
   Step one is generating the grid. At the moment my code takes an empty grid,
   adds 1-2 rows and columns extending inwards from the sides, and fills the
-  middle randomly. Since crossword grids must be rotationally symmetric, it only
+  middle randomly. Since crosswords are usually rotationally symmetric, it only
   generates half of it and fills in the rest using the first half.
 </p>
 <p>
   Step two, filling the grid with words, is the most complicated step. My
   algorithm is a tree search where each branch represents filling a slot in the
   grid with a word. A brute-force search will generate a valid filling of the
-  grid; however, it's very slow without optimizations. To improve the speed, a
-  few of the optimizations were:
+  grid; however, it's very slow without optimizations. I implement two main
+  types of optimizations: search heuristics and faster code.
 </p>
+<p>Search heuristics:</p>
 <ul>
   <li>
     Keep track of all words that can fit in each slot, and stop searching a
-    branch of the tree if any of the numbers of possible words drop to zero.
-    This is a lot of extra work for the algorithm, but it saves much more time
-    than it spends.
+    branch of the tree if a slot has no valid words.
   </li>
   <li>
     Choose the next word to fill based on which slot has the lowest number of
-    possible words that can fill it. This will likely make it faster to find
-    areas where no words fit a certain slot.
+    possible words that can fill it.
   </li>
   <li>
     Pick a word for a certain slot based on what leads to the highest number of
-    possibilities for crossing slots. This means that it's likelier for the
-    algorithm to take profitable branches of the tree.
+    possibilities for crossing slots.
+  </li>
+</ul>
+<p>Code efficiency:</p>
+<ul>
+  <li>
+    Use multithreading when choosing the next word to put in a slot. This
+    is implemented via a thread pool to avoid the overhead of spawning threads
+    mid-search.
+  </li>
+  <li>
+    Store the words as SIMD vectors to increase the speed of matching comparisons
+    between words and slots.
+  </li>
+  <li>
+    Aggressive moving of data to avoid copying at all costs.
   </li>
 </ul>
 <p>
-  With these optimizations, the filling process now usually takes around 1
-  second, with code written in C++. This is about a 100x improvement over
-  previous iterations of the code, which were written in Python.
+  With these optimizations, the filling process now usually takes around 0.1
+  seconds. This is about a 1000x improvement over previous iterations of the code.
 </p>
 <p>
   Step three is clueing the filled grid. For each word in the filled grid, my
   code looks at past crosswords and randomly chooses a clue corresponding to
-  that word. These generated puzzles aren't completely original, but
-  computationally generating high-quality clues would be extremely hard and
-  costly.
+  that word. These clues aren't original, but generating them from scratch
+  would be costly.
 </p>
 
 <h2>Playing on my Website</h2>
