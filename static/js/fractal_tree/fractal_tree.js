@@ -18,7 +18,7 @@ var hs4;
 
 function setup() {
   let cnv = createCanvas(750, 450);
-  cnv.parent("p5Container");
+  cnv.parent("p5-container");
   strokeWeight(2);
   stroke(10);
   
