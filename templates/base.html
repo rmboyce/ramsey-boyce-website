@@ -11,11 +11,11 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Rubik"
-    >
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter"
-    >
+    />
     <!--
     <link
       rel="stylesheet"
@@ -25,19 +25,19 @@
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
-    >
+    />
     <link
       rel="icon"
       type="image/png"
       href="{{ url_for('static', filename='resources/favicon_16x16.png') }}"
       sizes="16x16"
-    >
+    />
     <link
       rel="icon"
       type="image/png"
       href="{{ url_for('static', filename='resources/favicon_32x32.png') }}"
       sizes="32x32"
-    >
+    />
 
     {% block head %}{% endblock %}
   </head>
@@ -46,20 +46,16 @@
     <div id="container">
       {% endif %}
       <header>
-        <div class="flexbar inter font-norm">
-          <a href="/projects" title="My projects">personal projects</a>
+        <div class="flexbar inter">
+          <a href="/" title="About me">about</a>
           &middot;
-          <a
-            href="/visualizations"
-            title="Visualizations using p5.js"
-            >p5.js visualizations</a
-          >
+          <a href="/projects" title="My projects">personal projects</a>
           &middot;
           <a href="/daily_crossword" title="Daily computer-generated crossword"
             >daily crossword</a
           >
           &middot;
-          <a href="/" title="About me">about</a>
+          <a href="/misc" title="Misc">misc</a>
         </div>
       </header>
 
@@ -68,22 +64,25 @@
       {% block content %}{% endblock %}
 
       <footer>
-        <hr>
+        <hr />
         <div class="flexbar">
           <a href="https://www.linkedin.com/in/ramseyboyce/" class="unstyled"
-            ><i data-lucide="linkedin"></i></a>
+            ><i data-lucide="linkedin" class="icon-size"></i
+          ></a>
           &middot;
           <a href="https://github.com/rmboyce" class="unstyled"
-            ><i data-lucide="github"></i></a>
+            ><i data-lucide="github" class="icon-size"></i
+          ></a>
           &middot;
           <a href="https://twitter.com/RamseyBoyce" class="unstyled"
-            ><i data-lucide="twitter"></i></a>
+            ><i data-lucide="twitter" class="icon-size"></i
+          ></a>
         </div>
         <script src="https://unpkg.com/lucide@latest"></script>
         <script>
           lucide.createIcons();
         </script>
-        <p class="smallDesc">By Ramsey Boyce</p>
+        <p class="gray-desc">By Ramsey Boyce</p>
       </footer>
       {% if squeeze or squeeze is not defined %}
     </div>

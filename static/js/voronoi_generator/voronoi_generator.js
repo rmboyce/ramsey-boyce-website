@@ -85,7 +85,7 @@ var b2;
 
 function setup() {
   let cnv = createCanvas(750, 450);
-  cnv.parent("p5Container");
+  cnv.parent("p5-container");
   background(0,0,0);
   
   points.push(createVector(100, 100));
