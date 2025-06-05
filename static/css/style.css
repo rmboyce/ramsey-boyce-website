@@ -182,7 +182,7 @@ button.login:hover {
 /* Scrollbar stuff */
 /* Works on Firefox */
 * {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: #888 #eee;
 }
 
