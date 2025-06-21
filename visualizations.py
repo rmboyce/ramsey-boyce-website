@@ -1,4 +1,5 @@
 from flask import Blueprint, abort, render_template, url_for
+from jinja2 import TemplateNotFound
 from markupsafe import Markup
 
 from utils import title
@@ -20,7 +21,7 @@ JS_MAP = {
 def generate_js_markup(js_path, file_list):
     js = ""
     for file in file_list:
-        js += f"""<script src="{url_for('static', filename=(f'js/{js_path}/{file}'))}" type="text/javascript"></script>\n"""
+        js += f"""<script src="{url_for("static", filename=(f"js/{js_path}/{file}"))}" type="text/javascript"></script>\n"""
     return Markup(js)
 
 
@@ -48,5 +49,5 @@ def show(page: str):
             page_js=JS,
             page_content=f"pages/visualizations/{page}.html",
         )
-    except:
+    except TemplateNotFound:
         abort(404)
