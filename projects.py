@@ -1,4 +1,5 @@
 from flask import Blueprint, abort, render_template
+from jinja2 import TemplateNotFound
 
 from utils import title
 
@@ -26,5 +27,5 @@ def show(page: str):
             title=title(page),
             page_content=f"pages/projects/{page}.html",
         )
-    except:
+    except TemplateNotFound:
         abort(404)

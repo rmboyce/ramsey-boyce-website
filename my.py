@@ -1,14 +1,14 @@
+import os
 from time import sleep
 
-import os
 from dotenv import load_dotenv
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import LoginManager, UserMixin, login_required, login_user
 from markupsafe import Markup
+from mysecrets import LINKS
 from werkzeug.security import check_password_hash  # , generate_password_hash
 
 from route_config import app
-from mysecrets import LINKS
 
 load_dotenv()
 

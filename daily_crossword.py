@@ -29,14 +29,14 @@ def current_crossword():
 def daily_crossword():
     HEAD = Markup(
         f"""
-        <link rel="stylesheet" href="{url_for('static', filename='css/crosswordnexus.css')}">
+        <link rel="stylesheet" href="{url_for("static", filename="css/crosswordnexus.css")}">
 
-        <script src="{url_for('static', filename='js/daily_crossword/crosswords.js')}"></script>
-        <script src="{url_for('static', filename='js/daily_crossword/puz.min.js')}"></script>
+        <script src="{url_for("static", filename="js/daily_crossword/crosswords.js")}"></script>
+        <script src="{url_for("static", filename="js/daily_crossword/puz.min.js")}"></script>
         
-        <script src="{url_for('static', filename='js/daily_crossword/jquery.js')}"></script>
-        <script src="{url_for('static', filename='js/daily_crossword/zip.js')}"></script>
-        <script src="{url_for('static', filename='js/daily_crossword/jspdf.min.js')}"></script>
+        <script src="{url_for("static", filename="js/daily_crossword/jquery.js")}"></script>
+        <script src="{url_for("static", filename="js/daily_crossword/zip.js")}"></script>
+        <script src="{url_for("static", filename="js/daily_crossword/jspdf.min.js")}"></script>
         
         <style>
             div.crossword {{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; text-align: center; }}

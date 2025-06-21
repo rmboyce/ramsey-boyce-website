@@ -1,12 +1,13 @@
 from flask import render_template
 
 from daily_crossword import daily_crossword_pages
-from visualizations import visualization_pages
+from misc import misc_pages
+
 # from my import my_pages
 from projects import project_pages
-from misc import misc_pages
 from route_config import app
 from utils import clear_trailing, force_https
+from visualizations import visualization_pages
 
 # ===================================
 # =              Index              =
