@@ -1,6 +1,6 @@
 from flask import render_template
 
-from daily_crossword import daily_crossword_pages
+# from daily_crossword import daily_crossword_pages
 from misc import misc_pages
 
 # from my import my_pages
@@ -13,8 +13,8 @@ from visualizations import visualization_pages
 # =              Index              =
 # ===================================
 
-app.before_request(force_https)
-app.before_request(clear_trailing)
+_ = app.before_request(force_https)
+_ = app.before_request(clear_trailing)
 
 
 @app.route("/index")
@@ -33,7 +33,7 @@ def page_not_found(_):
 
 
 # Register blueprints for pages
-app.register_blueprint(daily_crossword_pages, url_prefix="/daily_crossword")
+# app.register_blueprint(daily_crossword_pages, url_prefix="/daily_crossword")
 # app.register_blueprint(my_pages, url_prefix='/my')
 app.register_blueprint(project_pages, url_prefix="/projects")
 app.register_blueprint(visualization_pages, url_prefix="/projects/visualizations")
