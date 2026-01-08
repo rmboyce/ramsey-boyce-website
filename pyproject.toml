@@ -3,7 +3,7 @@ name = "ramsey-boyce-website"
 version = "0.1.0"
 description = "My personal website"
 authors = [{ name = "rmboyce" }]
-requires-python = "~=3.13"
+requires-python = "~=3.13.11"
 readme = "README.md"
 dependencies = [
     "flask>=3.0.2,<4",
