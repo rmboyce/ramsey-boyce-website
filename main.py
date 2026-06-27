@@ -1,7 +1,9 @@
+import os
 from flask import render_template
 
 # from daily_crossword import daily_crossword_pages
 from misc import misc_pages
+from game import game_pages
 
 # from my import my_pages
 from projects import project_pages
@@ -38,8 +40,10 @@ def page_not_found(_):
 app.register_blueprint(project_pages, url_prefix="/projects")
 app.register_blueprint(visualization_pages, url_prefix="/projects/visualizations")
 app.register_blueprint(misc_pages, url_prefix="/misc")
+app.register_blueprint(game_pages, url_prefix="/game")
 
 
-if __name__ == "__main__":
+# Only runs on local machine
+if os.environ.get("GAE_ENV") != "standard":
     print(app.url_map)
     app.run(debug=True)
