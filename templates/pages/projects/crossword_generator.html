@@ -8,7 +8,7 @@
 
 <h2>Overview</h2>
 <p>
-  This program generates crossword puzzles using a three step process: first,
+  This program generates crossword puzzles using a three-step process: first,
   generate the grid; second, fill the grid with words; and third, clue the
   filled grid. To make a different puzzle available on my website each day, I
   began using the web framework Flask.
@@ -25,16 +25,16 @@
 
 <h2>Generating the Puzzles</h2>
 <p>
-  Step one is generating the grid. At the moment my code takes an empty grid,
+  Step one is generating the grid. At the moment, my code takes an empty grid,
   adds 1-2 rows and columns extending inwards from the sides, and fills the
   middle randomly. Since crosswords are usually rotationally symmetric, it only
-  generates half of it and fills in the rest using the first half.
+  generates half of the grid and fills in the rest based on that half.
 </p>
 <p>
   Step two, filling the grid with words, is the most complicated step. My
   algorithm is a tree search where each branch represents filling a slot in the
-  grid with a word. A brute-force search will generate a valid filling of the
-  grid; however, it's very slow without optimizations. I implement two main
+  grid with a word. A brute-force search can find a valid way to fill the grid,
+  but it is very slow without optimizations. I implement two main
   types of optimizations: search heuristics and faster code.
 </p>
 <p>Search heuristics:</p>
@@ -64,7 +64,7 @@
     between words and slots.
   </li>
   <li>
-    Aggressive moving of data to avoid copying at all costs.
+    Aggressively shifting data to avoid copying at all costs.
   </li>
 </ul>
 <p>
@@ -72,7 +72,7 @@
   seconds. This is about a 1000x improvement over previous iterations of the code.
 </p>
 <p>
-  Step three is clueing the filled grid. For each word in the filled grid, my
+  Step three is cluing the filled grid. For each word in the filled grid, my
   code looks at past crosswords and randomly chooses a clue corresponding to
   that word. These clues aren't original, but generating them from scratch
   would be costly.

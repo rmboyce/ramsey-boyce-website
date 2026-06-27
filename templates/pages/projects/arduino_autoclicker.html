@@ -60,10 +60,10 @@
   until the autoclick LED turns on or off.
 </p>
 <p>
-  In regular mode the device will simulate a click for as long as a foot pedal
+  In regular mode, the device will simulate a click for as long as a foot pedal
   is held down. The left and right click indicator LEDs will also turn on while
   the Clickotron holds the mouse button down. This allows me to select text by
-  holding the left foot pedal down to hold left click and dragging the mouse
+  pressing the left foot pedal down to hold left click and dragging the mouse
   across the text.
 </p>
 <p>
@@ -89,7 +89,7 @@
   you do not use input devices that normally act as closed switches, you will
   have to modify the program to click when a "HIGH" voltage is read (basically
   just change all the "LOW"s into "HIGH"s). Then load the program onto your
-  arduino-make sure that you have the "USB Host Shield Library 2.0" installed in
+  Arduino — make sure that you have the "USB Host Shield Library 2.0" installed in
   the menu (Tools > Manage Libraries). You will also need an Arduino Leonardo
   and a USB Host Shield board. If your USB Host Shield board is not set up, you
   will have to bridge the 5V pad and the
@@ -100,10 +100,10 @@
   >
     SPI</a
   >
-  (a communciation protocol) lines so that power and data go to the circuits.
+  (a communication protocol) lines so that power and data go to the circuits.
 </p>
 <p>
-  Note that applies if your scroll wheel does not seem to be working correctly:
+  Note regarding possible scroll wheel issues:
   If it only works while the mouse is moved, making an edit to the USB Host
   Shield library will fix it. On Windows you will have to go to Documents >
   Arduino > libraries > USB_Host_Shield_Library_2.0 > hiduniversal.h and add
@@ -171,21 +171,21 @@
   click when pins 12 or 13 read a "LOW" voltage.
 </p>
 <p>
-  In the LED circuit, the pins of the arduino are set to high when the LED
+  In the LED circuit, the pins of the Arduino are set to high when the LED
   should turn on. There is also a resistor to limit the current and stop the LED
   from burning out.
 </p>
 <p>
-  The potentiometer is soldered onto the Clickotron using wires. The device
-  reads the value through pin A5 of the arduino and uses it to set the click
+  The potentiometer is wired to the Clickotron. The device
+  reads the value through pin A5 of the Arduino and uses it to set the click
   speed in autoclick mode.
 </p>
 <p>
-  The MAX7221 chip is used to drive the two seven segment displays. The arduino
-  sends SPI signals to the chip through the 2x3 ICSP header to control it. The
-  two capacitors C1 and C2 keep the power stable for the chip. I decided to add
-  the capacitors because many websites say that the MAX7221 is extremely
-  sensitive to power fluctuation, although the capacitors are not strictly
+  The MAX7221 chip is used to drive the two seven segment displays. The Arduino
+  sends SPI signals to the chip through the 2x3 ICSP header to control it.
+  Capacitors C1 and C2 stabilize the power supply for the chip. I decided to add
+  them because many sources note that the MAX7221 is extremely
+  sensitive to power fluctuations, although they are not strictly
   necessary.
 </p>
 
