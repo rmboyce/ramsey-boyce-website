@@ -1,9 +1,9 @@
 runtime: python313
 
 handlers:
-  - url: /static/game/serpent-fusion.wasm
-    static_files: static/game/serpent-fusion.wasm
-    upload: static/game/serpent-fusion.wasm
+  - url: /static/serpent_fusion/serpent-fusion.wasm
+    static_files: static/serpent_fusion/serpent-fusion.wasm
+    upload: static/serpent_fusion/serpent-fusion.wasm
     mime_type: application/wasm
     http_headers:
       Vary: Accept-Encoding

@@ -5,11 +5,13 @@ from markupsafe import Markup
 # =         Serpent Fusion          =
 # ===================================
 
-game_pages = Blueprint("game_pages", __name__, template_folder="templates")
+serpent_fusion_pages = Blueprint(
+    "serpent_fusion_pages", __name__, template_folder="templates"
+)
 
 
-@game_pages.route("/")
-def game():
+@serpent_fusion_pages.route("/")
+def serpent_fusion():
     HEAD = Markup("""
     <style>
         canvas {
@@ -30,6 +32,6 @@ def game():
         "custom_page.html",
         title="Serpent Fusion",
         head_html=HEAD,
-        page_content="pages/game.html",
+        page_content="pages/serpent_fusion.html",
         squeeze=False,
     )
