@@ -2,9 +2,8 @@
 
 <h2>Overview</h2>
 <p>
-  This is a Python program I made that builds and trains a neural network which
-  assigns aesthetic quality scores to images. The scores are based on what the
-  average person would say. It is trained on images from the
+  This Python program trains a neural network to score image aesthetics based on
+  human preferences, using the
   <a
     href="http://refbase.cvc.uab.es/files/MMP2012a.pdf"
     title="AVA dataset"
@@ -12,20 +11,20 @@
   >
     AVA (Aesthetic Visual Analysis)</a
   >
-  dataset, available
+  dataset (available
   <a
     href="https://academictorrents.com/details/71631f83b11d3d79d8f84efe0a7e12f0ac001460"
     title="Academictorrents AVA dataset"
     rel="nofollow"
   >
     here</a
-  >.
+  >).
 </p>
 <p>
-  This project uses Jupyter Notebook. You can download the PDF version of the notebook
+  View the Jupyter Notebook PDF
   <a
     href="{{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}}"
-    title="Jupyter Notebook pdf"
+    title="Jupyter Notebook PDF"
   >
     here</a
   >.
@@ -42,28 +41,22 @@
 
 <h2>Usage</h2>
 <p>
-  Download the PDF version of the Jupyter Notebook file
-  <a
-    href="{{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}}"
-    title="Jupyter Notebook pdf"
-  >
-    here</a
-  >.
-</p>
-<p>
-  Get the code (an ipynb file):
+  Download the Jupyter Notebook (`.ipynb`) file from
   <a
     href="https://github.com/rmboyce/image_rater"
     title="Image rater code"
     rel="nofollow"
   >
-    https://github.com/rmboyce/image_rater</a
+    GitHub</a
   >
-</p>
-<p>
-  The Jupyter Notebook (`.ipynb`) file can be run on your computer. If
-  you run the notebook, you will need the AVA dataset on your local computer.
-  Note the hardcoded location ("E:/AVA_dataset") in the Python code.
+  or view the PDF version
+  <a
+    href="{{url_for('static', filename='resources/Image_Rater_Transfer_Learning.pdf')}}"
+    title="Jupyter Notebook PDF"
+  >
+    here</a
+  >. Running it locally requires downloading the AVA dataset to the path
+  specified in the code (default is `E:/AVA_dataset`).
 </p>
 
 <p>
@@ -77,7 +70,7 @@
 
 <h2>Technical Details</h2>
 <p>
-  The image rater first uses the
+  The model uses a pre-trained
   <a
     href="https://github.com/machrisaa/tensorflow-vgg"
     title="VGG Github"
@@ -85,16 +78,12 @@
   >
     VGG19</a
   >
-  network to convert images from the AVA dataset into codes, and then runs those codes
-  through a fully-connected network with two hidden layers to return image
-  ratings (see figure 1 above). The rating for an image is in the form of a
-  probability distribution over the integers from 1 (lowest quality) to 10
-  (highest quality).
+  network to convert images into feature codes, which are then passed to a
+  two-layer fully-connected neural network. The output rating is a probability
+  distribution from 1 (lowest) to 10 (highest quality).
 </p>
 <p>
-  The network achieves a correlation coefficient of 0.52 between the predicted
-  and actual ratings for a validation set of images. Additionally, I performed a factor
-  analysis to determine which VGG19 codes have the largest effect on image
-  quality. The notebook includes functions to show a selection of images with
-  high values of any VGG19 code.
+  It achieves a 0.52 correlation coefficient on validation data. Factor analysis
+  identifies VGG19 codes with the largest impact on aesthetics, and helper
+  functions visualize images high in specific activations.
 </p>

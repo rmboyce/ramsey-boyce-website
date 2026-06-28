@@ -1,8 +1,10 @@
-<canvas id="glcanvas" tabindex='1'></canvas>
+<canvas id="glcanvas" tabindex="1"></canvas>
 <!-- Pulled from https://not-fl3.github.io/miniquad-samples/mq_js_bundle.js -->
 <script src="{{url_for('static', filename='game/mq_js_bundle.js')}}"></script>
 <!-- For quad-storage https://github.com/optozorax/quad-storage -->
 <script src="{{url_for('static', filename='game/sapp_jsutils.js')}}"></script>
 <script src="{{url_for('static', filename='game/quad-storage.js')}}"></script>
 <!-- Actual loading of game -->
-<script>load("{{url_for('static', filename='game/serpent-fusion.wasm')}}");</script>
+<script>
+  load("{{url_for('static', filename='game/serpent-fusion.wasm')}}");
+</script>

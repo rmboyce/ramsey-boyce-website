@@ -1,16 +1,12 @@
 <p>
-  Start with a polygon and a point in a random location inside it.
-  Then, choose a random vertex from the polygon and make a copy of
-  the point some fraction of the way between the old point and the vertex. The
-  process is repeated using the new point. Eventually, the points will make a
-  pattern.
+  Starting with a point inside a polygon, the program repeatedly plots a new
+  point a fraction of the distance toward a randomly chosen vertex. Over time,
+  these points form a fractal pattern.
 </p>
 <p>
-  The Sierpinski Carpet Fraction is the ratio between the size of a polygon and
-  the size of smaller polygons that can be put inside the original against its
-  vertices without colliding with the other small polygons. The Sierpinski Fraction
-  usually causes the points to make nice patterns, and it is calculated in the
-  method CalculateCarpetFraction() if you want to look more into it.
+  The "Sierpinski Fraction" is the size ratio of non-overlapping sub-polygons
+  packed within the main polygon. Calculated via `CalculateCarpetFraction()`,
+  this ratio generates clean fractal designs.
 </p>
 <p>More information:</p>
 <ul>

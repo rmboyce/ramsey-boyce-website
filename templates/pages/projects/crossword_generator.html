@@ -8,10 +8,8 @@
 
 <h2>Overview</h2>
 <p>
-  This program generates crossword puzzles using a three-step process: first,
-  generate the grid; second, fill the grid with words; and third, clue the
-  filled grid. To make a different puzzle available on my website each day, I
-  began using the web framework Flask.
+  This program generates crossword puzzles in three steps: grid generation, word
+  filling, and cluing. The puzzle is served dynamically using Flask.
 </p>
 
 <p>
@@ -25,63 +23,41 @@
 
 <h2>Generating the Puzzles</h2>
 <p>
-  Step one is generating the grid. At the moment, my code takes an empty grid,
-  adds 1-2 rows and columns extending inwards from the sides, and fills the
-  middle randomly. Since crosswords are usually rotationally symmetric, it only
-  generates half of the grid and fills in the rest based on that half.
+  Grid generation: the code starts with an empty grid, adds rows and columns
+  extending inwards, and randomly fills the center. Rotational symmetry is
+  enforced by mirroring the first half.
 </p>
 <p>
-  Step two, filling the grid with words, is the most complicated step. My
-  algorithm is a tree search where each branch represents filling a slot in the
-  grid with a word. A brute-force search can find a valid way to fill the grid,
-  but it is very slow without optimizations. I implement two main
-  types of optimizations: search heuristics and faster code.
+  Word filling: a tree search is used to match words to slots. Because
+  brute-force search is slow, optimizations in both search heuristics and
+  execution speed were implemented.
 </p>
 <p>Search heuristics:</p>
 <ul>
-  <li>
-    Keep track of all words that can fit in each slot, and stop searching a
-    branch of the tree if a slot has no valid words.
-  </li>
-  <li>
-    Choose the next word to fill based on which slot has the lowest number of
-    possible words that can fill it.
-  </li>
-  <li>
-    Pick a word for a certain slot based on what leads to the highest number of
-    possibilities for crossing slots.
-  </li>
+  <li>Prune search branches immediately when a slot has zero valid words.</li>
+  <li>Fill slots with the fewest possible word options first.</li>
+  <li>Prioritize words that leave the most options open for crossing slots.</li>
 </ul>
 <p>Code efficiency:</p>
 <ul>
   <li>
-    Use multithreading when choosing the next word to put in a slot. This
-    is implemented via a thread pool to avoid the overhead of spawning threads
-    mid-search.
+    Use a thread pool to parallelize word selection without thread-spawning
+    overhead.
   </li>
-  <li>
-    Store the words as SIMD vectors to increase the speed of matching comparisons
-    between words and slots.
-  </li>
-  <li>
-    Aggressively shifting data to avoid copying at all costs.
-  </li>
+  <li>Store word lists as SIMD vectors for fast pattern matching.</li>
+  <li>Minimize data copying.</li>
 </ul>
 <p>
-  With these optimizations, the filling process now usually takes around 0.1
-  seconds. This is about a 1000x improvement over previous iterations of the code.
+  These optimizations reduced fill time to 0.1 seconds—a 1000x speedup over
+  previous iterations.
 </p>
 <p>
-  Step three is cluing the filled grid. For each word in the filled grid, my
-  code looks at past crosswords and randomly chooses a clue corresponding to
-  that word. These clues aren't original, but generating them from scratch
-  would be costly.
+  Cluing: clues are matched from archives of historical crosswords rather than
+  generated algorithmically.
 </p>
 
 <h2>Playing on my Website</h2>
 <p>
-  To make a different crossword available on my website each day, I had to use a
-  web framework to make my site dynamic. I chose to use Flask as it seemed good
-  for small projects like this site. To display puzzles in the browser, I use a
-  Javascript player from Crossword Nexus.
+  Flask serves a new puzzle daily, and a JavaScript player from Crossword Nexus
+  renders the grid in-browser.
 </p>

@@ -2,20 +2,16 @@
 
 <h2>Overview</h2>
 <p>
-  The Clickotron board is a shield for the Arduino Leonardo that I designed
-  to extend the capabilities of a normal mouse. The full Clickotron-5000
-  autoclicking device uses a Leonardo, a USB Host Shield board, and the
-  Clickotron board on top, with my code loaded on the Arduino.
+  The Clickotron is an Arduino Leonardo shield designed to extend mouse
+  capabilities. The full Clickotron-5000 autoclicking device uses an Arduino
+  Leonardo, a USB Host Shield, and the Clickotron board running custom firmware.
 </p>
 <p>
-  The Arduino can simulate mouse clicks on the computer, so other input devices
-  can be used to create mouse clicks. For example, I use the Clickotron with two
-  foot pedals as left and right click. The device can also continuously click
-  the mouse buttons when the respective pedal is held down. I made the device
-  because bad posture was causing numbness in my hands and I had trouble using a
-  regular mouse (proper posture and exercises have fixed this!). I still use the
-  autoclicker to play League of Legends with my friends, since over the Covid-19
-  pandemic it's the best way to stay in touch.
+  By simulating mouse inputs, the device lets external switches trigger clicks.
+  For example, I use two foot pedals for left and right clicking, with support
+  for continuous autoclicking when held down. I built it to alleviate hand
+  numbness from poor posture (since resolved) and still use it to play games
+  with friends.
 </p>
 <p>
   Link to the code:
@@ -48,30 +44,23 @@
 
 <h2>About the Device</h2>
 <p>
-  A normal USB mouse plugs into the USB Host board and the mouse signals are
-  passed through the device. This means that the mouse can be used normally as
-  if it was plugged into the computer without the device (see footnote 1 for
-  details). Then other input devices can be soldered to the Clickotron to
-  generate mouse clicks.
+  A standard USB mouse plugs directly into the USB Host board, passing signals
+  through so it behaves normally (see footnote 1). External switches can be
+  wired to the Clickotron to trigger inputs.
 </p>
 <p>
-  In my current setup with two foot pedals, the Clickotron has two modes,
-  regular and autoclick. To switch between the modes, hold down both pedals
-  until the autoclick LED turns on or off.
+  The device toggles between regular and autoclick modes by holding both pedals
+  down.
 </p>
 <p>
-  In regular mode, the device will simulate a click for as long as a foot pedal
-  is held down. The left and right click indicator LEDs will also turn on while
-  the Clickotron holds the mouse button down. This allows me to select text by
-  pressing the left foot pedal down to hold left click and dragging the mouse
-  across the text.
+  In regular mode, the pedal simulates a click for as long as it is pressed.
+  Indicator LEDs light up during clicks, allowing operations like text selection
+  by holding the pedal down and dragging the mouse.
 </p>
 <p>
-  In autoclick mode, while a foot pedal is held down the device will constantly
-  click at a speed that is set using a potentiometer soldered to the device. The
-  number of clicks per second is shown by the two seven segment displays on the
-  Clickotron. The click durations are generated based on a normal distribution
-  so that the Clickotron will be indistinguishable from human clicking.
+  In autoclick mode, holding a pedal clicks continuously. The click speed is set
+  via a potentiometer and shown on a two-digit seven-segment display. Click
+  intervals follow a normal distribution to mimic human clicking.
 </p>
 
 <p>
@@ -85,14 +74,11 @@
 
 <h2>Usage</h2>
 <p>
-  Put together the circuit either using the Clickotron board or a breadboard. If
-  you do not use input devices that normally act as closed switches, you will
-  have to modify the program to click when a "HIGH" voltage is read (basically
-  just change all the "LOW"s into "HIGH"s). Then load the program onto your
-  Arduino — make sure that you have the "USB Host Shield Library 2.0" installed in
-  the menu (Tools > Manage Libraries). You will also need an Arduino Leonardo
-  and a USB Host Shield board. If your USB Host Shield board is not set up, you
-  will have to bridge the 5V pad and the
+  Assemble the circuit on the Clickotron PCB or a breadboard. If using
+  normally-open switches, modify the code to trigger on HIGH instead of LOW.
+  Load the program onto your Arduino Leonardo (ensure the "USB Host Shield
+  Library 2.0" is installed via the Library Manager). If using an unconfigured
+  USB Host Shield, bridge the 5V pad and the
   <a
     href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface"
     title="SPI (Wikipedia)"
@@ -100,17 +86,12 @@
   >
     SPI</a
   >
-  (a communication protocol) lines so that power and data go to the circuits.
+  lines to enable power and data transfer.
 </p>
 <p>
-  Note regarding possible scroll wheel issues:
-  If it only works while the mouse is moved, making an edit to the USB Host
-  Shield library will fix it. On Windows you will have to go to Documents >
-  Arduino > libraries > USB_Host_Shield_Library_2.0 > hiduniversal.h and add
-  "virtual" on line 60 before the BuffersIdentical function so that it reads
-  "virtual bool BuffersIdentical". For other operating systems you will have to
-  figure out where the USB Host Shield Library is stored and make the same
-  change to the code.
+  Note on scroll wheel issues: If the scroll wheel only works while the mouse is
+  moving, edit `hiduniversal.h` in the USB Host Shield library and add `virtual`
+  before the `bool BuffersIdentical` function on line 60.
 </p>
 <p>
   One place to buy the USB Host board:
@@ -163,37 +144,23 @@
   >
 </p>
 <p>
-  When the switches are closed, current runs from the 5V pin through the 10
-  kiloohm resistor to ground and the input pins detect a voltage. When the
-  switches open, the resistor pulls down the voltage of the input pins to
-  ground. The foot pedals that I used have the switch normally closed, and
-  pressing the pedal down opens the switch inside. Therefore, I made the program
-  click when pins 12 or 13 read a "LOW" voltage.
+  Closing a switch connects the input pin to 5V; opening it pulls the pin to
+  ground via a 10 kΩ resistor. Since my foot pedals are normally closed (opening
+  when pressed), the code triggers clicks on a LOW signal on pins 12 or 13.
 </p>
 <p>
-  In the LED circuit, the pins of the Arduino are set to high when the LED
-  should turn on. There is also a resistor to limit the current and stop the LED
-  from burning out.
+  The status LEDs are driven by digital output pins, protected by
+  current-limiting resistors.
 </p>
+<p>A potentiometer wired to pin A5 sets the autoclick speed.</p>
 <p>
-  The potentiometer is wired to the Clickotron. The device
-  reads the value through pin A5 of the Arduino and uses it to set the click
-  speed in autoclick mode.
-</p>
-<p>
-  The MAX7221 chip is used to drive the two seven segment displays. The Arduino
-  sends SPI signals to the chip through the 2x3 ICSP header to control it.
-  Capacitors C1 and C2 stabilize the power supply for the chip. I decided to add
-  them because many sources note that the MAX7221 is extremely
-  sensitive to power fluctuations, although they are not strictly
-  necessary.
+  A MAX7221 chip, controlled via SPI from the ICSP header, drives the two
+  seven-segment displays. Capacitors C1 and C2 stabilize the power supply for
+  the MAX7221, many sources note it as sensitive to power fluctuation.
 </p>
 
 <h2>Notes</h2>
 <p>
-  The current code should work with normal USB mice, but some functions
-  may or may not work depending on the exact mouse you use. If you use a more
-  complicated mouse that reports input differently, you will have to change the
-  code so that the HID report the Clickotron device sends to your computer is
-  correct.
+  The code works with standard USB mice. Complicated mice reporting non-standard
+  inputs may require firmware modifications to format the HID reports correctly.
 </p>
