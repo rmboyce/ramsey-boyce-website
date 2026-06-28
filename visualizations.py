@@ -18,7 +18,7 @@ JS_MAP = {
 }
 
 
-def generate_js_markup(js_path, file_list):
+def generate_js_markup(js_path: str, file_list: list[str]):
     js = ""
     for file in file_list:
         js += f"""<script src="{url_for("static", filename=(f"js/{js_path}/{file}"))}" type="text/javascript"></script>\n"""

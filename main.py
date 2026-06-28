@@ -1,5 +1,6 @@
 import os
-from flask import render_template
+from flask import render_template, request, redirect
+from werkzeug import Response
 
 # from daily_crossword import daily_crossword_pages
 from misc import misc_pages
@@ -8,15 +9,29 @@ from game import game_pages
 # from my import my_pages
 from projects import project_pages
 from route_config import app
-from utils import clear_trailing, force_https
 from visualizations import visualization_pages
 
 # ===================================
 # =              Index              =
 # ===================================
 
-_ = app.before_request(force_https)
-_ = app.before_request(clear_trailing)
+
+@app.before_request
+def force_https() -> Response | None:
+    # ProxyFix handles request.is_secure safely behind your proxy
+    if not app.debug and not request.is_secure:
+        if request.url.startswith("http://"):
+            url = request.url.replace("http://", "https://", 1)
+            return redirect(url, code=301)
+
+
+@app.before_request
+def clear_trailing() -> Response | None:
+    request_path = request.path
+    if request_path != "/" and request_path.endswith("/"):
+        query = request.query_string.decode("utf-8")
+        target_url = f"{request_path[:-1]}?{query}" if query else request_path[:-1]
+        return redirect(target_url, code=301)
 
 
 @app.route("/index")
